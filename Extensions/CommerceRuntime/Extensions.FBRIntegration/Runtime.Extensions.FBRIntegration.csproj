@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.props" />
+  <Import Project="..\..\..\BuildTools\Common.props" />
+  <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.settings" />
+
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+    <AssemblyName>CDC.Commerce.Runtime.FBRIntegration</AssemblyName>
+    <RootNamespace>CDC.Commerce.Runtime.FBRIntegration</RootNamespace>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Runtime.Framework" Version="10.4.21344.1" />
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages" Version="9.38.22167.5" />
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Runtime.Services.Messages" Version="9.38.22167.5" />
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Runtime.DataServices" Version="9.36.22107.2" />
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Runtime.Localization.Services.Messages" Version="9.36.22107.2" />
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Runtime.Localization.Data.Services.Messages" Version="9.36.22107.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Dynamics.Commerce.Runtime.ElectronicReporting">
+      <HintPath>..\..\..\..\..\..\RetailServer\webroot\bin\Microsoft.Dynamics.Commerce.Runtime.ElectronicReporting.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\" />
+  </ItemGroup>
+
+  
+  <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.targets" />
+</Project>

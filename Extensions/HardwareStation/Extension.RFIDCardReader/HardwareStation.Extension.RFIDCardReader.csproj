@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.props" />
+  <Import Project="..\..\..\BuildTools\Common.props" />
+  <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.settings" />
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+    <AssemblyName>CDC.Commerce.HardwareStation.RFIDCardReader</AssemblyName>
+    <RootNamespace>CDC.Commerce.HardwareStation.RFIDCardReader</RootNamespace>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Dynamics.Commerce.HardwareStation.Core" Version="$(HardwareRepoPackagesVersion)" />
+    <PackageReference Include="Microsoft.Dynamics.Commerce.HardwareStation.PeripheralRequests" Version="$(HardwareRepoPackagesVersion)" />
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Runtime.Hosting.Contracts" Version="$(FrameworkRepoPackagesVersion)" />
+    <PackageReference Include="Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Opos" Version="$(HardwareRepoPackagesVersion)" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="ChilkatDotNet46">
+      <HintPath>..\..\..\References\ChilkatDotNet46.dll</HintPath>
+    </Reference>
+    <Reference Include="GNetPlus">
+      <HintPath>..\..\..\References\GNetPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="MifareReader">
+      <HintPath>..\..\..\References\MifareReader.dll</HintPath>
+    </Reference>
+  </ItemGroup>  
+  <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.targets" />
+</Project>

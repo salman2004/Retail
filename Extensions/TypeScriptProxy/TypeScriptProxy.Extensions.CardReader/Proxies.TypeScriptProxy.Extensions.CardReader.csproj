@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.props" />
+  <Import Project="..\..\..\BuildTools\Common.props" />
+  <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.settings" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>$(AssemblyNamePrefix).Commerce.TypeScriptProxy.CardReader</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+  </PropertyGroup>
+
+  <ItemGroup Label="Libraries">
+    <TypeReferences Include="..\..\..\Pos\Contracts\*.d.ts">
+      <Visible>false</Visible>
+    </TypeReferences>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Tools.ExtensionsProxyGenerator" Version="9.38.22167.5" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="2.2.2" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <RetailServerExtensionAssemblies Include="..\..\RetailServer\Extension.CardReader\bin\$(Configuration)\net461\$(AssemblyNamePrefix).RetailServer.CardReader.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\RetailServer\Extension.CardReader\RetailServer.Extensions.CardReader.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DataService\" />
+  </ItemGroup>
+
+  <Target Name="CopyGeneratedContractsToPos" AfterTargets="AfterBuild">
+    <ItemGroup>
+      <GeneratedDataServiceContracts Include="DataService\*.g.ts" />
+    </ItemGroup>
+    <Copy SourceFiles="@(GeneratedDataServiceContracts)" DestinationFolder="$(SdkRootPath)\POS\Extensions\RFIDCardReaderExtension\DataService" SkipUnchangedFiles="true" />
+  </Target>
+
+  <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.targets" />
+</Project>

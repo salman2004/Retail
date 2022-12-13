@@ -81,7 +81,6 @@
 
             request.Transaction.IsDiscountFullyCalculated = !request.CalculateSimpleDiscountOnly;
 
-            request.Transaction.SetProperty("CSDMonthlyLimitUsed", pricingDataServiceManagerEx.MonthlyLimitUsed);//decimal.Truncate(Convert.ToDecimal(request.Transaction.GetProperty("CSDCardBalance")?.ToString()?.Trim() ?? decimal.Zero.ToString()) - request.Transaction.ActiveSalesLines.Where(a=>a.DiscountAmount > 0).Sum(a=>a.Price * a.QuantityDiscounted )));
             request.Transaction.SetProperty("CSDstoreId", request.RequestContext.GetDeviceConfiguration().StoreNumber);
             
             return new GetPriceServiceResponse(request.Transaction);

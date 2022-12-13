@@ -120,7 +120,6 @@
                     item.SetProperty("GrossProfit", entity?.GetProperty("GrossProfit") ?? decimal.Zero);
                     
                 }
-
                 retailDiscounts = retailDiscounts.OrderByDescending(a => Convert.ToDecimal(a.GetProperty("CDCTOPONCART"))).ThenByDescending(x => Convert.ToDecimal(x.GetProperty("CDCPRICINGPRIORITY"))).ThenByDescending(z => Convert.ToDecimal(z.GetProperty("GrossProfit"))).AsReadOnly();
                 //Sorting
 
@@ -162,8 +161,8 @@
                         }
                     }
                 }
-                
-                this.MonthlyLimitUsed = cartTotal; //decimal.Truncate(cardBalance - this.Transaction.ActiveSalesLines.Where(a => a.DiscountAmount > 0).Sum(sl => sl.AgreementPrice * sl.Quantity));
+
+                this.Transaction.SetProperty("CSDMonthlyLimitUsed", Convert.ToString(cardBalance - itemPriceMap?.Where(a => filteredRetailDiscounts.Any(b => string.Format("{0}::{1}", b.ItemId, b.InventoryDimensionId) == a.Key))?.Sum(z => z.Value) ?? decimal.Zero));
                 return filteredRetailDiscounts.AsReadOnly();
             }
             else

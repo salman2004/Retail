@@ -9,6 +9,7 @@
     using Microsoft.Dynamics.Commerce.Runtime.Workflow.Orders;
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -18,11 +19,12 @@
         {
             // Validate cart check out
             GetSalesOrderDetailsByTransactionIdServiceRequest getSalesOrderRequest = new GetSalesOrderDetailsByTransactionIdServiceRequest(request.Cart.Id, SearchLocation.Local);
-            if (request.RequestContext.ExecuteAsync<GetSalesOrderDetailsServiceResponse>(getSalesOrderRequest).Result.SalesOrder != null)
+            GetSalesOrderDetailsServiceResponse response = await request.RequestContext.ExecuteAsync<GetSalesOrderDetailsServiceResponse>(getSalesOrderRequest).ConfigureAwait(false);//Result.SalesOrder;
+            if (response.SalesOrder != null)
             {
                 throw new CartValidationException(DataValidationErrors.Microsoft_Dynamics_Commerce_Runtime_CartAlreadyCheckedOut, request.Cart.Id);
             }
-
+            
             // Get the scanned cart line
             CartLine line = request.Cart.CartLines.FirstOrDefault();
             if (line == null)

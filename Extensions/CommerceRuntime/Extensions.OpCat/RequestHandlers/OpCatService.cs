@@ -118,7 +118,7 @@ namespace CDC.Commerce.Runtime.CustomOpCat.RequestHandlers
                         }
                         //getProductDimensionValues.RequestContext.GetChannelConfiguration().SetProperty("Barcode", string.Empty);
                         return new EntityDataServiceResponse<ProductDimensionValue>(productDimensionValueList.AsPagedResult());
-                    }                    
+                    }
                 }
                 catch (Exception)
                 {

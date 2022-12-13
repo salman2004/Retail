@@ -173,7 +173,7 @@ namespace CDC.Commerce.Runtime.FBRIntegration
                 query.Parameters["@transactionId"] = request.SalesOrder.Id;
 
                 var result = await databaseContext.ReadEntityAsync<InvoiceId>(query).ConfigureAwait(false);
-                if (result.Results.Count < 0)
+                if (result.FirstOrDefault().GetProperty("CDCFBRINVOICEID")?.ToString()?.Trim() == string.Empty || result.FirstOrDefault().GetProperty("CDCFBRINVOICEID")?.ToString()?.Trim() == null)
                 {
                     return String.Empty;
                 }

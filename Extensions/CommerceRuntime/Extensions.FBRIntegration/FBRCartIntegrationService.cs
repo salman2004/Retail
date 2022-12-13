@@ -132,15 +132,7 @@ namespace CDC.Commerce.Runtime.FBRIntegration
                     {
                         string body = JsonConvert.SerializeObject(ConvertSalesTransactionToInvoiceAsync(saveSalesTransaction.SalesTransaction, saveSalesTransaction));
                         string json = JObject.Parse(body)["Result"].ToString();
-
-                        //
-                        using (FileStream fs = File.Create(@"c:\temp\MyTest.txt"))
-                        {
-                            byte[] info = new UTF8Encoding(true).GetBytes(string.Format("{0} \n", json));
-                            fs.Write(info, 0, info.Length);
-                        }
-                        //
-
+                        
                         HttpResponseMessage response = GetResponseFromFBRService(integrationUrl, json, HttpMethod.Post);
                         if (response.IsSuccessStatusCode)
                         {

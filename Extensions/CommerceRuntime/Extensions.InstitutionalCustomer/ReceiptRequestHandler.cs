@@ -25,25 +25,25 @@ namespace CDC.Commerce.Runtime.InstitutionalCustomer
         }
 
         public async Task<Response> Execute(Request request)
-        {
+            {
             ThrowIf.Null(request, "request");
 
             if (request.GetType() == typeof(GetSalesOrderDetailsByTransactionIdServiceRequest))
             {
                 GetSalesOrderDetailsByTransactionIdServiceRequest getSalesOrderDetails = (GetSalesOrderDetailsByTransactionIdServiceRequest)request;
-                GetSalesOrderDetailsServiceResponse response =(GetSalesOrderDetailsServiceResponse) await this.ExecuteNextAsync<Response>(getSalesOrderDetails);
+                GetSalesOrderDetailsServiceResponse response =await this.ExecuteNextAsync<GetSalesOrderDetailsServiceResponse>(getSalesOrderDetails);
 
                 if (response.SalesOrder== null)
                 {
                     return response;
                 }
 
-                if (response.SalesOrder.LoyaltyCardId == (response.SalesOrder.AttributeValues.Where(a=>a.Name == "CSDCardNumber")?.FirstOrDefault()?.ToString() ?? null))
+                if (response.SalesOrder.LoyaltyCardId == (response.SalesOrder.AttributeValues.Where(a=>a.Name == "CSDCardNumber")?.FirstOrDefault()?.ToString()?.Trim() ?? null))
                 {
                     response.SalesOrder.SalesLines = new Collection<SalesLine>(response.SalesOrder.SalesLines
-                        .OrderByDescending(a => Convert.ToDecimal(a.AttributeValues.Where(z=>z.Name=="CDCTOPONCART").FirstOrDefault().ToString()))
-                        .ThenByDescending(x => Convert.ToDecimal(x.AttributeValues.Where(z => z.Name == "CDCPRICINGPRIORITY").FirstOrDefault().ToString()))
-                        .ThenByDescending(y => Convert.ToDecimal(y.AttributeValues.Where(z => z.Name == "GrossProfit").FirstOrDefault().ToString())).ToList());
+                        .OrderByDescending(a => Convert.ToDecimal( (a.AttributeValues.Where(z=>z.Name == "CDCTOPONCART")?.FirstOrDefault()?.ToString()?.Trim() == string.Empty) ? decimal.Zero.ToString() : a.AttributeValues.Where(z => z.Name == "CDCTOPONCART")?.FirstOrDefault()?.ToString()?.Trim()))
+                        .ThenByDescending(x => Convert.ToDecimal( (x.AttributeValues.Where(z => z.Name == "CDCPRICINGPRIORITY")?.FirstOrDefault()?.ToString()?.Trim() ==string.Empty ) ? decimal.Zero.ToString() : x.AttributeValues.Where(z => z.Name == "CDCPRICINGPRIORITY")?.FirstOrDefault()?.ToString()?.Trim()))
+                        .ThenByDescending(y => Convert.ToDecimal( (y.AttributeValues.Where(z => z.Name == "GrossProfit")?.FirstOrDefault()?.ToString()?.Trim() == string.Empty) ? decimal.Zero.ToString() : y.AttributeValues.Where(z => z.Name == "GrossProfit")?.FirstOrDefault()?.ToString()?.Trim())).ToList());
                 }
                 return response;
             }
@@ -53,5 +53,6 @@ namespace CDC.Commerce.Runtime.InstitutionalCustomer
             }
 
         }
+        
     }
 }

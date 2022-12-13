@@ -30,7 +30,7 @@ namespace CDC.Commerce.Runtime.MarginCap.RequestHandlers
             if (request.GetType() == typeof(CalculateDiscountsServiceRequest))
             {
                 CalculateDiscountsServiceRequest calculateDiscountsService = (CalculateDiscountsServiceRequest)request;
-                priceServiceResponse = (GetPriceServiceResponse)await ExecuteBaseRequestAsync(request);
+                priceServiceResponse = await this.ExecuteNextAsync<GetPriceServiceResponse>(request);
                 
                 if (calculateDiscountsService.Transaction.RefundableTenderLines.Count == 0)
                 {
@@ -48,14 +48,10 @@ namespace CDC.Commerce.Runtime.MarginCap.RequestHandlers
                         HashSet<string> supportedTenderTypes = new HashSet<string>(tenderTypeForRefundCharges);
                         List<TenderLine> tenderList = calculateDiscountsService.Transaction.RefundableTenderLines.Where(m => supportedTenderTypes.Contains(m.TenderTypeId)).ToList();
                         decimal sum = tenderList.Sum(a => a.Amount);
-
-                        //List<TenderLine> tenderList = calculateDiscountsService.Transaction.RefundableTenderLines.Where(a => Convert.ToInt32(a.TenderTypeId) == 3 || Convert.ToInt32(a.TenderTypeId) == 4 || Convert.ToInt32(a.TenderTypeId) == 5 || Convert.ToInt32(a.TenderTypeId) == 1).ToList();
-                        //foreach (var item in tenderList)
-                        //{
+                        
                         if (tenderList.Count > 0)
                         {
-                            //calculateDiscountsService.Transaction.ChargeLines.RemoveAt(calculateDiscountsService.Transaction.ChargeLines.in);//a => a.ChargeCode == cardRefundChargeCode);
-                            decimal processingFees = tenderList.Sum(a => a.Amount) * Convert.ToDecimal((cardFee)) / 100;
+                            decimal processingFees = (tenderList.Sum(a => a.Amount)) * (Convert.ToDecimal((cardFee)) / 100);
                             if (!calculateDiscountsService.Transaction.ChargeLines.Any(a => a.ChargeCode == cardRefundChargeCode))
                             {
                                 ChargeLineOverride chargeLineOverride = new ChargeLineOverride();
@@ -80,8 +76,6 @@ namespace CDC.Commerce.Runtime.MarginCap.RequestHandlers
                                 chargeLine.NetAmountPerUnit = processingFees;
                                 chargeLine.ChargeLineOverrides.Add(chargeLineOverride);
                                 calculateDiscountsService.Transaction.ChargeLines.Add(chargeLine);
-
-
                             }
                         }
                     }
@@ -90,12 +84,14 @@ namespace CDC.Commerce.Runtime.MarginCap.RequestHandlers
             }
             return priceServiceResponse;
         }
+
         public async Task<Response> ExecuteBaseRequestAsync(Request request)
         {
             var requestHandler = request.RequestContext.Runtime.GetNextAsyncRequestHandler(request.GetType(), this);
             Response response = await request.RequestContext.Runtime.ExecuteAsync<Response>(request, request.RequestContext, requestHandler, false).ConfigureAwait(false);
             return response;
         }
+
         private void GetCardRefundChargeCode(RequestContext context, out string CardRefundChargeCode)
         {
             var configurationRequest = new GetConfigurationParametersDataRequest(context.GetChannelConfiguration().RecordId);
@@ -103,6 +99,7 @@ namespace CDC.Commerce.Runtime.MarginCap.RequestHandlers
 
             CardRefundChargeCode = configurationResponse?.PagedEntityCollection?.Where(cp => string.Equals(cp.Name.ToUpper().Trim(), ("CardRefundChargeCode").ToUpper().Trim(), StringComparison.OrdinalIgnoreCase))?.FirstOrDefault()?.Value ?? string.Empty;
         }
+
         private void GetCardRefundProcessingFeePercentage(RequestContext context, out decimal cardFee)
         {
             cardFee = decimal.Zero;            
@@ -115,6 +112,7 @@ namespace CDC.Commerce.Runtime.MarginCap.RequestHandlers
                 cardFee = decimalValue;
             }
         }
+        
         private void GetTenderTypeForRefundCharges(RequestContext context, out List<string> tenderTypeForRefundCharges)
         {
             tenderTypeForRefundCharges = new List<string>();

@@ -26,6 +26,11 @@
             await Task.CompletedTask;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task OnExecuting(Request request)
         {
             this.GetConfigurationParameters(request.RequestContext, out bool checkInventory);
@@ -34,10 +39,16 @@
                 // Calculate inventory at save
                 await ProductAvailabilityHelper.CalculateInventoryAtSave(request as SaveCartRequest).ConfigureAwait(false);
             }
-
+            
             await Task.CompletedTask;
+            
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="checkInventory"></param>
         private void GetConfigurationParameters(RequestContext context, out bool checkInventory)
         {
             // Get the configuration parameters

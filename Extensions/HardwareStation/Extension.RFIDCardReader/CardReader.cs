@@ -9,6 +9,12 @@ namespace CDC.Commerce.HardwareStation.RFIDCardReader
     {
         public CardHelper cardHelper { get; set; }
 
+        public CardReader()
+        {
+            Chilkat.Global glob = new Chilkat.Global();
+            glob.UnlockBundle("YASOOB.CB1022024_TNcAqC5qnUpg");
+        }
+
         public void CloseConnection()
         {
             this.cardHelper.mifareReader.PortOpen = false;

@@ -32,7 +32,7 @@ namespace CDC.Commerce.Runtime.InstitutionalCustomer
             {
                 GetSalesOrderDetailsByTransactionIdServiceRequest getSalesOrderDetails = (GetSalesOrderDetailsByTransactionIdServiceRequest)request;
                 GetSalesOrderDetailsServiceResponse response =await this.ExecuteNextAsync<GetSalesOrderDetailsServiceResponse>(getSalesOrderDetails);
-
+                
                 if (response.SalesOrder== null)
                 {
                     return response;

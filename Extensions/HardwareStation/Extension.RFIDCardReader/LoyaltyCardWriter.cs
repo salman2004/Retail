@@ -16,6 +16,12 @@ namespace CDC.Commerce.HardwareStation.RFIDCardReader
         public string cardId { get; set; }
         public MifareReader mifareReader { get; set; }
 
+        public LoyaltyCardWriter()
+        {
+            Chilkat.Global glob = new Chilkat.Global();
+            glob.UnlockBundle("YASOOB.CB1022024_TNcAqC5qnUpg");
+        }
+
         public void CloseConnection()
         {
             this.mifareReader.PortOpen = false;

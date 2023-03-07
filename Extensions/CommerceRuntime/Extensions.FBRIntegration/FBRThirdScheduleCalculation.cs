@@ -1,6 +1,7 @@
 ﻿using Microsoft.Dynamics.Commerce.Runtime;
 using Microsoft.Dynamics.Commerce.Runtime.Data;
 using Microsoft.Dynamics.Commerce.Runtime.DataModel;
+using Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages;
 using Microsoft.Dynamics.Commerce.Runtime.Messages;
 using Microsoft.Dynamics.Commerce.Runtime.Services.Messages;
 using System;
@@ -28,7 +29,7 @@ namespace CDC.Commerce.Runtime.FBRIntegration
         public async Task<Response> Execute(Request request)
         {
             CalculateTaxServiceRequest calculateTax = (CalculateTaxServiceRequest)request;
-            CalculateTaxServiceResponse serviceResponse = (CalculateTaxServiceResponse) await ExecuteBaseRequestAsync(calculateTax);
+            CalculateTaxServiceResponse serviceResponse = await this.ExecuteNextAsync<CalculateTaxServiceResponse>(calculateTax);
 
             foreach (var salesLine in calculateTax.Transaction.ActiveSalesLines)
             {
@@ -57,26 +58,42 @@ namespace CDC.Commerce.Runtime.FBRIntegration
                         salesLine.TaxAmount = taxLines.Sum(a => a.Amount);
                         salesLine.TaxLines = taxLines;
 
-                        foreach (var item in salesLine.DiscountLines)
+                        GetTenderDiscountOfferIds(request.RequestContext, out List<string> offerIds);
+                        GetTenderDiscountValue(request.RequestContext, out decimal maxDiscount);
+
+                        decimal totalTenderTypeDiscountAmount = calculateTax.Transaction.ActiveSalesLines.Sum(a => a.DiscountLines.Where(b => b.DiscountLineType == DiscountLineType.TenderTypeDiscount && offerIds.Contains(b.OfferId)).Sum(c => c.EffectiveAmount));
+
+                        if (totalTenderTypeDiscountAmount < maxDiscount)
                         {
-                            item.EffectiveAmount = (salesLine.AgreementPrice - (taxLines.Sum(a => a.Amount) / salesLine.Quantity)) * (item.EffectivePercentage / 100) * salesLine.Quantity;
-                            item.Amount = item.EffectiveAmount;
-                            item.DiscountCost = item.EffectiveAmount;
+                            foreach (var item in salesLine.DiscountLines)
+                            {
+                                if (!(offerIds.Contains(item.OfferId) && item.EffectiveAmount == maxDiscount || item.EffectivePercentage == 0 && item.EffectiveAmount > 0))
+                                {
+                                    item.EffectiveAmount = (salesLine.AgreementPrice - (taxLines.Sum(a => a.Amount) / salesLine.Quantity)) * (item.EffectivePercentage / 100) * salesLine.Quantity;
+                                    item.Amount = item.EffectiveAmount;
+                                }
+                            }
                         }
+                        else
+                        {
+                            foreach (var item in salesLine.DiscountLines.Where(a=> !offerIds.Contains(a.OfferId)))
+                            {   
+                                item.EffectiveAmount = (salesLine.AgreementPrice - (taxLines.Sum(a => a.Amount) / salesLine.Quantity)) * (item.EffectivePercentage / 100) * salesLine.Quantity;
+                                item.Amount = item.EffectiveAmount;
+                            }
+                        }
+                        
                         salesLine.DiscountAmount = salesLine.DiscountLines.Sum(a => a.EffectiveAmount);
-                        salesLine.DiscountAmountWithoutTax = salesLine.DiscountAmount;
-                        salesLine.PeriodicDiscount = salesLine.DiscountAmount;
-                        salesLine.PeriodicPercentageDiscount = salesLine.DiscountAmount;
-                        salesLine.TotalPercentageDiscount = salesLine.DiscountAmount;
+                        salesLine.DiscountAmountWithoutTax = salesLine.DiscountLines.Sum(a => a.DiscountCost);
+                        salesLine.PeriodicDiscount = salesLine.DiscountLines.Where(a => a.DiscountLineType == DiscountLineType.PeriodicDiscount).Sum(line => line.EffectiveAmount);
+                        salesLine.TenderDiscountAmount = salesLine.DiscountLines.Where(a => a.DiscountLineType == DiscountLineType.TenderTypeDiscount).Sum(line => line.EffectiveAmount);
                     }
-                }
-                
+                }                
             }
-
             calculateTax.Transaction.DiscountAmount = calculateTax.Transaction.ActiveSalesLines.Sum(a => a.DiscountAmount);
-            calculateTax.Transaction.DiscountAmountWithoutTax = calculateTax.Transaction.ActiveSalesLines.Sum(a => a.DiscountAmount);
-            calculateTax.Transaction.PeriodicDiscountAmount = calculateTax.Transaction.ActiveSalesLines.Sum(a => a.DiscountAmount);
-
+            calculateTax.Transaction.DiscountAmountWithoutTax = calculateTax.Transaction.ActiveSalesLines.Sum(a => a.DiscountAmountWithoutTax);
+            calculateTax.Transaction.PeriodicDiscountAmount = calculateTax.Transaction.ActiveSalesLines.Sum(a => a.PeriodicDiscount);
+            calculateTax.Transaction.TenderDiscountAmount = calculateTax.Transaction.ActiveSalesLines.Sum(a => a.TenderDiscountAmount);
             return serviceResponse;
         }
         public async Task<Response> ExecuteBaseRequestAsync(Request request)
@@ -84,6 +101,38 @@ namespace CDC.Commerce.Runtime.FBRIntegration
             var requestHandler = request.RequestContext.Runtime.GetNextAsyncRequestHandler(request.GetType(), this);
             Response response = await request.RequestContext.Runtime.ExecuteAsync<Response>(request, request.RequestContext, requestHandler, false).ConfigureAwait(false);
             return response;
+        }
+
+        private void GetTenderDiscountOfferIds(RequestContext context, out List<string> offerIds)
+        {
+            offerIds = new List<string>();
+
+            // Get the configuration parameters
+            var configurationRequest = new GetConfigurationParametersDataRequest(context.GetChannelConfiguration().RecordId);
+            var configurationResponse = context.ExecuteAsync<EntityDataServiceResponse<RetailConfigurationParameter>>(configurationRequest).Result;
+
+            string tenderDiscountOfferIds = configurationResponse?.PagedEntityCollection?.Where(cp => string.Equals(cp.Name.ToUpper().Trim(), ("MINDISCOUNTHEADER").ToUpper().Trim(), StringComparison.OrdinalIgnoreCase))?.FirstOrDefault()?.Value ?? string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(tenderDiscountOfferIds))
+            {
+                offerIds = tenderDiscountOfferIds.Split(';').ToList();
+            }
+        }
+
+        private void GetTenderDiscountValue(RequestContext context, out decimal maxDiscount)
+        {
+            maxDiscount = decimal.Zero;
+
+            // Get the configuration parameters
+            var configurationRequest = new GetConfigurationParametersDataRequest(context.GetChannelConfiguration().RecordId);
+            var configurationResponse = context.ExecuteAsync<EntityDataServiceResponse<RetailConfigurationParameter>>(configurationRequest).Result;
+
+            string tenderDiscountValue = configurationResponse?.PagedEntityCollection?.Where(cp => string.Equals(cp.Name.ToUpper().Trim(), ("MINDISCOUNTVALUE").ToUpper().Trim(), StringComparison.OrdinalIgnoreCase))?.FirstOrDefault()?.Value ?? string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(tenderDiscountValue) && decimal.TryParse(tenderDiscountValue, out decimal value))
+            {
+                maxDiscount = value;
+            }
         }
 
         public void GetMarginCapOnProductAndProductCategory(RequestContext requestContext, String itemId, string variantId, string dataAreaId, out decimal maximumRetailPrice, out int gstType)

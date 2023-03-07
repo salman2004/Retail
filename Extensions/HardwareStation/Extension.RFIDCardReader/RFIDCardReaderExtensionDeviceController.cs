@@ -147,7 +147,7 @@ namespace CDC.Commerce.HardwareStation.RFIDCardReader
                 }
                 else
                 {
-                    return await Task.FromResult(false);
+                    throw new PeripheralException("Microsoft_Dynamics_Commerce_HardwareStation_RFID_Card_Error", "Card number doesnot match");
                 }
             }
             catch (Exception ex)

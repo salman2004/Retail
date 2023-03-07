@@ -127,7 +127,7 @@ namespace CDC.Commerce.Runtime.CustomOpCat.RequestHandlers
             }
 
             if (dimensionValuesResponse.First().DimensionType == ProductDimensionType.Configuration)
-            {
+            {   
                 getProductDimensionValues.RequestContext.GetChannelConfiguration().SetProperty("Barcode", string.Empty);
                 foreach (var item in dimensionValuesResponse)
                 {
@@ -167,13 +167,17 @@ namespace CDC.Commerce.Runtime.CustomOpCat.RequestHandlers
                         productOrderSequence = await this.GetProductOrderSequence(request, result.Products.First().ItemId);
                         if (productOrderSequence != (int)ProductOrderSequence.Regular)
                         {
-                            item.Value = item.Value + " (RS." + result.Products.First().Price + ")";
+                            dimensionValuesResponse = FilterPromoProducts(request.RequestContext, dimensionValuesResponse);
+                            item.Value = item.Value + " (RS." + String.Format("{0:0.00}", result.Products.First().Price) + ")";
                             item.DisplayOrder = result.Products.First().Price;
 
                             if (itemAvailability.First().AvailableQuantity <= 0)
                             {
                                 List<ProductDimensionValue> values = dimensionValuesResponse.ToList();
-                                values.RemoveAt(count);
+                                if (values.Count > 0)
+                                {
+                                    values.RemoveAt(count);
+                                }
                                 dimensionValuesResponse = new EntityDataServiceResponse<ProductDimensionValue>(values.AsPagedResult());
                                 continue;
                             }
@@ -217,7 +221,7 @@ namespace CDC.Commerce.Runtime.CustomOpCat.RequestHandlers
                 query.Parameters["@itemId"] = name;
 
                 var cdcProductOrderSequence = await databaseContext.ReadEntityAsync<InventTable>(query).ConfigureAwait(false);
-                int cdcProductOrderSequenceNumber = Convert.ToInt32(Convert.ToString(cdcProductOrderSequence.FirstOrDefault().GetProperty("CDCPRODUCTORDERSEQUENCE")));
+                int cdcProductOrderSequenceNumber = Convert.ToInt32(Convert.ToString(cdcProductOrderSequence.FirstOrDefault()?.GetProperty("CDCPRODUCTORDERSEQUENCE")?? decimal.Zero.ToString()));
                 return cdcProductOrderSequenceNumber;
             }
         }
@@ -242,5 +246,33 @@ namespace CDC.Commerce.Runtime.CustomOpCat.RequestHandlers
             Response response = await request.RequestContext.Runtime.ExecuteAsync<Response>(request, request.RequestContext, requestHandler, false).ConfigureAwait(false);
             return response;
         }
+
+        public EntityDataServiceResponse<ProductDimensionValue> FilterPromoProducts(RequestContext context, EntityDataServiceResponse<ProductDimensionValue>  dimensionValuesResponse)
+        {
+            List<ProductDimensionValue> productDimensions = new List<ProductDimensionValue>();
+
+            using (DatabaseContext databaseContext = new DatabaseContext(context))
+            {
+                SqlQuery query = new SqlQuery();
+                query.QueryString = $@"Select RECID,OPCAT from ext.ECORESCONFIGURATION where RECID IN({string.Join(",", dimensionValuesResponse.Select(sl =>  sl.RecordId ))}) ";
+
+                try
+                {
+                    List<ExtensionsEntity> entities = databaseContext.ReadEntity<ExtensionsEntity>(query).ToList();
+                    foreach (var item in entities.Where(en => en.GetProperty("OPCAT").ToString() == decimal.One.ToString()))
+                    {
+
+                        productDimensions.AddRange(dimensionValuesResponse.Where(dv => dv.RecordId.ToString() == item.GetProperty("RECID").ToString()).ToList());
+                    }
+
+                    return new EntityDataServiceResponse<ProductDimensionValue>(productDimensions.AsPagedResult());
+                }
+                catch (Exception)
+                {
+                    return dimensionValuesResponse;
+                }
+            }
+        }
+
     }
 }

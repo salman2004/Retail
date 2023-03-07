@@ -26,7 +26,7 @@ namespace CDC.RetailServer.CardReader
         /// <param name="parameters">The dictionary of action parameter values.</param>
         /// <returns>The last terminal sequential signature data.</returns>
         [HttpPost]
-        [Authorization(CommerceRoles.Anonymous, CommerceRoles.Customer, CommerceRoles.Device, CommerceRoles.Employee)]
+        [Authorization(CommerceRoles.Anonymous, CommerceRoles.Application, CommerceRoles.Customer, CommerceRoles.Device, CommerceRoles.Employee, CommerceRoles.Storefront)]
         public virtual async Task<bool> AuthenticateCard(IEndpointContext context, string cnicNumber, string cardNumber)
         {
             var request = new CardReaderRequest(cardNumber, cnicNumber);

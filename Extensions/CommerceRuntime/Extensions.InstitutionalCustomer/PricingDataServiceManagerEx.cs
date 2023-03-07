@@ -81,12 +81,18 @@
 
         private ReadOnlyCollection<PeriodicDiscount> FilterMonthlyCapDiscounts(ReadOnlyCollection<PeriodicDiscount> retailDiscounts)
         {
+            GetLoyaltyCardDetails(out string cardNumber, out decimal cardBalance, this.RequestContext,out DateTime lastTransactionDateTime);
+
+            if (lastTransactionDateTime!= DateTime.MinValue && lastTransactionDateTime > DateTime.Now)
+            {
+                this.MonthlyLimitUsed = decimal.Zero;
+                return new List<PeriodicDiscount>().AsReadOnly();
+            }
+
             if (retailDiscounts.IsNullOrEmpty())
             {
                 return retailDiscounts;
             }
-            
-            GetLoyaltyCardDetails(out string cardNumber, out decimal cardBalance, this.RequestContext);
 
             if (string.IsNullOrWhiteSpace(this.Transaction.LoyaltyCardId)
                 || string.IsNullOrWhiteSpace(cardNumber)
@@ -99,12 +105,15 @@
 
             SalesAffiliationLoyaltyTier affiliationLoyaltyTier = this.Transaction.AffiliationLoyaltyTierLines.FirstOrDefault(alt => alt.AffiliationType == RetailAffiliationType.Loyalty);
             GetLoyaltyDetails(this.RequestContext, affiliationLoyaltyTier.AffiliationId, out decimal loyaltyLimit, out bool checkLoyaltyLimit);
+            this.Transaction.SetProperty("checkLoyaltyLimit", checkLoyaltyLimit);
 
-            if (!checkLoyaltyLimit)
-            {
-                this.MonthlyLimitUsed = decimal.Zero;
-                return retailDiscounts;
-            }
+            //if (!checkLoyaltyLimit)
+            //{
+            //    this.Transaction.SetProperty("CSDMonthlyLimitUsed", "00000");
+            //    this.Transaction.SetProperty("CSDCardBalance", "00000");
+            //    this.MonthlyLimitUsed = decimal.Zero;
+            //    return retailDiscounts;
+            //}
 
             if (checkLoyaltyLimit && this.Transaction.LoyaltyCardId.Equals(cardNumber) && cardBalance > decimal.Zero)
             {
@@ -128,7 +137,7 @@
                     if (itemPriceMap.ContainsKey(string.Format("{0}::{1}", salesLine.ItemId, salesLine.InventoryDimensionId)))
                     {                        
                         decimal quantity = retailDiscounts.Where(a => a.InventoryDimensionId == salesLine.InventoryDimensionId && a.ItemId == salesLine.ItemId)?.Where(b => b.OfferQuantityLimit > 0)?.FirstOrDefault()?.OfferQuantityLimit ?? decimal.Zero;
-                        itemPriceMap[string.Format("{0}::{1}", salesLine.ItemId, salesLine.InventoryDimensionId)] = (quantity != decimal.Zero ? quantity: salesLine.Quantity) * salesLine.Price;
+                        itemPriceMap[string.Format("{0}::{1}", salesLine.ItemId, salesLine.InventoryDimensionId)] = itemPriceMap[string.Format("{0}::{1}", salesLine.ItemId, salesLine.InventoryDimensionId)] + (quantity != decimal.Zero ? quantity: salesLine.Quantity) * salesLine.Price;
                     }
                     else
                     {
@@ -161,13 +170,12 @@
                         }
                     }
                 }
-
-                this.Transaction.SetProperty("CSDMonthlyLimitUsed", Convert.ToString(cardBalance - itemPriceMap?.Where(a => filteredRetailDiscounts.Any(b => string.Format("{0}::{1}", b.ItemId, b.InventoryDimensionId) == a.Key))?.Sum(z => z.Value) ?? decimal.Zero));
+            
                 return filteredRetailDiscounts.AsReadOnly();
             }
             else
             {
-                this.MonthlyLimitUsed = decimal.Zero;
+                this.MonthlyLimitUsed = decimal.Zero;                
                 return new List<PeriodicDiscount>().AsReadOnly();
             }
         }
@@ -334,19 +342,19 @@
             }
         }
 
-        private void GetLoyaltyCardDetails(out string cardNumber, out decimal cardBalance, RequestContext context)
+        private void GetLoyaltyCardDetails(out string cardNumber, out decimal cardBalance, RequestContext context, out DateTime lastTransactionDateTime)
         {
             cardNumber = this.Transaction?.GetProperty("CSDCardNumber")?.ToString()?.Trim() ?? string.Empty;
             decimal.TryParse(this.Transaction?.GetProperty("CSDCardBalance")?.ToString()?.Trim() ?? string.Empty, out cardBalance);
-            cardBalance = ResetCardBalance(cardBalance, context);
+            cardBalance = ResetCardBalance(cardBalance, context, out lastTransactionDateTime);
         }
 
-        private decimal ResetCardBalance(decimal orignalCardBalance, RequestContext context)
+        private decimal ResetCardBalance(decimal orignalCardBalance, RequestContext context, out DateTime lastTransactionDateTime)
         {
             decimal cardBalance = decimal.MinValue;
-            DateTime lastTransactionDateTime = DateTime.MaxValue;
+            lastTransactionDateTime = DateTime.MaxValue;
 
-            DateTime.TryParse(this.Transaction?.GetProperty("CSDlastTransactionDateTime")?.ToString()?.Trim() ?? string.Empty, out lastTransactionDateTime);
+            DateTime.TryParse(this.Transaction?.GetProperty("CSDlastTransactionDateTime")?.ToString()?.Trim() ?? DateTime.MinValue.ToString(), out lastTransactionDateTime);
             var configurationRequest = new GetConfigurationParametersDataRequest(context.GetChannelConfiguration().RecordId);
             var configurationResponse = context.ExecuteAsync<EntityDataServiceResponse<RetailConfigurationParameter>>(configurationRequest).Result;
 
@@ -375,6 +383,7 @@
             {   
                 return orignalCardBalance;
             }
+            this.Transaction.SetProperty("CSDCardBalance", cardBalance.ToString());
             return cardBalance;
         }
 
@@ -400,6 +409,13 @@
                     var loyaltyDetail = databaseContext.ReadEntity<ExtensionsEntity>(query);
                     loyaltyLimit = Convert.ToDecimal(Convert.ToString(loyaltyDetail?.FirstOrDefault()?.GetProperty("CDCMONTHLYCATLIMIT") ?? decimal.Zero));
                     checkLoyaltyLimit = Convert.ToBoolean(Convert.ToInt32(Convert.ToString(loyaltyDetail?.FirstOrDefault()?.GetProperty("CDCPROTECTMONTHLYCAT") ?? decimal.Zero)));
+
+                    if (!checkLoyaltyLimit)
+                    {
+                        this.Transaction.SetProperty("CSDMonthlyLimitUsed", "00000");
+                        this.Transaction.SetProperty("CSDCardBalance", "00000");
+                        this.MonthlyLimitUsed = decimal.Zero;
+                    }
                 }
                 catch (Exception)
                 {

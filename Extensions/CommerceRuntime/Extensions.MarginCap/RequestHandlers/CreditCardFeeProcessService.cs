@@ -25,7 +25,7 @@ namespace CDC.Commerce.Runtime.MarginCap.RequestHandlers
         }
 
         public async Task<Response> Execute(Request request)
-        {
+        {   
             GetPriceServiceResponse priceServiceResponse = new GetPriceServiceResponse();
             if (request.GetType() == typeof(CalculateDiscountsServiceRequest))
             {
@@ -54,12 +54,12 @@ namespace CDC.Commerce.Runtime.MarginCap.RequestHandlers
                             decimal processingFees = (tenderList.Sum(a => a.Amount)) * (Convert.ToDecimal((cardFee)) / 100);
                             if (!calculateDiscountsService.Transaction.ChargeLines.Any(a => a.ChargeCode == cardRefundChargeCode))
                             {
-                                ChargeLineOverride chargeLineOverride = new ChargeLineOverride();
-                                chargeLineOverride.OriginalAmount = 0;
-                                chargeLineOverride.OverrideAmount = processingFees;
-                                chargeLineOverride.OverrideReasonDescription = cardRefundChargeCode;
-                                chargeLineOverride.UserId = request.RequestContext.GetPrincipal().ExternalIdentityId;
-                                chargeLineOverride.OverrideDateTime = DateTime.Now;
+                                //ChargeLineOverride chargeLineOverride = new ChargeLineOverride();
+                                //chargeLineOverride.OriginalAmount = 0;
+                                //chargeLineOverride.OverrideAmount = processingFees;
+                                //chargeLineOverride.OverrideReasonDescription = cardRefundChargeCode;
+                                //chargeLineOverride.UserId = request.RequestContext.GetPrincipal().ExternalIdentityId;
+                                //chargeLineOverride.OverrideDateTime = DateTime.Now;
 
                                 ChargeLine chargeLine = new ChargeLine();
 
@@ -74,7 +74,7 @@ namespace CDC.Commerce.Runtime.MarginCap.RequestHandlers
                                 chargeLine.Description = cardRefundChargeCode;
                                 chargeLine.Quantity = 1;
                                 chargeLine.NetAmountPerUnit = processingFees;
-                                chargeLine.ChargeLineOverrides.Add(chargeLineOverride);
+                                //chargeLine.ChargeLineOverrides.Add(chargeLineOverride);
                                 calculateDiscountsService.Transaction.ChargeLines.Add(chargeLine);
                             }
                         }

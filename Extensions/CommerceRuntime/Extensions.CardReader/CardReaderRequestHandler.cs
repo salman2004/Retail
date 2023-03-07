@@ -4,6 +4,7 @@ using Microsoft.Dynamics.Commerce.Runtime.Data;
 using Microsoft.Dynamics.Commerce.Runtime.DataModel;
 using Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages;
 using Microsoft.Dynamics.Commerce.Runtime.Messages;
+using Microsoft.Dynamics.Commerce.Runtime.Services.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,6 @@ namespace CDC.Commerce.Runtime.CardReader
             {
                 throw new ArgumentNullException("request");
             }
-
             Type reqType = request.GetType();
             if (reqType == typeof(CardReaderRequest))
             {
@@ -56,6 +56,11 @@ namespace CDC.Commerce.Runtime.CardReader
                 {
                     LocalizedMessage = "The card you are trying to use is blocked. Please contact concerned department."
                 };
+            }
+
+            if (request.CNICNumber == string.Empty)
+            {
+                return new CardReaderResponse(true);
             }
 
             GetLoyaltyCardDataRequest getLoyaltyCardDataRequest = new GetLoyaltyCardDataRequest(request.CardNumber);

@@ -25,5 +25,11 @@
     <PackageReference Include="Microsoft.Dynamics.Commerce.Tools.ExtensionsProxyGenerator" Version="$(ChannelRepoPackagesVersion)" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="CDC.Commerce.Runtime.CardReader">
+      <HintPath>..\..\..\References\CDC.Commerce.Runtime.CardReader.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
   <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.targets" />
 </Project>

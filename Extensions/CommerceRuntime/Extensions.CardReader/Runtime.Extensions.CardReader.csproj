@@ -2,6 +2,12 @@
   <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.props" />
   <Import Project="..\..\..\BuildTools\Common.props" />
   <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.settings" />
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
 
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>

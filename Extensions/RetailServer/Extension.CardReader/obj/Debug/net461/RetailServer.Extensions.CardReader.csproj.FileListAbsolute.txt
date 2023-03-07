@@ -371,6 +371,8 @@ C:\RetailSDK\Update\RetailSDKUpdate\Extensions\RetailServer\Extension.CardReader
 C:\RetailSDK\Update\RetailSDKUpdate\Extensions\RetailServer\Extension.CardReader\bin\Debug\net461\CDC.RetailServer.CardReader.pdb
 C:\RetailSDK\Update\RetailSDKUpdate\Extensions\RetailServer\Extension.CardReader\obj\Debug\net461\CDC.RetailServer.CardReader.dll
 C:\RetailSDK\Update\RetailSDKUpdate\Extensions\RetailServer\Extension.CardReader\obj\Debug\net461\CDC.RetailServer.CardReader.pdb
+C:\RetailSDK\Update\RetailSDK_Version28\Extensions\RetailServer\Extension.CardReader\bin\Debug\net461\CDC.RetailServer.CardReader.dll
+C:\RetailSDK\Update\RetailSDK_Version28\Extensions\RetailServer\Extension.CardReader\bin\Debug\net461\CDC.RetailServer.CardReader.pdb
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\RetailServer\Extension.CardReader\bin\Debug\net461\Microsoft.Dynamics.Retail.Diagnostics.dll
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\RetailServer\Extension.CardReader\bin\Debug\net461\Microsoft.Dynamics.Commerce.Runtime.Framework.dll
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\RetailServer\Extension.CardReader\bin\Debug\net461\Microsoft.Dynamics.Commerce.Runtime.Hosting.Contracts.dll
@@ -486,12 +488,10 @@ C:\RetailSDK\Update\RetailSDK_Version28\Extensions\RetailServer\Extension.CardRe
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\RetailServer\Extension.CardReader\bin\Debug\net461\System.Xml.XPath.XDocument.dll
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\RetailServer\Extension.CardReader\bin\Debug\net461\CDC.Commerce.Runtime.CardReader.dll
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\RetailServer\Extension.CardReader\bin\Debug\net461\CDC.Commerce.Runtime.CardReader.pdb
+C:\RetailSDK\Update\RetailSDK_Version28\Extensions\RetailServer\Extension.CardReader\obj\Debug\net461\RetailServer.Extensions.CardReader.csprojAssemblyReference.cache
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\RetailServer\Extension.CardReader\obj\Debug\net461\RetailServer.Extensions.CardReader.csproj.CoreCompileInputs.cache
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\RetailServer\Extension.CardReader\obj\Debug\net461\RetailServer.Extensions.CardReader.AssemblyInfoInputs.cache
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\RetailServer\Extension.CardReader\obj\Debug\net461\RetailServer.Extensions.CardReader.AssemblyInfo.cs
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\RetailServer\Extension.CardReader\obj\Debug\net461\RetailServer.Extensions.CardReader.csproj.CopyComplete
-C:\RetailSDK\Update\RetailSDK_Version28\Extensions\RetailServer\Extension.CardReader\obj\Debug\net461\RetailServer.Extensions.CardReader.csprojAssemblyReference.cache
-C:\RetailSDK\Update\RetailSDK_Version28\Extensions\RetailServer\Extension.CardReader\bin\Debug\net461\CDC.RetailServer.CardReader.dll
-C:\RetailSDK\Update\RetailSDK_Version28\Extensions\RetailServer\Extension.CardReader\bin\Debug\net461\CDC.RetailServer.CardReader.pdb
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\RetailServer\Extension.CardReader\obj\Debug\net461\CDC.RetailServer.CardReader.dll
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\RetailServer\Extension.CardReader\obj\Debug\net461\CDC.RetailServer.CardReader.pdb

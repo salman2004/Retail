@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.props" />
+  <Import Project="..\..\..\BuildTools\Common.props" />
+  <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.settings" />
+
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+    <AssemblyName>$(AssemblyNamePrefix).Commerce.RetailProxy.AskariCardBinNumberVerification</AssemblyName>
+    <RootNamespace>CDC.Commerce.RetailProxy.AskariCardBinNumberVerification</RootNamespace>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<RetailServerExtensionAssemblies Include="..\..\RetailServer\Extension.AskariCardBinNumberVerification\bin\$(Configuration)\net461\$(AssemblyNamePrefix).RetailServer.AskariCardBinNumberVerification.dll" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\RetailServer\Extension.AskariCardBinNumberVerification\RetailServer.Extension.AskariCardBinNumberVerification.csproj" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Composition" Version="1.2.0" />
+    <PackageReference Include="Microsoft.Dynamics.Commerce.RetailProxy" Version="$(ChannelRepoPackagesVersion)" />
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Tools.ExtensionsProxyGenerator" Version="$(ChannelRepoPackagesVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CDC.Commerce.Runtime.AskariCardBinNumberVerification">
+      <HintPath>..\..\..\References\CDC.Commerce.Runtime.AskariCardBinNumberVerification.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.targets" />
+</Project>

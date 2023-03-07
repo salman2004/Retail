@@ -1731,17 +1731,17 @@
           "lib/net45/_._": {}
         }
       },
-      "Contoso.RetailServer.CardReader/1.0.0": {
+      "CDC.RetailServer.CardReader/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "Microsoft.Dynamics.Commerce.Runtime.Hosting.Contracts": "[10.6.0, 10.7.0)"
         },
         "compile": {
-          "bin/placeholder/Contoso.RetailServer.CardReader.dll": {}
+          "bin/placeholder/CDC.RetailServer.CardReader.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Contoso.RetailServer.CardReader.dll": {}
+          "bin/placeholder/CDC.RetailServer.CardReader.dll": {}
         }
       }
     }
@@ -6125,7 +6125,7 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
-    "Contoso.RetailServer.CardReader/1.0.0": {
+    "CDC.RetailServer.CardReader/1.0.0": {
       "type": "project",
       "path": "../../RetailServer/Extension.CardReader/RetailServer.Extensions.CardReader.csproj",
       "msbuildProject": "../../RetailServer/Extension.CardReader/RetailServer.Extensions.CardReader.csproj"
@@ -6133,7 +6133,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.6.1": [
-      "Contoso.RetailServer.CardReader >= 1.0.0",
+      "CDC.RetailServer.CardReader >= 1.0.0",
       "Microsoft.Dynamics.Commerce.RetailProxy >= 9.38.* < 9.39.0",
       "Microsoft.Dynamics.Commerce.Tools.ExtensionsProxyGenerator >= 9.38.* < 9.39.0",
       "System.Composition >= 1.2.0"
@@ -6149,7 +6149,7 @@
     "version": "1.0.0",
     "restore": {
       "projectUniqueName": "C:\\RetailSDK\\Update\\RetailSDK_Version28\\Extensions\\RetailProxy\\RetailProxy.Extensions.CardReader\\Proxies.RetailProxy.Extensions.CardReader.csproj",
-      "projectName": "Contoso.Commerce.RetailProxy.CardReader",
+      "projectName": "CDC.Commerce.RetailProxy.CardReader",
       "projectPath": "C:\\RetailSDK\\Update\\RetailSDK_Version28\\Extensions\\RetailProxy\\RetailProxy.Extensions.CardReader\\Proxies.RetailProxy.Extensions.CardReader.csproj",
       "packagesPath": "C:\\RetailSDK\\Update\\RetailSDK_Version28\\References",
       "outputPath": "C:\\RetailSDK\\Update\\RetailSDK_Version28\\Extensions\\RetailProxy\\RetailProxy.Extensions.CardReader\\obj\\",

@@ -56,51 +56,58 @@
 
             foreach (var item in getPriceServiceResponse.Transaction.ActiveSalesLines)
             {
-                capOnProductAndProductCategory = GetMarginCapOnProductAndProductCategory(request, item.ItemId, await GetProductIdAsync(request, item));
-                isMarginCapEnabledOnProductAndProductCategory = Convert.ToBoolean(Convert.ToInt32(capOnProductAndProductCategory.GetProperty("ISMARGINCAPALLOWED").ToString()));
-                excludeDiscount = Convert.ToBoolean(Convert.ToInt32(capOnProductAndProductCategory.GetProperty("EXCLUDEDISCOUNT").ToString()));
-                marginCapPercentageOnProductAndProductCategory = Convert.ToDecimal(capOnProductAndProductCategory.GetProperty("MARGINCAPPERCENTAGE").ToString());
-
-                if (excludeDiscount)
+                if (item.IsReturnLine())
                 {
-                    item.DiscountLines.Clear();
-                    item.DiscountAmount = 0;
-                    item.DiscountAmountWithoutTax = 0;
-                    item.PeriodicDiscount = 0;
-                    item.PeriodicPercentageDiscount = 0;
+                    continue;
                 }
-                if (isMarginCapEnabledOnProductAndProductCategory)
+                else
                 {
-                    if (marginCapPercentageOnProductAndProductCategory == 0)
-                    {
-                        marginCapPercentageOnProductAndProductCategory = marginCapPercentageOnStoreAndEntity;
-                    }
-                    item.TotalPercentageDiscount = item.DiscountLines.Sum(a => a.EffectivePercentage);
-                    var costPrice = GetCostPrice(item, request);
-                    var grossMargin = CalculateGrossMargin(costPrice, item.AgreementPrice);
-                    grossMargin =Convert.ToDecimal(String.Format("{0:0.00}", grossMargin));
+                    capOnProductAndProductCategory = GetMarginCapOnProductAndProductCategory(request, item.ItemId, await GetProductIdAsync(request, item));
+                    isMarginCapEnabledOnProductAndProductCategory = Convert.ToBoolean(Convert.ToInt32(capOnProductAndProductCategory.GetProperty("ISMARGINCAPALLOWED").ToString()));
+                    excludeDiscount = Convert.ToBoolean(Convert.ToInt32(capOnProductAndProductCategory.GetProperty("EXCLUDEDISCOUNT").ToString()));
+                    marginCapPercentageOnProductAndProductCategory = Convert.ToDecimal(capOnProductAndProductCategory.GetProperty("MARGINCAPPERCENTAGE").ToString());
 
-                    if ((grossMargin - marginCapPercentageOnProductAndProductCategory) <= item.TotalPercentageDiscount)
+                    if (excludeDiscount)
                     {
-                        decimal newDiscount = grossMargin - marginCapPercentageOnProductAndProductCategory;
-                        if (newDiscount < Decimal.Zero)
+                        item.DiscountLines.Clear();
+                        item.DiscountAmount = 0;
+                        item.DiscountAmountWithoutTax = 0;
+                        item.PeriodicDiscount = 0;
+                        item.PeriodicPercentageDiscount = 0;
+                    }
+                    if (isMarginCapEnabledOnProductAndProductCategory)
+                    {
+                        if (marginCapPercentageOnProductAndProductCategory == 0)
                         {
-                            newDiscount = Decimal.Zero;
+                            marginCapPercentageOnProductAndProductCategory = marginCapPercentageOnStoreAndEntity;
                         }
-                        decimal newDistributedDiscount = newDiscount / item.DiscountLines.Count;
-                        foreach (var discountLine in item.DiscountLines)
+                        item.TotalPercentageDiscount = item.DiscountLines.Sum(a => a.EffectivePercentage);
+                        var costPrice = GetCostPrice(item, request);
+                        var grossMargin = CalculateGrossMargin(costPrice, item?.Price ?? decimal.Zero);
+                        grossMargin = Convert.ToDecimal(String.Format("{0:0.00}", grossMargin));
+
+                        if ((grossMargin - marginCapPercentageOnProductAndProductCategory) <= item.TotalPercentageDiscount)
                         {
-                            discountLine.EffectivePercentage = newDistributedDiscount;
-                            discountLine.Percentage = newDistributedDiscount;
-                            discountLine.Amount = item.AgreementPrice * item.Quantity * (discountLine.EffectivePercentage / 100);
-                            discountLine.EffectiveAmount = item.AgreementPrice * item.Quantity * (discountLine.EffectivePercentage / 100);
+                            decimal newDiscount = grossMargin - marginCapPercentageOnProductAndProductCategory;
+                            if (newDiscount < Decimal.Zero)
+                            {
+                                newDiscount = Decimal.Zero;
+                            }
+                            decimal newDistributedDiscount = newDiscount / item.DiscountLines.Count;
+                            foreach (var discountLine in item.DiscountLines)
+                            {
+                                discountLine.EffectivePercentage = newDistributedDiscount;
+                                discountLine.Percentage = newDistributedDiscount;
+                                discountLine.Amount = item.AgreementPrice * item.Quantity * (discountLine.EffectivePercentage / 100);
+                                discountLine.EffectiveAmount = item.AgreementPrice * item.Quantity * (discountLine.EffectivePercentage / 100);
+                            }
+                            item.DiscountAmount = (item.AgreementPrice * (newDiscount / 100)) * item.Quantity;
+                            item.DiscountAmountWithoutTax = item.DiscountAmount;
+                            item.PeriodicDiscount = item.DiscountAmount;
+                            item.PeriodicPercentageDiscount = newDiscount;
+                            item.TotalPercentageDiscount = newDiscount;
+
                         }
-                        item.DiscountAmount = (item.AgreementPrice * (newDiscount / 100)) * item.Quantity;
-                        item.DiscountAmountWithoutTax = item.DiscountAmount;
-                        item.PeriodicDiscount = item.DiscountAmount;
-                        item.PeriodicPercentageDiscount = newDiscount;
-                        item.TotalPercentageDiscount = newDiscount;
-                                              
                     }
                 }
             }

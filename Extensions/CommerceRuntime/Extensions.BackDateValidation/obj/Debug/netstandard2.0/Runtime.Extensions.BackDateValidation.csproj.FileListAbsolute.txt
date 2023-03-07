@@ -1,0 +1,8 @@
+C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.BackDateValidation\bin\Debug\netstandard2.0\CDC.Commerce.Runtime.BackDateValidation.deps.json
+C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.BackDateValidation\bin\Debug\netstandard2.0\CDC.Commerce.Runtime.BackDateValidation.dll
+C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.BackDateValidation\bin\Debug\netstandard2.0\CDC.Commerce.Runtime.BackDateValidation.pdb
+C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.BackDateValidation\obj\Debug\netstandard2.0\Runtime.Extensions.BackDateValidation.csproj.CoreCompileInputs.cache
+C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.BackDateValidation\obj\Debug\netstandard2.0\Runtime.Extensions.BackDateValidation.AssemblyInfoInputs.cache
+C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.BackDateValidation\obj\Debug\netstandard2.0\Runtime.Extensions.BackDateValidation.AssemblyInfo.cs
+C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.BackDateValidation\obj\Debug\netstandard2.0\CDC.Commerce.Runtime.BackDateValidation.dll
+C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.BackDateValidation\obj\Debug\netstandard2.0\CDC.Commerce.Runtime.BackDateValidation.pdb

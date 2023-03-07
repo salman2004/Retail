@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v2.0/",
-    "signature": "f9bd9409e958efbbfabab87ad37a3a3bca9db3f6"
+    "signature": "82e32763a36ac07e37e304863d014584037402b0"
   },
   "compilationOptions": {},
   "targets": {
@@ -10,7 +10,7 @@
       "CDC.Commerce.TypeScriptProxy.CardReader/1.0.0": {
         "dependencies": {
           "CDC.RetailServer.CardReader": "1.0.0",
-          "Microsoft.Dynamics.Commerce.Tools.ExtensionsProxyGenerator": "9.36.22107.2",
+          "Microsoft.Dynamics.Commerce.Tools.ExtensionsProxyGenerator": "9.38.22167.5",
           "Microsoft.TypeScript.MSBuild": "2.2.2",
           "NETStandard.Library": "2.0.3"
         },
@@ -19,7 +19,7 @@
         }
       },
       "Microsoft.Dynamics.Commerce.Tools.CoreProxyGenerator/10.19.21267.4": {},
-      "Microsoft.Dynamics.Commerce.Tools.ExtensionsProxyGenerator/9.36.22107.2": {
+      "Microsoft.Dynamics.Commerce.Tools.ExtensionsProxyGenerator/9.38.22167.5": {
         "dependencies": {
           "Microsoft.Dynamics.Commerce.Tools.CoreProxyGenerator": "10.19.21267.4"
         }
@@ -34,7 +34,7 @@
       "CDC.RetailServer.CardReader/1.0.0": {
         "dependencies": {
           "Microsoft.Dynamics.Commerce.Runtime.Hosting.Contracts": "7.0.0.0",
-          "CDC.Commerce.Runtime.CardReader": "1.0.0.7",
+          "CDC.Commerce.Runtime.CardReader": "1.0.0.0",
           "Microsoft.Dynamics.Commerce.Runtime.Framework": "7.0.0.0",
           "System.Composition.TypedParts": "1.0.33.0",
           "System.Composition.AttributedModel": "1.0.33.0",
@@ -59,15 +59,15 @@
         "runtime": {
           "Microsoft.Dynamics.Commerce.Runtime.Hosting.Contracts.dll": {
             "assemblyVersion": "7.0.0.0",
-            "fileVersion": "10.5.22077.1"
+            "fileVersion": "10.6.22165.1"
           }
         }
       },
-      "CDC.Commerce.Runtime.CardReader.Reference/1.0.0.7": {
+      "CDC.Commerce.Runtime.CardReader.Reference/1.0.0.0": {
         "runtime": {
           "CDC.Commerce.Runtime.CardReader.dll": {
-            "assemblyVersion": "1.0.0.7",
-            "fileVersion": "1.0.0.7"
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "10.0.28.8"
           }
         }
       },
@@ -75,7 +75,7 @@
         "runtime": {
           "Microsoft.Dynamics.Commerce.Runtime.Framework.dll": {
             "assemblyVersion": "7.0.0.0",
-            "fileVersion": "10.5.22077.1"
+            "fileVersion": "10.6.22165.1"
           }
         }
       },
@@ -99,7 +99,7 @@
         "runtime": {
           "Microsoft.Dynamics.Retail.Diagnostics.dll": {
             "assemblyVersion": "7.0.0.0",
-            "fileVersion": "10.8.22035.2"
+            "fileVersion": "10.8.22111.1"
           }
         }
       },
@@ -206,12 +206,12 @@
       "path": "microsoft.dynamics.commerce.tools.coreproxygenerator/10.19.21267.4",
       "hashPath": "microsoft.dynamics.commerce.tools.coreproxygenerator.10.19.21267.4.nupkg.sha512"
     },
-    "Microsoft.Dynamics.Commerce.Tools.ExtensionsProxyGenerator/9.36.22107.2": {
+    "Microsoft.Dynamics.Commerce.Tools.ExtensionsProxyGenerator/9.38.22167.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-4T8xQPAImnKQ28fidYgmyaZ9AjocOPL6oA9bQW6i0ZNYByMk5eaAG4EXKQQIMCZ/UQ3XnH3vTMgGSiQpT7AULw==",
-      "path": "microsoft.dynamics.commerce.tools.extensionsproxygenerator/9.36.22107.2",
-      "hashPath": "microsoft.dynamics.commerce.tools.extensionsproxygenerator.9.36.22107.2.nupkg.sha512"
+      "sha512": "sha512-zflMHMJ+smYsAfQ2kR51F2lWDgRX/tf4jmEHHs06qjKDoyYdZovkdBUJhIxsrmJIL2gE+K0oUxRS/OrA4niBKQ==",
+      "path": "microsoft.dynamics.commerce.tools.extensionsproxygenerator/9.38.22167.5",
+      "hashPath": "microsoft.dynamics.commerce.tools.extensionsproxygenerator.9.38.22167.5.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "type": "package",
@@ -244,7 +244,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "CDC.Commerce.Runtime.CardReader.Reference/1.0.0.7": {
+    "CDC.Commerce.Runtime.CardReader.Reference/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

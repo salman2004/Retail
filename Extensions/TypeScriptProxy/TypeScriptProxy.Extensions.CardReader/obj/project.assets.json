@@ -48,14 +48,14 @@
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       },
-      "Contoso.RetailServer.CardReader/1.0.0": {
+      "CDC.RetailServer.CardReader/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6.1",
         "compile": {
-          "bin/placeholder/Contoso.RetailServer.CardReader.dll": {}
+          "bin/placeholder/CDC.RetailServer.CardReader.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Contoso.RetailServer.CardReader.dll": {}
+          "bin/placeholder/CDC.RetailServer.CardReader.dll": {}
         }
       }
     }
@@ -307,7 +307,7 @@
         "netstandard.library.nuspec"
       ]
     },
-    "Contoso.RetailServer.CardReader/1.0.0": {
+    "CDC.RetailServer.CardReader/1.0.0": {
       "type": "project",
       "path": "../../RetailServer/Extension.CardReader/RetailServer.Extensions.CardReader.csproj",
       "msbuildProject": "../../RetailServer/Extension.CardReader/RetailServer.Extensions.CardReader.csproj"
@@ -315,7 +315,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
-      "Contoso.RetailServer.CardReader >= 1.0.0",
+      "CDC.RetailServer.CardReader >= 1.0.0",
       "Microsoft.Dynamics.Commerce.Tools.ExtensionsProxyGenerator >= 9.38.22167.5",
       "Microsoft.TypeScript.MSBuild >= 2.2.2",
       "NETStandard.Library >= 2.0.3"
@@ -331,7 +331,7 @@
     "version": "1.0.0",
     "restore": {
       "projectUniqueName": "C:\\RetailSDK\\Update\\RetailSDK_Version28\\Extensions\\TypeScriptProxy\\TypeScriptProxy.Extensions.CardReader\\Proxies.TypeScriptProxy.Extensions.CardReader.csproj",
-      "projectName": "Contoso.Commerce.TypeScriptProxy.CardReader",
+      "projectName": "CDC.Commerce.TypeScriptProxy.CardReader",
       "projectPath": "C:\\RetailSDK\\Update\\RetailSDK_Version28\\Extensions\\TypeScriptProxy\\TypeScriptProxy.Extensions.CardReader\\Proxies.TypeScriptProxy.Extensions.CardReader.csproj",
       "packagesPath": "C:\\RetailSDK\\Update\\RetailSDK_Version28\\References",
       "outputPath": "C:\\RetailSDK\\Update\\RetailSDK_Version28\\Extensions\\TypeScriptProxy\\TypeScriptProxy.Extensions.CardReader\\obj\\",

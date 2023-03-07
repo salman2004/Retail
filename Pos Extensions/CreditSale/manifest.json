@@ -1,0 +1,18 @@
+﻿{
+    "$schema": "../manifestSchema.json",
+    "name": "Pos_Extensibility_CreditSale",
+    "publisher": "Delcit",
+    "version": "1.0.0.6",
+    "minimumPosVersion": "1.0.0.0",
+  "components": {    
+    "extend": {
+      "triggers": [
+        { "$ref": "../askaricardsale/manifest.json#" },
+        {
+          "triggerType": "PreOperation",
+          "modulePath": "TriggerHandlers/CreditSalePreOperationTrigger"
+        }
+      ]
+      }
+    }
+  }

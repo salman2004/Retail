@@ -1,0 +1,21 @@
+﻿{
+    "$schema": "../manifestSchema.json",
+    "name": "Pos_Extensibility_AskariCardSale",
+    "publisher": "Delcit",
+    "version": "1.0.0.6",
+    "minimumPosVersion": "1.0.0.0",
+  "components": {
+    "extend": {
+      "triggers": [
+        {
+          "triggerType": "PreOperation",
+          "modulePath": "TriggerHandlers/AskariCardSalePreOperationTrigger"
+        },
+        {
+          "triggerType": "PostLogon",
+          "modulePath": "TriggerHandlers/PostLogOnTrigger"
+        }
+      ]
+    }
+    }
+  }

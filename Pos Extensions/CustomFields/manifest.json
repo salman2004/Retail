@@ -1,0 +1,40 @@
+﻿{
+  "$schema": "../manifestSchema.json",
+  "name": "Pos_Extensibility_CustomFields",
+  "publisher": "Delcit",
+  "version": "1.0.0.1",
+  "minimumPosVersion": "1.0.0.0",
+  "components": {
+    "extend": {
+      "views": {
+        "CartView": {
+          "totalsPanel": {
+            "customFields": [
+              {
+                "fieldName": "Ehsaas Program Discount",
+                "modulePath": "CartViewExtension/EhsaasProgramChargesCustomField"
+              },
+              {
+                "fieldName": "FBR Charges",
+                "modulePath": "CartViewExtension/FbrChargesCustomField"
+              },
+              {
+                "fieldName": "Card Remaining Balance",
+                "modulePath": "CartViewExtension/LoyaltyCardRemainingBalanceCustomField"
+              },
+              {
+                "fieldName": "Total Charges",
+                "modulePath": "CartViewExtension/TotalChargesCustomField"
+              }
+            ]
+          }
+        },
+        "CustomerDetailsView": {
+          "appBarCommands": [
+            { "modulePath": "CustomerDetailsViewExtension/AddLoyaltyCustomerCommand" }
+          ]
+        }
+      }
+    }
+  }
+}

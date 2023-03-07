@@ -1,0 +1,30 @@
+﻿{
+  "$schema": "../manifestSchema.json",
+  "name": "Pos_Extensibility_EhsasProgram",
+  "publisher": "Delcit",
+  "version": "1.0.0.1",
+  "minimumPosVersion": "1.0.0.0",
+  "components": {
+    "create": {
+      "operations": [
+        {
+          "operationId": "5002",
+          "operationRequestFactoryPath": "Operations/EhsasProgramOperationRequestFactory",
+          "operationRequestHandlerPath": "Operations/EhsasProgramOperationRequestHandler"
+        }
+      ]
+    },
+    "extend": {
+      "triggers": [
+        {
+          "triggerType": "OperationFailure",
+          "modulePath": "TriggerHandlers/EhsasProgramFailureTrigger"
+        },
+        {
+          "triggerType": "PostOperation",
+          "modulePath": "TriggerHandlers/EhsasProgramPostTrigger"
+        }
+      ]
+    }
+  }
+}

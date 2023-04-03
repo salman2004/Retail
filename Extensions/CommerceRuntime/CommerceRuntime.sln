@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Runtime.Extensions.AskariCa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Runtime.Extensions.ReturnTransactions", "Extensions.ReturnTransactions\Runtime.Extensions.ReturnTransactions.csproj", "{952FCFD9-5239-4A7A-A56B-68CA53DF1CE6}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Runtime.Extensions.FractionalSale", "Extensions.FractionalSale\Runtime.Extensions.FractionalSale.csproj", "{A1BE8419-2543-42AF-AE24-2388E813B538}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{952FCFD9-5239-4A7A-A56B-68CA53DF1CE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{952FCFD9-5239-4A7A-A56B-68CA53DF1CE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{952FCFD9-5239-4A7A-A56B-68CA53DF1CE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1BE8419-2543-42AF-AE24-2388E813B538}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1BE8419-2543-42AF-AE24-2388E813B538}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1BE8419-2543-42AF-AE24-2388E813B538}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1BE8419-2543-42AF-AE24-2388E813B538}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,7 +101,7 @@ Global
 		SolutionGuid = {8F651935-32F7-4420-B359-A3B7C37E58EF}
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 14
+		SccNumberOfProjects = 15
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://dev.azure.com/delcit
 		SccLocalPath0 = .
@@ -138,5 +144,8 @@ Global
 		SccProjectUniqueName13 = Extensions.ReturnTransactions\\Runtime.Extensions.ReturnTransactions.csproj
 		SccProjectName13 = Extensions.ReturnTransactions
 		SccLocalPath13 = Extensions.ReturnTransactions
+		SccProjectUniqueName14 = Extensions.FractionalSale\\Runtime.Extensions.FractionalSale.csproj
+		SccProjectName14 = Extensions.FractionalSale
+		SccLocalPath14 = Extensions.FractionalSale
 	EndGlobalSection
 EndGlobal

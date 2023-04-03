@@ -3,6 +3,7 @@
   <Import Project="..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.settings" />
     <ItemGroup>
       <ProjectFiles Include="TypeScriptProxy.Extensions.CardReader\Proxies.TypeScriptProxy.Extensions.CardReader.csproj" />
+      <ProjectFiles Include="TypeScriptProxy.Extensions.FractionalSale\Proxies.TypeScriptProxy.Extensions.FractionalSale.csproj" />
     </ItemGroup>
     <Import Project="$(SdkRootPath)\BuildTools\Microsoft.Dynamics.RetailSdk.Build.traversal.targets" />
 </Project>

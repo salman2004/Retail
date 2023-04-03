@@ -211,3 +211,4 @@ C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.Re
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.ReturnTransactions\obj\Debug\net461\Runtime.Extensions.ReturnTransactions.csproj.CopyComplete
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.ReturnTransactions\obj\Debug\net461\CDC.Commerce.Runtime.ReturnTransactions.dll
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.ReturnTransactions\obj\Debug\net461\CDC.Commerce.Runtime.ReturnTransactions.pdb
+C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.ReturnTransactions\obj\Debug\net461\Runtime.Extensions.ReturnTransactions.csprojAssemblyReference.cache

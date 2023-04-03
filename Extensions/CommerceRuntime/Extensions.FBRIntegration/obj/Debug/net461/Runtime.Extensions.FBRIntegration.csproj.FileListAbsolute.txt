@@ -188,10 +188,10 @@ C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.FB
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.FBRIntegration\bin\Debug\net461\Microsoft.Dynamics365.LocalizationFrameworkCore.dll
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.FBRIntegration\bin\Debug\net461\zxing.dll
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.FBRIntegration\bin\Debug\net461\EPPlus.dll
+C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.FBRIntegration\obj\Debug\net461\Runtime.Extensions.FBRIntegration.csprojAssemblyReference.cache
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.FBRIntegration\obj\Debug\net461\Runtime.Extensions.FBRIntegration.csproj.CoreCompileInputs.cache
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.FBRIntegration\obj\Debug\net461\Runtime.Extensions.FBRIntegration.AssemblyInfoInputs.cache
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.FBRIntegration\obj\Debug\net461\Runtime.Extensions.FBRIntegration.AssemblyInfo.cs
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.FBRIntegration\obj\Debug\net461\Runtime.Extensions.FBRIntegration.csproj.CopyComplete
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.FBRIntegration\obj\Debug\net461\CDC.Commerce.Runtime.FBRIntegration.dll
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.FBRIntegration\obj\Debug\net461\CDC.Commerce.Runtime.FBRIntegration.pdb
-C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.FBRIntegration\obj\Debug\net461\Runtime.Extensions.FBRIntegration.csprojAssemblyReference.cache

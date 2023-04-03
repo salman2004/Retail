@@ -2,6 +2,7 @@
 import { ClientEntities, ProxyEntities } from "PosApi/Entities";
 import { ObjectExtensions } from "PosApi/TypeExtensions";
 import { HardwareStationDeviceActionRequest, HardwareStationDeviceActionResponse } from "PosApi/Consume/Peripherals";
+import { IMessageDialogOptions, ShowMessageDialogClientRequest, ShowMessageDialogClientResponse } from "PosApi/Consume/Dialogs";
 
 export default class CardReaderPrePaymentTrigger extends Triggers.PrePaymentTrigger
 {
@@ -74,7 +75,6 @@ export default class CardReaderPrePaymentTrigger extends Triggers.PrePaymentTrig
                 });
             }
         }
-       
         return Promise.resolve({
             canceled: false,
             data: null
@@ -86,5 +86,6 @@ export default class CardReaderPrePaymentTrigger extends Triggers.PrePaymentTrig
         return extensionProperties.filter((prop: ProxyEntities.CommerceProperty) => prop.Key === column)
             .map((prop: ProxyEntities.CommerceProperty) => prop.Value)[0];
     }
+    
 }
     

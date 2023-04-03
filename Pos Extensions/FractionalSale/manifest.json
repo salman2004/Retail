@@ -1,0 +1,17 @@
+﻿{
+  "$schema": "../manifestSchema.json",
+  "name": "Pos_Extensibility_FractionalSale",
+  "publisher": "Delcit",
+  "version": "1.0.0.1",
+  "minimumPosVersion": "1.0.0.0",
+  "components": {
+    "extend": {
+      "triggers": [
+        {
+          "triggerType": "PreOperation",
+          "modulePath": "TriggerHandlers/FractionalSalePreOperationTrigger"
+        }
+      ]
+    }
+  }
+}

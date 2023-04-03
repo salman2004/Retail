@@ -6,6 +6,7 @@
 	  <ProjectFiles Include="Extension.EhsasProgram\RetailServer.Extensions.EhsasProgram.csproj" />
 	  <ProjectFiles Include="Extension.BackDateValidation\RetailServer.Extension.BackDateValidation.csproj" />
 	  <ProjectFiles Include="Extension.AskariCardBinNumberVerification\RetailServer.Extension.AskariCardBinNumberVerification.csproj" />
+	  <ProjectFiles Include="Extension.FractionalSale\RetailServer.Extensions.FractionalSale.csproj" />
     </ItemGroup>
     <Import Project="$(SdkRootPath)\BuildTools\Microsoft.Dynamics.RetailSdk.Build.traversal.targets" />
 </Project>

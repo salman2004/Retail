@@ -7,6 +7,7 @@ using Microsoft.Dynamics.Commerce.Runtime.Services.Messages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,30 +59,30 @@ namespace CDC.Commerce.Runtime.FBRIntegration
                         salesLine.TaxAmount = taxLines.Sum(a => a.Amount);
                         salesLine.TaxLines = taxLines;
 
-                        GetTenderDiscountOfferIds(request.RequestContext, out List<string> offerIds);
-                        GetTenderDiscountValue(request.RequestContext, out decimal maxDiscount);
+                        //GetTenderDiscountOfferIds(request.RequestContext, out List<string> offerIds);
+                        //GetTenderDiscountValue(request.RequestContext, out decimal maxDiscount);
 
-                        decimal totalTenderTypeDiscountAmount = calculateTax.Transaction.ActiveSalesLines.Sum(a => a.DiscountLines.Where(b => b.DiscountLineType == DiscountLineType.TenderTypeDiscount && offerIds.Contains(b.OfferId)).Sum(c => c.EffectiveAmount));
+                        //decimal totalTenderTypeDiscountAmount = calculateTax.Transaction.ActiveSalesLines.Sum(a => a.DiscountLines.Where(b => b.DiscountLineType == DiscountLineType.TenderTypeDiscount && offerIds.Contains(b.OfferId)).Sum(c => c.EffectiveAmount));
 
-                        if (totalTenderTypeDiscountAmount < maxDiscount)
-                        {
-                            foreach (var item in salesLine.DiscountLines)
-                            {
-                                if (!(offerIds.Contains(item.OfferId) && item.EffectiveAmount == maxDiscount || item.EffectivePercentage == 0 && item.EffectiveAmount > 0))
-                                {
-                                    item.EffectiveAmount = (salesLine.AgreementPrice - (taxLines.Sum(a => a.Amount) / salesLine.Quantity)) * (item.EffectivePercentage / 100) * salesLine.Quantity;
-                                    item.Amount = item.EffectiveAmount;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            foreach (var item in salesLine.DiscountLines.Where(a=> !offerIds.Contains(a.OfferId)))
-                            {   
-                                item.EffectiveAmount = (salesLine.AgreementPrice - (taxLines.Sum(a => a.Amount) / salesLine.Quantity)) * (item.EffectivePercentage / 100) * salesLine.Quantity;
-                                item.Amount = item.EffectiveAmount;
-                            }
-                        }
+                        //if (totalTenderTypeDiscountAmount < maxDiscount)
+                        //{
+                        //    foreach (var item in salesLine.DiscountLines)
+                        //    {
+                        //        if (!(offerIds.Contains(item.OfferId) && item.EffectiveAmount == maxDiscount || item.EffectivePercentage == 0 && item.EffectiveAmount > 0))
+                        //        {
+                        //            item.EffectiveAmount = (salesLine.Price - (taxLines.Sum(a => a.Amount) / salesLine.Quantity)) * (item.EffectivePercentage / 100) * salesLine.Quantity;
+                        //            item.Amount = item.EffectiveAmount;
+                        //        }
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    foreach (var item in salesLine.DiscountLines.Where(a=> !offerIds.Contains(a.OfferId)))
+                        //    {   
+                        //        item.EffectiveAmount = (salesLine.Price - (taxLines.Sum(a => a.Amount) / salesLine.Quantity)) * (item.EffectivePercentage / 100) * salesLine.Quantity;
+                        //        item.Amount = item.EffectiveAmount;
+                        //    }
+                        //}
                         
                         salesLine.DiscountAmount = salesLine.DiscountLines.Sum(a => a.EffectiveAmount);
                         salesLine.DiscountAmountWithoutTax = salesLine.DiscountLines.Sum(a => a.DiscountCost);

@@ -4,6 +4,8 @@ using Microsoft.Dynamics.Commerce.Runtime.Hosting.Contracts;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace CDC.Commerce.HardwareStation.RFIDCardReader
@@ -127,6 +129,7 @@ namespace CDC.Commerce.HardwareStation.RFIDCardReader
                 throw new PeripheralException("Microsoft_Dynamics_Commerce_HardwareStation_RFID_Card_Error", "The card selected is incorrect. Please place the previous card");
             }
             cardReader.cardHelper.mifareReader.mfHalt();
+            
             return await Task.FromResult(true);
         }
 
@@ -154,10 +157,7 @@ namespace CDC.Commerce.HardwareStation.RFIDCardReader
             {
                 throw new PeripheralException("Microsoft_Dynamics_Commerce_HardwareStation_RFID_Card_Error", ex.Message);
             }
-
-
         }
-
     }    
     
 }

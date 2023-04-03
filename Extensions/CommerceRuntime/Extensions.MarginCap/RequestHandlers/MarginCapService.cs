@@ -2,7 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
+    using System.Text;
     using System.Threading.Tasks;
     using CDC.Commerce.Runtime.MarginCap.Entities;
     using CDC.CommerceRuntime.Entities.DataModel;
@@ -32,22 +34,24 @@
             
             GetMarginCapOnProductAndProductCategory capOnProductAndProductCategory;
             GetMarginCapOnStoreAndLoyaltyProgram getMarginCapOnStoreAndLoyalty;
-            bool isMarginCapEnabledForStoreAndLoyaltyProgram = false;
-            bool isMarginCapEnabledOnProductAndProductCategory = false;
-            bool excludeDiscount = false;
-            decimal marginCapPercentageOnStoreAndEntity = 0.00M;
-            decimal marginCapPercentageOnProductAndProductCategory = 0.00M;
-            CalculateDiscountsServiceRequest discountsServiceRequest = (CalculateDiscountsServiceRequest)request;
+            CalculateDiscountsServiceRequest discountsServiceRequest;
+            GetPriceServiceResponse getPriceServiceResponse;
+
+            bool excludeDiscount, isMarginCapEnabledOnProductAndProductCategory, isMarginCapEnabledForStoreAndLoyaltyProgram = false;
+            decimal marginCapPercentageOnStoreAndEntity, marginCapPercentageOnProductAndProductCategory = 0.00M;
+
+            discountsServiceRequest = (CalculateDiscountsServiceRequest)request;
             discountsServiceRequest.Transaction.SetProperty("CSDstoreId", request.RequestContext.GetDeviceConfiguration().StoreNumber);
-            GetPriceServiceResponse getPriceServiceResponse = (GetPriceServiceResponse)await ExecuteBaseRequestAsync(request);
+            getPriceServiceResponse = (GetPriceServiceResponse)await ExecuteBaseRequestAsync(request);
+
             if (discountsServiceRequest.Transaction.AffiliationLoyaltyTierLines.Where(a => a.AffiliationType == RetailAffiliationType.Loyalty).Count() == 0)
             {
                 return getPriceServiceResponse;
             }
             
             getMarginCapOnStoreAndLoyalty = GetMarginCapOnStoreAndLoyaltyProgram(request);       
-            isMarginCapEnabledForStoreAndLoyaltyProgram = Convert.ToBoolean(Convert.ToInt32(getMarginCapOnStoreAndLoyalty.GetProperty("ISMARGINCAPALLOWEDONSTOREANDLOYALTY").ToString()));
-            marginCapPercentageOnStoreAndEntity = Convert.ToDecimal(getMarginCapOnStoreAndLoyalty.GetProperty("MARGINCAPPERCENTAGE").ToString());
+            isMarginCapEnabledForStoreAndLoyaltyProgram = Convert.ToBoolean(Convert.ToInt32(getMarginCapOnStoreAndLoyalty?.GetProperty("ISMARGINCAPALLOWEDONSTOREANDLOYALTY")?.ToString() ?? decimal.Zero.ToString()));
+            marginCapPercentageOnStoreAndEntity = Convert.ToDecimal(getMarginCapOnStoreAndLoyalty?.GetProperty("MARGINCAPPERCENTAGE")?.ToString() ?? decimal.Zero.ToString());
             
             if (!isMarginCapEnabledForStoreAndLoyaltyProgram)
             {
@@ -63,9 +67,10 @@
                 else
                 {
                     capOnProductAndProductCategory = GetMarginCapOnProductAndProductCategory(request, item.ItemId, await GetProductIdAsync(request, item));
-                    isMarginCapEnabledOnProductAndProductCategory = Convert.ToBoolean(Convert.ToInt32(capOnProductAndProductCategory.GetProperty("ISMARGINCAPALLOWED").ToString()));
-                    excludeDiscount = Convert.ToBoolean(Convert.ToInt32(capOnProductAndProductCategory.GetProperty("EXCLUDEDISCOUNT").ToString()));
-                    marginCapPercentageOnProductAndProductCategory = Convert.ToDecimal(capOnProductAndProductCategory.GetProperty("MARGINCAPPERCENTAGE").ToString());
+                    isMarginCapEnabledOnProductAndProductCategory = Convert.ToBoolean(Convert.ToInt32(capOnProductAndProductCategory?.GetProperty("ISMARGINCAPALLOWED")?.ToString()?? decimal.Zero.ToString()));
+                    excludeDiscount = Convert.ToBoolean(Convert.ToInt32(capOnProductAndProductCategory?.GetProperty("EXCLUDEDISCOUNT")?.ToString() ?? decimal.Zero.ToString()));
+                    marginCapPercentageOnProductAndProductCategory = Convert.ToDecimal(capOnProductAndProductCategory?.GetProperty("MARGINCAPPERCENTAGE")?.ToString() ?? decimal.Zero.ToString());
+                    
 
                     if (excludeDiscount)
                     {
@@ -85,7 +90,7 @@
                         var costPrice = GetCostPrice(item, request);
                         var grossMargin = CalculateGrossMargin(costPrice, item?.Price ?? decimal.Zero);
                         grossMargin = Convert.ToDecimal(String.Format("{0:0.00}", grossMargin));
-
+                        
                         if ((grossMargin - marginCapPercentageOnProductAndProductCategory) <= item.TotalPercentageDiscount)
                         {
                             decimal newDiscount = grossMargin - marginCapPercentageOnProductAndProductCategory;
@@ -93,7 +98,7 @@
                             {
                                 newDiscount = Decimal.Zero;
                             }
-                            decimal newDistributedDiscount = newDiscount / item.DiscountLines.Count;
+                            decimal newDistributedDiscount = newDiscount / ((item.DiscountLines.Count != (int)decimal.Zero) ? item.DiscountLines.Count : decimal.One);
                             foreach (var discountLine in item.DiscountLines)
                             {
                                 discountLine.EffectivePercentage = newDistributedDiscount;
@@ -124,8 +129,8 @@
             ParameterSet parameters = new ParameterSet();
             parameters["@LoyaltyId"] = discountsServiceRequest.Transaction.AffiliationLoyaltyTierLines.Where(a => a.AffiliationType == RetailAffiliationType.Loyalty).FirstOrDefault().AffiliationId;
             parameters["@StoreNumber"] = request.RequestContext.GetDeviceConfiguration().StoreNumber;
-            parameters["@DataAreaId"] = request.RequestContext.GetChannelConfiguration().InventLocationDataAreaId;         
-
+            parameters["@DataAreaId"] = request.RequestContext.GetChannelConfiguration().InventLocationDataAreaId;
+            
             using (DatabaseContext databaseContext = new DatabaseContext(request.RequestContext))
             {
                 var result = databaseContext.ExecuteStoredProcedure<GetMarginCapOnStoreAndLoyaltyProgram>("ext.GETMARGINCAPONLOYALTYANDSTORE", parameters, QueryResultSettings.AllRecords);
@@ -141,7 +146,7 @@
             parameters["@ItemId"] = itemId;
             parameters["@StoreNumber"] = request.RequestContext.GetDeviceConfiguration().StoreNumber;
             parameters["@DataAreaId"] = request.RequestContext.GetChannelConfiguration().InventLocationDataAreaId;
-
+            
             using (DatabaseContext databaseContext = new DatabaseContext(request.RequestContext))
             {
                 var result = databaseContext.ExecuteStoredProcedure<GetMarginCapOnProductAndProductCategory>("ext.GETMARGINCAPONPRODUCTANDPRODUCTCATEGORY", parameters, QueryResultSettings.AllRecords);

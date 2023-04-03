@@ -7,7 +7,6 @@
   "components": {    
     "extend": {
       "triggers": [
-        { "$ref": "../askaricardsale/manifest.json#" },
         {
           "triggerType": "PreOperation",
           "modulePath": "TriggerHandlers/CreditSalePreOperationTrigger"

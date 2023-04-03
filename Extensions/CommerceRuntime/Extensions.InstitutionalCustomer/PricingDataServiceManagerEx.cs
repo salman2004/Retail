@@ -54,15 +54,17 @@
                     if (offerIds.Contains(offerTenderDiscount.Key))
                     {
                         var offerTenderDiscountTotal = decimal.Zero;
-                        foreach (var item in offerTenderDiscount.ToList())
+                        foreach (var item in offerTenderDiscount.GroupBy(td => td.ProductId).ToList())
                         {
-                            offerTenderDiscountTotal += this.Transaction?.DiscountCalculableSalesLines?.Where(sl => sl.ProductId == item.ProductId)?.Sum(sl => sl.Price * sl.Quantity) ?? decimal.Zero;
+                            offerTenderDiscountTotal += this.Transaction?.ActiveSalesLines?.Where(sl => sl.ProductId == item.Key)?.Sum(sl => (sl.Price * sl.Quantity) - sl.DiscountAmount) ?? decimal.Zero;
                         }
 
+                        decimal otherTenderedAmount = this?.Transaction?.TenderLines?.Where(tl => tl.Status == TenderLineStatus.Committed)?.Sum(tl => tl.AmountInCompanyCurrency) ?? decimal.Zero;
+                        offerTenderDiscountTotal = offerTenderDiscountTotal - otherTenderedAmount;
+
                         var offerTenderDiscountPct = offerTenderDiscount.FirstOrDefault().DiscountPercent;
-
                         var offerDiscountAmount = offerTenderDiscountTotal == decimal.Zero ? decimal.Zero : (offerTenderDiscountTotal * offerTenderDiscountPct) / 100;
-
+                        
                         if (maxDiscount < offerDiscountAmount)
                         {
                             offerTenderDiscountPct = (maxDiscount / offerTenderDiscountTotal) * 100;
@@ -81,9 +83,9 @@
 
         private ReadOnlyCollection<PeriodicDiscount> FilterMonthlyCapDiscounts(ReadOnlyCollection<PeriodicDiscount> retailDiscounts)
         {
-            GetLoyaltyCardDetails(out string cardNumber, out decimal cardBalance, this.RequestContext,out DateTime lastTransactionDateTime);
+            GetLoyaltyCardDetails(out string cardNumber, out decimal cardBalance, this.RequestContext, out DateTime lastTransactionDateTime);
 
-            if (lastTransactionDateTime!= DateTime.MinValue && lastTransactionDateTime > DateTime.Now)
+            if (lastTransactionDateTime != DateTime.MinValue && lastTransactionDateTime > DateTime.Now)
             {
                 this.MonthlyLimitUsed = decimal.Zero;
                 return new List<PeriodicDiscount>().AsReadOnly();
@@ -107,13 +109,11 @@
             GetLoyaltyDetails(this.RequestContext, affiliationLoyaltyTier.AffiliationId, out decimal loyaltyLimit, out bool checkLoyaltyLimit);
             this.Transaction.SetProperty("checkLoyaltyLimit", checkLoyaltyLimit);
 
-            //if (!checkLoyaltyLimit)
-            //{
-            //    this.Transaction.SetProperty("CSDMonthlyLimitUsed", "00000");
-            //    this.Transaction.SetProperty("CSDCardBalance", "00000");
-            //    this.MonthlyLimitUsed = decimal.Zero;
-            //    return retailDiscounts;
-            //}
+            if (!checkLoyaltyLimit)
+            {
+                this.MonthlyLimitUsed = decimal.Zero;
+                return retailDiscounts;
+            }
 
             if (checkLoyaltyLimit && this.Transaction.LoyaltyCardId.Equals(cardNumber) && cardBalance > decimal.Zero)
             {
@@ -127,7 +127,7 @@
                     item.SetProperty("CDCTOPONCART", entity?.GetProperty("CDCTOPONCART") ?? decimal.Zero);
                     item.SetProperty("CDCPRICINGPRIORITY", entity?.GetProperty("CDCPRICINGPRIORITY") ?? decimal.Zero);
                     item.SetProperty("GrossProfit", entity?.GetProperty("GrossProfit") ?? decimal.Zero);
-                    
+
                 }
                 retailDiscounts = retailDiscounts.OrderByDescending(a => Convert.ToDecimal(a.GetProperty("CDCTOPONCART"))).ThenByDescending(x => Convert.ToDecimal(x.GetProperty("CDCPRICINGPRIORITY"))).ThenByDescending(z => Convert.ToDecimal(z.GetProperty("GrossProfit"))).AsReadOnly();
                 //Sorting
@@ -135,15 +135,15 @@
                 foreach (SalesLine salesLine in this.Transaction?.ActiveSalesLines)
                 {
                     if (itemPriceMap.ContainsKey(string.Format("{0}::{1}", salesLine.ItemId, salesLine.InventoryDimensionId)))
-                    {                        
+                    {
                         decimal quantity = retailDiscounts.Where(a => a.InventoryDimensionId == salesLine.InventoryDimensionId && a.ItemId == salesLine.ItemId)?.Where(b => b.OfferQuantityLimit > 0)?.FirstOrDefault()?.OfferQuantityLimit ?? decimal.Zero;
-                        itemPriceMap[string.Format("{0}::{1}", salesLine.ItemId, salesLine.InventoryDimensionId)] = itemPriceMap[string.Format("{0}::{1}", salesLine.ItemId, salesLine.InventoryDimensionId)] + (quantity != decimal.Zero ? quantity: salesLine.Quantity) * salesLine.Price;
+                        itemPriceMap[string.Format("{0}::{1}", salesLine.ItemId, salesLine.InventoryDimensionId)] = itemPriceMap[string.Format("{0}::{1}", salesLine.ItemId, salesLine.InventoryDimensionId)] + (quantity != decimal.Zero ? quantity : salesLine.Quantity) * salesLine.Price;
                     }
                     else
                     {
                         itemPriceMap.Add(string.Format("{0}::{1}", salesLine.ItemId, salesLine.InventoryDimensionId), salesLine.Price * salesLine.Quantity);
                     }
-                }               
+                }
 
                 decimal cartTotal = decimal.Zero;
                 Dictionary<string, decimal> itemPriceTotal = new Dictionary<string, decimal>();
@@ -170,12 +170,12 @@
                         }
                     }
                 }
-            
+
                 return filteredRetailDiscounts.AsReadOnly();
             }
             else
             {
-                this.MonthlyLimitUsed = decimal.Zero;                
+                this.MonthlyLimitUsed = decimal.Zero;
                 return new List<PeriodicDiscount>().AsReadOnly();
             }
         }
@@ -189,7 +189,7 @@
 
             GetGrossMarginCapAffiliation(this.RequestContext, out List<string> affiliations);
             GetGrossMarginCap(this.RequestContext, out decimal grossMarginCap);
-                        
+
             if (!affiliations.IsNullOrEmpty() && !string.IsNullOrWhiteSpace(this.Transaction.CustomerId) && grossMarginCap > decimal.Zero)
             {
                 QueryResultSettings querySettings = new QueryResultSettings(new PagingInfo(affiliations.Count(), 0), new SortingInfo());
@@ -346,6 +346,18 @@
         {
             cardNumber = this.Transaction?.GetProperty("CSDCardNumber")?.ToString()?.Trim() ?? string.Empty;
             decimal.TryParse(this.Transaction?.GetProperty("CSDCardBalance")?.ToString()?.Trim() ?? string.Empty, out cardBalance);
+            decimal.TryParse(this.Transaction?.GetProperty("CSDOldCardBalance")?.ToString()?.Trim() ?? string.Empty, out decimal oldCardBalance);
+            DateTime.TryParse(this.Transaction?.GetProperty("CSDCardResetDateTime")?.ToString() ?? string.Empty, out DateTime resetBalanceDateTime);
+            
+            if (!string.IsNullOrEmpty(this.Transaction.LoyaltyCardId) && cardNumber != string.Empty && resetBalanceDateTime > DateTime.Now)
+            {
+                cardBalance = oldCardBalance;
+                throw new CommerceException("Microsoft_Dynamics_Commerce_30104", "Card Balance")
+                {
+                    LocalizedMessage = "Card balance was reset in future date time",
+                    LocalizedMessageParameters = new object[] { }
+                };
+            }
             cardBalance = ResetCardBalance(cardBalance, context, out lastTransactionDateTime);
         }
 
@@ -380,10 +392,12 @@
                 }
             }
             catch (Exception)
-            {   
+            {
                 return orignalCardBalance;
             }
             this.Transaction.SetProperty("CSDCardBalance", cardBalance.ToString());
+            this.Transaction.SetProperty("CSDCardResetDateTime", DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"));
+            this.Transaction.SetProperty("CSDOldCardBalance", orignalCardBalance);
             return cardBalance;
         }
 
@@ -476,18 +490,18 @@
                     {
                         entity.SetProperty("InventoryDimensionId", item.InventoryDimensionId);
                         entity.SetProperty("GrossProfit", CalculateGrossMargin(Convert.ToDecimal(entity?.GetProperty("COSTPRICE") ?? decimal.Zero), item?.Price ?? decimal.Zero));
-                        
+
                         item.SetProperty("CDCTOPONCART", entity.GetProperty("CDCTOPONCART")?.ToString()?.Trim() ?? string.Empty);
                         item.SetProperty("CDCPRICINGPRIORITY", entity.GetProperty("CDCPRICINGPRIORITY")?.ToString()?.Trim() ?? string.Empty);
                         item.SetProperty("GrossProfit", entity.GetProperty("GrossProfit")?.ToString()?.Trim() ?? string.Empty);
-                        
+
                     }
 
                 }
-               return entities.OrderByDescending(a => a.GetProperty("CDCTOPONCART")).ThenByDescending(x => x.GetProperty("CDCPRICINGPRIORITY")).ThenByDescending(z => z.GetProperty("GrossProfit")).ToList();
+                return entities.OrderByDescending(a => a.GetProperty("CDCTOPONCART")).ThenByDescending(x => x.GetProperty("CDCPRICINGPRIORITY")).ThenByDescending(z => z.GetProperty("GrossProfit")).ToList();
             }
             catch (Exception ex)
-            {   
+            {
                 RetailLogger.Log.AxGenericErrorEvent(string.Format("Error when sorting: {0}", ex.Message));
                 return entities;
             }

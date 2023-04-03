@@ -211,3 +211,4 @@ C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.Ca
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.CardReader\obj\Debug\net461\Runtime.Extensions.CardReader.csproj.CopyComplete
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.CardReader\obj\Debug\net461\CDC.Commerce.Runtime.CardReader.dll
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.CardReader\obj\Debug\net461\CDC.Commerce.Runtime.CardReader.pdb
+C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.CardReader\obj\Debug\net461\Runtime.Extensions.CardReader.csprojAssemblyReference.cache

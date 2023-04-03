@@ -48,6 +48,7 @@ C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.Eh
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.EhsasProgram\bin\Debug\net461\Microsoft.IdentityModel.Logging.dll
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.EhsasProgram\bin\Debug\net461\Microsoft.IdentityModel.Tokens.dll
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.EhsasProgram\bin\Debug\net461\Newtonsoft.Json.dll
+C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.EhsasProgram\bin\Debug\net461\System.ComponentModel.Annotations.dll
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.EhsasProgram\bin\Debug\net461\System.Composition.AttributedModel.dll
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.EhsasProgram\bin\Debug\net461\System.Composition.Convention.dll
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.EhsasProgram\bin\Debug\net461\System.Composition.Hosting.dll
@@ -211,4 +212,4 @@ C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.Eh
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.EhsasProgram\obj\Debug\net461\Runtime.Extensions.EhsasProgram.csproj.CopyComplete
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.EhsasProgram\obj\Debug\net461\CDC.Commerce.Runtime.EhsasProgram.dll
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.EhsasProgram\obj\Debug\net461\CDC.Commerce.Runtime.EhsasProgram.pdb
-C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.EhsasProgram\bin\Debug\net461\System.ComponentModel.Annotations.dll
+C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.EhsasProgram\obj\Debug\net461\Runtime.Extensions.EhsasProgram.csprojAssemblyReference.cache

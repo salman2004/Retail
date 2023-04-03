@@ -32,7 +32,7 @@ namespace CDC.Commerce.Runtime.MarginCap.RequestHandlers
                 CalculateDiscountsServiceRequest calculateDiscountsService = (CalculateDiscountsServiceRequest)request;
                 priceServiceResponse = await this.ExecuteNextAsync<GetPriceServiceResponse>(request);
                 
-                if (calculateDiscountsService.Transaction.RefundableTenderLines.Count == 0)
+                if (priceServiceResponse.Transaction.RefundableTenderLines.Count == 0)
                 {
                     return priceServiceResponse;
                 }
@@ -43,39 +43,38 @@ namespace CDC.Commerce.Runtime.MarginCap.RequestHandlers
 
                 if ( !string.IsNullOrEmpty(cardRefundChargeCode) && tenderTypeForRefundCharges.Count > 0)
                 {
-                    if (calculateDiscountsService.Transaction.IsReturnByReceipt)
+                    if (priceServiceResponse.Transaction.IsReturnByReceipt)
                     {
                         HashSet<string> supportedTenderTypes = new HashSet<string>(tenderTypeForRefundCharges);
-                        List<TenderLine> tenderList = calculateDiscountsService.Transaction.RefundableTenderLines.Where(m => supportedTenderTypes.Contains(m.TenderTypeId)).ToList();
-                        decimal sum = tenderList.Sum(a => a.Amount);
+                        List<TenderLine> tenderLists = priceServiceResponse.Transaction.RefundableTenderLines.Where(m => supportedTenderTypes.Contains(m.TenderTypeId)).ToList();
+                        List<SalesLine> productReturnableLines = priceServiceResponse.Transaction.ActiveSalesLines.Where(sl => sl.IsReturnLine()).ToList();//.Sum(sl => sl.Price * sl.Quantity);  //RefundableTenderLines.Where(m => supportedTenderTypes.Contains(m.TenderTypeId)).ToList();
+                        decimal returnSalesLines = productReturnableLines.Sum(sl => (sl.Price * (sl.QuantityReturnable ?? sl.Quantity)) - sl.DiscountAmount);
                         
-                        if (tenderList.Count > 0)
+                        if (productReturnableLines.Count > 0)
                         {
-                            decimal processingFees = (tenderList.Sum(a => a.Amount)) * (Convert.ToDecimal((cardFee)) / 100);
-                            if (!calculateDiscountsService.Transaction.ChargeLines.Any(a => a.ChargeCode == cardRefundChargeCode))
+                            decimal processingFees = returnSalesLines * (Convert.ToDecimal((cardFee)) / 100);
+                            ChargeLine ccrChargeLine = priceServiceResponse.Transaction.ChargeLines?.Where(a => a.ChargeCode == cardRefundChargeCode)?.FirstOrDefault() ?? null;
+                            if (ccrChargeLine == null)
                             {
-                                //ChargeLineOverride chargeLineOverride = new ChargeLineOverride();
-                                //chargeLineOverride.OriginalAmount = 0;
-                                //chargeLineOverride.OverrideAmount = processingFees;
-                                //chargeLineOverride.OverrideReasonDescription = cardRefundChargeCode;
-                                //chargeLineOverride.UserId = request.RequestContext.GetPrincipal().ExternalIdentityId;
-                                //chargeLineOverride.OverrideDateTime = DateTime.Now;
-
                                 ChargeLine chargeLine = new ChargeLine();
 
                                 chargeLine.BeginDateTime = DateTimeOffset.MinValue;
                                 chargeLine.EndDateTime = DateTimeOffset.MinValue;
                                 chargeLine.ChargeLineId = Guid.NewGuid().ToString();
                                 chargeLine.ChargeCode = cardRefundChargeCode;
-                                chargeLine.CurrencyCode = tenderList.First().Currency;
+                                chargeLine.CurrencyCode = priceServiceResponse.Transaction.RefundableTenderLines.FirstOrDefault().Currency;
                                 chargeLine.ModuleType = ChargeModule.Sales;
                                 chargeLine.ModuleTypeValue = Convert.ToInt16(ChargeModule.Sales);
-                                chargeLine.CalculatedAmount = processingFees;
+                                chargeLine.CalculatedAmount = Math.Abs(processingFees);
                                 chargeLine.Description = cardRefundChargeCode;
                                 chargeLine.Quantity = 1;
-                                chargeLine.NetAmountPerUnit = processingFees;
-                                //chargeLine.ChargeLineOverrides.Add(chargeLineOverride);
-                                calculateDiscountsService.Transaction.ChargeLines.Add(chargeLine);
+                                chargeLine.NetAmountPerUnit = Math.Abs(processingFees);
+                                priceServiceResponse.Transaction.ChargeLines.Add(chargeLine);
+                            }
+                            else
+                            {
+                                ccrChargeLine.CalculatedAmount = Math.Abs(processingFees);
+                                ccrChargeLine.NetAmountPerUnit = Math.Abs(processingFees);
                             }
                         }
                     }

@@ -80,7 +80,7 @@ System.register(["PosApi/Extend/Triggers/PaymentTriggers", "PosApi/TypeExtension
                                             }
                                         });
                                     }
-                                    if (tenderLineSum + options.tenderLine.Amount < options.cart.AmountDue) {
+                                    if (Math.floor(tenderLineSum + options.tenderLine.Amount) < Math.floor(options.cart.AmountDue)) {
                                         return [2 /*return*/, Promise.resolve({
                                                 canceled: false
                                             })];

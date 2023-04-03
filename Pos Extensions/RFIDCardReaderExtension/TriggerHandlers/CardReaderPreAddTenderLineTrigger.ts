@@ -2,6 +2,8 @@
 import { ClientEntities, ProxyEntities } from "PosApi/Entities";
 import { ObjectExtensions } from "PosApi/TypeExtensions";
 import { HardwareStationDeviceActionRequest, HardwareStationDeviceActionResponse } from "PosApi/Consume/Peripherals";
+import { IMessageDialogOptions, ShowMessageDialogClientRequest, ShowMessageDialogClientResponse } from "PosApi/Consume/Dialogs";
+import { CalculateTotalOperationRequest, CalculateTotalOperationResponse } from "PosApi/Consume/Cart";
 
 export default class CardReaderPreAddTenderLineTrigger extends Triggers.PreAddTenderLineTrigger {
 
@@ -20,8 +22,8 @@ export default class CardReaderPreAddTenderLineTrigger extends Triggers.PreAddTe
             });
         }
 
-        if (tenderLineSum + options.tenderLine.Amount < options.cart.AmountDue) {
-            return Promise.resolve({
+        if (Math.floor(tenderLineSum + options.tenderLine.Amount) < Math.floor(options.cart.AmountDue)) {
+            return Promise.resolve({ 
                 canceled: false
             });
         }
@@ -40,7 +42,7 @@ export default class CardReaderPreAddTenderLineTrigger extends Triggers.PreAddTe
 
         let cardReaderProperty: string = this.getPropertyValue(properties, "CDCCardReaderValue").StringValue;
 
-        if (ObjectExtensions.isNullOrUndefined(cardReaderProperty) && cardReaderProperty == ""  && cardReaderProperty == null || options.cart.LoyaltyCardId.length == 0) {
+        if (ObjectExtensions.isNullOrUndefined(cardReaderProperty) && cardReaderProperty == "" && cardReaderProperty == null || options.cart.LoyaltyCardId.length == 0) {
             return Promise.resolve({ canceled: false });
         }
 
@@ -70,7 +72,7 @@ export default class CardReaderPreAddTenderLineTrigger extends Triggers.PreAddTe
             new HardwareStationDeviceActionRequest("RFIDCARDREADEREXTENSIONDEVICE",
                 "WriteTransactionalDataOnCard", WriteCardRequest);
         await (await this.context.runtime.executeAsync(hardwareStationDeviceActionRequest)).data;
-        
+
         return Promise.resolve({
             canceled: false,
             data: null
@@ -82,5 +84,6 @@ export default class CardReaderPreAddTenderLineTrigger extends Triggers.PreAddTe
         return extensionProperties.filter((prop: ProxyEntities.CommerceProperty) => prop.Key === column)
             .map((prop: ProxyEntities.CommerceProperty) => prop.Value)[0];
     }
+    
     
 }

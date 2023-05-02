@@ -152,10 +152,10 @@ C:\RetailSDK\Update\RetailSDK_Version28\Extensions\HardwareStation\Extension.RFI
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\HardwareStation\Extension.RFIDCardReader\bin\Debug\net461\ChilkatDotNet46.dll
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\HardwareStation\Extension.RFIDCardReader\bin\Debug\net461\GNetPlus.dll
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\HardwareStation\Extension.RFIDCardReader\bin\Debug\net461\MifareReader.dll
+C:\RetailSDK\Update\RetailSDK_Version28\Extensions\HardwareStation\Extension.RFIDCardReader\obj\Debug\net461\HardwareStation.Extension.RFIDCardReader.csprojAssemblyReference.cache
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\HardwareStation\Extension.RFIDCardReader\obj\Debug\net461\HardwareStation.Extension.RFIDCardReader.csproj.CoreCompileInputs.cache
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\HardwareStation\Extension.RFIDCardReader\obj\Debug\net461\HardwareStation.Extension.RFIDCardReader.AssemblyInfoInputs.cache
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\HardwareStation\Extension.RFIDCardReader\obj\Debug\net461\HardwareStation.Extension.RFIDCardReader.AssemblyInfo.cs
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\HardwareStation\Extension.RFIDCardReader\obj\Debug\net461\HardwareStation.Extension.RFIDCardReader.csproj.CopyComplete
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\HardwareStation\Extension.RFIDCardReader\obj\Debug\net461\CDC.Commerce.HardwareStation.RFIDCardReader.dll
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\HardwareStation\Extension.RFIDCardReader\obj\Debug\net461\CDC.Commerce.HardwareStation.RFIDCardReader.pdb
-C:\RetailSDK\Update\RetailSDK_Version28\Extensions\HardwareStation\Extension.RFIDCardReader\obj\Debug\net461\HardwareStation.Extension.RFIDCardReader.csprojAssemblyReference.cache

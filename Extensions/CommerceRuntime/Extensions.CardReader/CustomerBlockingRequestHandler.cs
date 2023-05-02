@@ -8,6 +8,9 @@ using Microsoft.Dynamics.Commerce.Runtime.Data;
 using Microsoft.Dynamics.Commerce.Runtime.DataModel;
 using CDC.Commerce.Runtime.CardReader.Entities;
 using System.Linq;
+using Microsoft.Dynamics.Retail.Diagnostics;
+using Microsoft.Dynamics.Commerce.Runtime.RealtimeServices.Messages;
+using Microsoft.Dynamics.Commerce.Runtime.Framework.Exceptions;
 
 namespace CDC.Commerce.Runtime.CardReader
 {
@@ -31,8 +34,13 @@ namespace CDC.Commerce.Runtime.CardReader
             if (request.GetType() == typeof(GetLoyaltyCardAffiliationsDataRequest))
             {
                 GetLoyaltyCardAffiliationsDataRequest affiliationsDataRequest = (GetLoyaltyCardAffiliationsDataRequest)request;
-                if (!await IsCardBlockedAsync(affiliationsDataRequest))
+                IsCardBlockedAsync(affiliationsDataRequest, out bool isCardBlocked, out bool isRebateCard);
+                if(!isCardBlocked)
                 {
+                    //if (isRebateCard && request.RequestContext.Runtime.Configuration.IsMasterDatabaseConnectionString)
+                    //{
+                    //    GetRebateQtyLimitFromHeadQuarters(request.RequestContext, affiliationsDataRequest.LoyaltyCardNumber, affiliationsDataRequest.Transaction);
+                    //}
                     return await ExecuteBaseRequestAsync(request);
                 }
                 else
@@ -55,29 +63,46 @@ namespace CDC.Commerce.Runtime.CardReader
             return response;
         }
 
-        public async Task<bool> IsCardBlockedAsync(GetLoyaltyCardAffiliationsDataRequest request)
+        public void IsCardBlockedAsync(GetLoyaltyCardAffiliationsDataRequest request, out bool isCardBlocked, out bool isRebateCard)
         {
+            isCardBlocked = false;
+            isRebateCard = false;
+
             using (DatabaseContext databaseContext = new DatabaseContext(request.RequestContext))
             {
-                var query = new SqlPagedQuery(QueryResultSettings.SingleRecord)
-                {
-                    DatabaseSchema = "ext",
-                    Select = new ColumnSet("CDCISCARDBLOCKED"),
-                    From = "RETAILLOYALTYCARD",
-                    Where = "CARDNUMBER = @cardNumber",
-                    OrderBy = "CDCISCARDBLOCKED"
-                };
-
+                SqlQuery query = new SqlQuery();
+                query.QueryString = $@"Select R1.CDCISCARDBLOCKED, R3.CDCPROTECTMONTHLYCAT from ext.RETAILLOYALTYCARD R1 join ax.RetailLoyaltyCardTier R2 on R2.LOYALTYCARD = R1.RECID join ext.RETAILAFFILIATION R3 on R3.RECID = R2.AFFILIATION where R1.CARDNUMBER = @cardNumber";
                 query.Parameters["@cardNumber"] = request.LoyaltyCardNumber;
-
-                var result = await databaseContext.ReadEntityAsync<DBEntity>(query).ConfigureAwait(false);
-                if (result.IsNullOrEmpty() || result.Count() == 0)
+            
+                try
                 {
-                    return false;
+                    List<ExtensionsEntity> entity = databaseContext.ReadEntity<ExtensionsEntity>(query).ToList();
+                    isCardBlocked = Convert.ToBoolean(entity?.FirstOrDefault()?.GetProperty("CDCISCARDBLOCKED").ToString() ?? Boolean.FalseString);
+                    isRebateCard = Convert.ToBoolean(entity?.FirstOrDefault()?.GetProperty("CDCPROTECTMONTHLYCAT").ToString() ?? Boolean.FalseString);
                 }
-                return Convert.ToBoolean(result.FirstOrDefault().GetProperty("CDCISCARDBLOCKED"));
+                catch (Exception ex)
+                {
+                    RetailLogger.Log.AxGenericErrorEvent($"Reding loyalty card config failed. {ex?.Message ?? string.Empty}");
+                }
             }
         }
 
+        public async void GetRebateQtyLimitFromHeadQuarters(RequestContext context, string loyaltyCardNumber, SalesTransaction transaction)
+        {
+            InvokeExtensionMethodRealtimeRequest extensionRequest = new InvokeExtensionMethodRealtimeRequest("GetRebateQtyLimitByLoyaltyCardId", loyaltyCardNumber, context.GetChannelConfiguration().InventLocationDataAreaId);
+            InvokeExtensionMethodRealtimeResponse response = await context.ExecuteAsync<InvokeExtensionMethodRealtimeResponse>(extensionRequest).ConfigureAwait(false);
+            if (!(bool)response.Result[0])
+            {
+                transaction.SetProperty("RebateQtyLimit", Convert.ToString(response.Result[1]));
+            }
+            else
+            {
+                throw new CommerceException("Microsoft_Dynamics_Commerce_30104", Convert.ToString(response.Result[1]))
+                {
+                    LocalizedMessage = Convert.ToString(response.Result[1]),
+                    LocalizedMessageParameters = new object[] { }
+                };
+            }
+        }
     }
 }

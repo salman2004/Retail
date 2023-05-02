@@ -76,6 +76,9 @@ System.register(["PosApi/Consume/Device", "PosApi/Extend/Triggers/ApplicationTri
                                 case 1: return [4 /*yield*/, (_a.sent()).data];
                                 case 2:
                                     response = _a.sent();
+                                    if (response.result.ExtensionProperties.filter(function (ep) { return ep.Key == "CreditSalesAllowedCustomerGroupAndPrefix"; }).length > 0) {
+                                        Global_1.Global.CreditSalesAllowedCustomerGroup = response.result.ExtensionProperties.filter(function (ep) { return ep.Key == "CreditSalesAllowedCustomerGroupAndPrefix"; })[0].Value.StringValue;
+                                    }
                                     if (response.result.ExtensionProperties.filter(function (ep) { return ep.Key == "AskariCardOperationType"; }).length > 0) {
                                         Global_1.Global.AskariCardOperationType = response.result.ExtensionProperties.filter(function (ep) { return ep.Key == "AskariCardOperationType"; })[0].Value.StringValue;
                                     }

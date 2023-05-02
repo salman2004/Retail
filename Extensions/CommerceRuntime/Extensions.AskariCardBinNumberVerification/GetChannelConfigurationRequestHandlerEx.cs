@@ -39,6 +39,7 @@
             CommerceProperty askariCardOperationTypeProperty = new CommerceProperty("AskariCardOperationType", GetConfigurationParameters(request.RequestContext, dataRequest.ChannelId, "AskariCardOperationType"));
             CommerceProperty askariCardTenderMethodProperty = new CommerceProperty("AskariCardTenderMethod", GetConfigurationParameters(request.RequestContext, dataRequest.ChannelId, "AskariCardTenderMethod"));
             CommerceProperty askariCardInfoCodeProperty = new CommerceProperty("AskariCardInfoCode", GetConfigurationParameters(request.RequestContext, dataRequest.ChannelId, "AskariCardInfoCode"));
+            CommerceProperty creditSalesAllowedCustomerGroupAndPrefix = new CommerceProperty("CreditSalesAllowedCustomerGroupAndPrefix", GetConfigurationParameters(request.RequestContext, dataRequest.ChannelId, "CreditSalesAllowedCustomerGroupAndPrefix"));
 
             CommerceProperty creditSaleAllowedCustomerGroup = new CommerceProperty("CreditSaleAllowedCustomerGroup", GetConfigurationParameters(request.RequestContext, dataRequest.ChannelId, "CreditSaleAllowedCustomerGroup"));
             CommerceProperty CreditSaleAllowedCustomerGroupAndPrefix = new CommerceProperty("CreditSaleAllowedCustomerGroupAndPrefix", GetConfigurationParameters(request.RequestContext, dataRequest.ChannelId, "CreditSaleAllowedCustomerGroupAndPrefix"));
@@ -48,6 +49,7 @@
             entityDataServiceResponse.Entity.ExtensionProperties.Add(askariCardInfoCodeProperty);
             entityDataServiceResponse.Entity.ExtensionProperties.Add(creditSaleAllowedCustomerGroup);
             entityDataServiceResponse.Entity.ExtensionProperties.Add(CreditSaleAllowedCustomerGroupAndPrefix);
+            entityDataServiceResponse.Entity.ExtensionProperties.Add(creditSalesAllowedCustomerGroupAndPrefix);
         }
 
         /// <summary>

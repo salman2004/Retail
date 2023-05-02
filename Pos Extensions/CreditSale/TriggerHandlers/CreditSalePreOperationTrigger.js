@@ -1,4 +1,4 @@
-System.register(["PosApi/Consume/Cart", "PosApi/Consume/Customer", "PosApi/Consume/Dialogs", "PosApi/Entities", "PosApi/Extend/Triggers/OperationTriggers"], function (exports_1, context_1) {
+System.register(["PosApi/Consume/Cart", "PosApi/Consume/Customer", "PosApi/Consume/Dialogs", "PosApi/Entities", "PosApi/Extend/Triggers/OperationTriggers", "PosApi/TypeExtensions", "../../AskariCardBinNumberVerification/Global"], function (exports_1, context_1) {
     "use strict";
     var __extends = (this && this.__extends) || (function () {
         var extendStatics = Object.setPrototypeOf ||
@@ -46,7 +46,7 @@ System.register(["PosApi/Consume/Cart", "PosApi/Consume/Customer", "PosApi/Consu
         }
     };
     var __moduleName = context_1 && context_1.id;
-    var Cart_1, Customer_1, Dialogs_1, Entities_1, Triggers, CreditSalePreOperationTrigger;
+    var Cart_1, Customer_1, Dialogs_1, Entities_1, Triggers, TypeExtensions_1, Global_1, CreditSalePreOperationTrigger;
     return {
         setters: [
             function (Cart_1_1) {
@@ -63,6 +63,12 @@ System.register(["PosApi/Consume/Cart", "PosApi/Consume/Customer", "PosApi/Consu
             },
             function (Triggers_1) {
                 Triggers = Triggers_1;
+            },
+            function (TypeExtensions_1_1) {
+                TypeExtensions_1 = TypeExtensions_1_1;
+            },
+            function (Global_1_1) {
+                Global_1 = Global_1_1;
             }
         ],
         execute: function () {
@@ -73,7 +79,7 @@ System.register(["PosApi/Consume/Cart", "PosApi/Consume/Customer", "PosApi/Consu
                 }
                 CreditSalePreOperationTrigger.prototype.execute = function (options) {
                     return __awaiter(this, void 0, void 0, function () {
-                        var operationId, cartRequest, cartResponse, customerRequest, customerResponse;
+                        var operationId, cartRequest, cartResponse, customerRequest, customerResponse_1, AllowedCustomerGroups, selectedCustomerGroup;
                         return __generator(this, function (_a) {
                             switch (_a.label) {
                                 case 0:
@@ -88,17 +94,34 @@ System.register(["PosApi/Consume/Cart", "PosApi/Consume/Customer", "PosApi/Consu
                                     return [4 /*yield*/, this.context.runtime.executeAsync(customerRequest)];
                                 case 3: return [4 /*yield*/, (_a.sent()).data];
                                 case 4:
-                                    customerResponse = _a.sent();
-                                    try {
-                                        if (customerResponse.result.CustomerGroup.toUpperCase() == "INSTITUTE" || (customerResponse.result.CustomerGroup.toUpperCase() == "REBATE" && cartResponse.result.LoyaltyCardId[0].toUpperCase() == 'E')) {
-                                            return [2 /*return*/, Promise.resolve({ canceled: false })];
+                                    customerResponse_1 = _a.sent();
+                                    if (!TypeExtensions_1.StringExtensions.isEmptyOrWhitespace(Global_1.Global.CreditSalesAllowedCustomerGroup)) {
+                                        try {
+                                            AllowedCustomerGroups = Global_1.Global.CreditSalesAllowedCustomerGroup.split(",");
+                                            if (AllowedCustomerGroups.filter(function (a) { return a.search(customerResponse_1.result.CustomerGroup.toUpperCase()) > -1; }).length > 0) {
+                                                selectedCustomerGroup = AllowedCustomerGroups.filter(function (a) { return a.search(customerResponse_1.result.CustomerGroup.toUpperCase()) > -1; })[0].split("::");
+                                                if (selectedCustomerGroup[0].toUpperCase() == customerResponse_1.result.CustomerGroup.toUpperCase() && TypeExtensions_1.ObjectExtensions.isNullOrUndefined(selectedCustomerGroup[1])) {
+                                                    return [2 /*return*/, Promise.resolve({ canceled: false })];
+                                                }
+                                                else if (selectedCustomerGroup[0].toUpperCase() == customerResponse_1.result.CustomerGroup.toUpperCase() && selectedCustomerGroup[1].toUpperCase() == cartResponse.result.LoyaltyCardId[0].toUpperCase()) {
+                                                    return [2 /*return*/, Promise.resolve({ canceled: false })];
+                                                }
+                                                else {
+                                                    this.showMessage('Not a valid customer group for credit sales', 'Error');
+                                                    return [2 /*return*/, Promise.resolve({ canceled: true })];
+                                                }
+                                            }
+                                            else {
+                                                this.showMessage('This payment method is only allowed for institutional or employee credit sale', 'Error');
+                                                return [2 /*return*/, Promise.resolve({ canceled: true })];
+                                            }
                                         }
-                                        else {
+                                        catch (e) {
                                             this.showMessage('This payment method is only allowed for institutional or employee credit sale', 'Error');
                                             return [2 /*return*/, Promise.resolve({ canceled: true })];
                                         }
                                     }
-                                    catch (e) {
+                                    else {
                                         this.showMessage('This payment method is only allowed for institutional or employee credit sale', 'Error');
                                         return [2 /*return*/, Promise.resolve({ canceled: true })];
                                     }

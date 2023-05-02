@@ -76,7 +76,7 @@ System.register(["PosApi/Consume/Dialogs", "PosApi/Extend/Triggers/OperationTrig
                 }
                 AskariCardSalePreOperationTrigger.prototype.execute = function (options) {
                     return __awaiter(this, void 0, void 0, function () {
-                        var operationId, re, numPadOptions, dialogRequest, result_1, cartClientResponse, reasonCodeLine, reasonCodeLines, saveReasonCodeLine, saveReasonCodeLinesOnCartClientResponse, saveReasonCodeLine, saveReasonCodeLinesOnCartClientResponse, validateBinNumberRequest, refreshRequest, validateBinNumberResponse;
+                        var operationId, cartClientResponse, re, numPadOptions, dialogRequest, result_1, reasonCodeLine, reasonCodeLines, saveReasonCodeLine, saveReasonCodeLinesOnCartClientResponse, saveReasonCodeLine, saveReasonCodeLinesOnCartClientResponse, validateBinNumberRequest, refreshRequest, validateBinNumberResponse;
                         return __generator(this, function (_a) {
                             switch (_a.label) {
                                 case 0:
@@ -84,10 +84,19 @@ System.register(["PosApi/Consume/Dialogs", "PosApi/Extend/Triggers/OperationTrig
                                     if (TypeExtensions_1.StringExtensions.isNullOrWhitespace(Global_1.Global.AskariCardOperationType) || TypeExtensions_1.StringExtensions.isNullOrWhitespace(Global_1.Global.AskariCardTenderMethod)) {
                                         return [2 /*return*/, Promise.resolve({ canceled: false })];
                                     }
-                                    if (!(Number(operationId) == Number(Global_1.Global.AskariCardOperationType))) return [3 /*break*/, 13];
-                                    if (!!TypeExtensions_1.ObjectExtensions.isNullOrUndefined(options.operationRequest["options"]["tenderType"])) return [3 /*break*/, 13];
+                                    if (!(Number(operationId) == Number(Global_1.Global.AskariCardOperationType))) return [3 /*break*/, 14];
+                                    return [4 /*yield*/, this.getCurrentCart()];
+                                case 1:
+                                    cartClientResponse = (_a.sent());
+                                    if (!!TypeExtensions_1.ObjectExtensions.isNullOrUndefined(options.operationRequest["options"]["tenderType"])) return [3 /*break*/, 14];
                                     re = options.operationRequest["options"]["tenderType"];
-                                    if (!(Number(re.TenderTypeId) == Number(Global_1.Global.AskariCardTenderMethod))) return [3 /*break*/, 13];
+                                    if (!(Number(re.TenderTypeId) == Number(Global_1.Global.AskariCardTenderMethod))) return [3 /*break*/, 14];
+                                    return [4 /*yield*/, this.getCurrentCart()];
+                                case 2:
+                                    if ((_a.sent()).result.IsReturnByReceipt && cartClientResponse.result.AmountDue < 0) {
+                                        this.showMessage("Tender type cannot be used in return transaction.", "Askari card");
+                                        return [2 /*return*/, Promise.resolve({ canceled: true })];
+                                    }
                                     numPadOptions = {
                                         title: "Pay using askari card ",
                                         subTitle: "For extra discount",
@@ -96,48 +105,45 @@ System.register(["PosApi/Consume/Dialogs", "PosApi/Extend/Triggers/OperationTrig
                                     };
                                     dialogRequest = new Dialogs_1.ShowNumericInputDialogClientRequest(numPadOptions);
                                     return [4 /*yield*/, this.context.runtime.executeAsync(dialogRequest)];
-                                case 1:
+                                case 3:
                                     result_1 = _a.sent();
-                                    if (!!result_1.canceled) return [3 /*break*/, 12];
+                                    if (!!result_1.canceled) return [3 /*break*/, 13];
                                     if (result_1.data.result.value.length != 16) {
                                         this.showMessage("Card number should be 16 digits", "Askari card");
                                         return [2 /*return*/, Promise.resolve({ canceled: true })];
                                     }
-                                    return [4 /*yield*/, this.getCurrentCart()];
-                                case 2:
-                                    cartClientResponse = (_a.sent());
                                     reasonCodeLine = new Commerce.Proxy.Entities.ReasonCodeLineClass();
                                     reasonCodeLine.ReasonCodeId = Global_1.Global.AskariCardInfoCode;
                                     reasonCodeLine.Amount = 0;
                                     reasonCodeLine.Information = result_1.data.result.value;
                                     reasonCodeLine.TransactionId = cartClientResponse.result.Id;
                                     reasonCodeLine.InputTypeValue = Commerce.Proxy.Entities.ReasonCodeInputType.Text;
-                                    if (!(cartClientResponse.result.ReasonCodeLines.filter(function (rl) { return rl.ReasonCodeId == Global_1.Global.AskariCardInfoCode; }).length > 0)) return [3 /*break*/, 5];
+                                    if (!(cartClientResponse.result.ReasonCodeLines.filter(function (rl) { return rl.ReasonCodeId == Global_1.Global.AskariCardInfoCode; }).length > 0)) return [3 /*break*/, 6];
                                     reasonCodeLines = cartClientResponse.result.ReasonCodeLines.filter(function (rl) { return rl.ReasonCodeId == Global_1.Global.AskariCardInfoCode; });
                                     reasonCodeLines.forEach(function (rs) { return rs.Information = result_1.data.result.value; });
                                     saveReasonCodeLine = new CartOperations.SaveReasonCodeLinesOnCartClientRequest(reasonCodeLines);
                                     return [4 /*yield*/, this.context.runtime.executeAsync(saveReasonCodeLine)];
-                                case 3: return [4 /*yield*/, (_a.sent()).data];
-                                case 4:
-                                    saveReasonCodeLinesOnCartClientResponse = _a.sent();
-                                    _a.label = 5;
+                                case 4: return [4 /*yield*/, (_a.sent()).data];
                                 case 5:
-                                    if (!(cartClientResponse.result.ReasonCodeLines.filter(function (rl) { return rl.ReasonCodeId == Global_1.Global.AskariCardInfoCode; }).length == 0)) return [3 /*break*/, 8];
+                                    saveReasonCodeLinesOnCartClientResponse = _a.sent();
+                                    _a.label = 6;
+                                case 6:
+                                    if (!(cartClientResponse.result.ReasonCodeLines.filter(function (rl) { return rl.ReasonCodeId == Global_1.Global.AskariCardInfoCode; }).length == 0)) return [3 /*break*/, 9];
                                     saveReasonCodeLine = new CartOperations.SaveReasonCodeLinesOnCartClientRequest([reasonCodeLine]);
                                     return [4 /*yield*/, this.context.runtime.executeAsync(saveReasonCodeLine)];
-                                case 6: return [4 /*yield*/, (_a.sent()).data];
-                                case 7:
-                                    saveReasonCodeLinesOnCartClientResponse = _a.sent();
-                                    _a.label = 8;
+                                case 7: return [4 /*yield*/, (_a.sent()).data];
                                 case 8:
+                                    saveReasonCodeLinesOnCartClientResponse = _a.sent();
+                                    _a.label = 9;
+                                case 9:
                                     validateBinNumberRequest = new DataServiceRequests_g_1.StoreOperations.ValidateBinNumberRequest(result_1.data.result.value, cartClientResponse.result.Id);
                                     refreshRequest = new CartOperations.RefreshCartClientRequest();
                                     return [4 /*yield*/, this.context.runtime.executeAsync(refreshRequest)];
-                                case 9:
+                                case 10:
                                     _a.sent();
                                     return [4 /*yield*/, this.context.runtime.executeAsync(validateBinNumberRequest)];
-                                case 10: return [4 /*yield*/, (_a.sent()).data];
-                                case 11:
+                                case 11: return [4 /*yield*/, (_a.sent()).data];
+                                case 12:
                                     validateBinNumberResponse = _a.sent();
                                     if (validateBinNumberResponse.result) {
                                         return [2 /*return*/, Promise.resolve({ canceled: false })];
@@ -146,9 +152,9 @@ System.register(["PosApi/Consume/Dialogs", "PosApi/Extend/Triggers/OperationTrig
                                         this.showMessage("There was an error validating card number", "Error");
                                         return [2 /*return*/, Promise.resolve({ canceled: true })];
                                     }
-                                    return [3 /*break*/, 13];
-                                case 12: return [2 /*return*/, Promise.resolve({ canceled: true })];
-                                case 13: return [2 /*return*/, Promise.resolve({ canceled: false })];
+                                    return [3 /*break*/, 14];
+                                case 13: return [2 /*return*/, Promise.resolve({ canceled: true })];
+                                case 14: return [2 /*return*/, Promise.resolve({ canceled: false })];
                             }
                         });
                     });

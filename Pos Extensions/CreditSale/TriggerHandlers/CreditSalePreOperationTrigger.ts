@@ -5,7 +5,8 @@ import { IMessageDialogOptions, ShowMessageDialogClientRequest, ShowMessageDialo
 import { ClientEntities, ProxyEntities } from "PosApi/Entities";
 import * as Triggers from "PosApi/Extend/Triggers/OperationTriggers";
 import { ReportDetailsExtensionCommandBase } from "PosApi/Extend/Views/ReportDetailsView";
-import { ObjectExtensions } from "PosApi/TypeExtensions";
+import { ObjectExtensions, StringExtensions } from "PosApi/TypeExtensions";
+import { Global } from "../../AskariCardBinNumberVerification/Global";
 
 export default class CreditSalePreOperationTrigger extends Triggers.PreOperationTrigger {
     /**
@@ -23,18 +24,40 @@ export default class CreditSalePreOperationTrigger extends Triggers.PreOperation
             let customerRequest: GetCustomerClientRequest<GetCustomerClientResponse> = new GetCustomerClientRequest<GetCustomerClientResponse>(cartResponse.result.CustomerId);
             let customerResponse: GetCustomerClientResponse = await (await this.context.runtime.executeAsync(customerRequest)).data;
 
-            try {
-                if (customerResponse.result.CustomerGroup.toUpperCase() == "INSTITUTE" || (customerResponse.result.CustomerGroup.toUpperCase() == "REBATE" && cartResponse.result.LoyaltyCardId[0].toUpperCase() == 'E')) {
-                    return Promise.resolve({ canceled: false })
-                } else {
+            if (!StringExtensions.isEmptyOrWhitespace(Global.CreditSalesAllowedCustomerGroup)) {
+                try
+                {
+                    const AllowedCustomerGroups = Global.CreditSalesAllowedCustomerGroup.split(",");
+                    if (AllowedCustomerGroups.filter(a => a.search(customerResponse.result.CustomerGroup.toUpperCase()) > -1).length > 0)
+                    {
+                        const selectedCustomerGroup = AllowedCustomerGroups.filter(a => a.search(customerResponse.result.CustomerGroup.toUpperCase()) > -1)[0].split("::");
+
+                        if (selectedCustomerGroup[0].toUpperCase() == customerResponse.result.CustomerGroup.toUpperCase() && ObjectExtensions.isNullOrUndefined(selectedCustomerGroup[1])) {
+                            return Promise.resolve({ canceled: false })
+                        }
+                        else if (selectedCustomerGroup[0].toUpperCase() == customerResponse.result.CustomerGroup.toUpperCase() && selectedCustomerGroup[1].toUpperCase() == cartResponse.result.LoyaltyCardId[0].toUpperCase()) {
+                            return Promise.resolve({ canceled: false })
+                        }
+                        else {
+                            this.showMessage('Not a valid customer group for credit sales', 'Error')
+                            return Promise.resolve({ canceled: true })
+                        }
+                    }
+                    else {
+                        this.showMessage('This payment method is only allowed for institutional or employee credit sale', 'Error')
+                        return Promise.resolve({ canceled: true })
+                    }
+
+                } catch (e) {
                     this.showMessage('This payment method is only allowed for institutional or employee credit sale', 'Error')
                     return Promise.resolve({ canceled: true })
                 }
-            } catch (e) {
+            }
+            else {
                 this.showMessage('This payment method is only allowed for institutional or employee credit sale', 'Error')
                 return Promise.resolve({ canceled: true })
             }
-            
+
         }
 
         return Promise.resolve({ canceled: false });

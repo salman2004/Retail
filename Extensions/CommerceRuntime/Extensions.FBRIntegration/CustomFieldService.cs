@@ -181,9 +181,14 @@ namespace CDC.Commerce.Runtime.FBRIntegration
             string value = string.Empty;
             if (!string.IsNullOrEmpty(request.SalesOrder.LoyaltyCardId))
             {
+                decimal discount = decimal.Zero;
                 var affiliation = request.SalesOrder.AffiliationLoyaltyTierLines.Where(a => a.AffiliationType == RetailAffiliationType.Loyalty).FirstOrDefault();
                 GetAffiliationDiscounts(request.RequestContext, affiliation.AffiliationId.ToString() ?? string.Empty, out List<ExtensionsEntity> discountExtensionEntity);
-                decimal discount = request.SalesOrder.ActiveSalesLines.Where(sl => sl.DiscountAmount > 0 && !sl.DiscountLines.IsNullOrEmpty() && sl.DiscountLines.Any(dl => discountExtensionEntity.Any(de => de.GetProperty("OFFERID").ToString() == dl.OfferId))).Sum(sl => sl.DiscountAmount);
+                if (!discountExtensionEntity.IsNullOrEmpty())
+                {
+                    List<string> offerIds = discountExtensionEntity.Select(a => a.GetProperty("OFFERID").ToString()).ToList();
+                    discount = request.SalesOrder.ActiveSalesLines.Where(sl => sl.DiscountAmount > 0 && !sl.DiscountLines.IsNullOrEmpty()).Sum(sl => sl.DiscountLines.Where(dl => offerIds.Contains(dl.OfferId)).Sum(dl => dl.EffectiveAmount));
+                }
                 value = String.Format("{0:0.00}", discount);
             }
             return value;

@@ -34,8 +34,18 @@ namespace CDC.Commerce.Runtime.CustomerSearch
         public async Task<Response> Execute(Request request)
         {
             ThrowIf.Null(request, "request");
-
+            GetProductSearchResultsDataRequest getProductSearchResultsDataRequest = (GetProductSearchResultsDataRequest)request;
             EntityDataServiceResponse<ProductSearchResult> response = await this.ExecuteNextAsync<EntityDataServiceResponse<ProductSearchResult>>(request);
+
+            if (response.IsNullOrEmpty() && CheckIfLoyaltyCardId(request.RequestContext, getProductSearchResultsDataRequest.SearchText))
+            {
+                throw new CommerceException("Microsoft_Dynamics_Commerce_30104", "Loyalty Card")
+                {
+                    LocalizedMessage = "There was an error reading card. Please contact support for further assitance.",
+                    LocalizedMessageParameters = new object[] { }
+                };
+            }
+
             response = await  FilterProductsByInventoryAsync(response, request.RequestContext);
 
             return response;
@@ -181,6 +191,44 @@ namespace CDC.Commerce.Runtime.CustomerSearch
             }
         }
 
-        
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="transaction"></param>
+        /// <param name="entities"></param>
+        private bool CheckIfLoyaltyCardId(RequestContext context, string barcode)
+        {
+            if (barcode == null || barcode.IsNullOrEmpty())
+            {
+                return false;
+            }
+
+            using (DatabaseContext databaseContext = new DatabaseContext(context))
+            {
+                SqlQuery query = new SqlQuery();
+                query.QueryString = $@"SELECT CARDNUMBER FROM AX.RETAILLOYALTYCARD WHERE CARDNUMBER = @cardNumber";
+                query.Parameters["@cardNumber"] = barcode;
+
+                try
+                {
+                    ExtensionsEntity entity = databaseContext.ReadEntity<ExtensionsEntity>(query).ToList().FirstOrDefault();
+                    string cardNumber = entity?.GetProperty("CARDNUMBER")?.ToString() ?? string.Empty;
+                    if (cardNumber == string.Empty)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
     }
 }

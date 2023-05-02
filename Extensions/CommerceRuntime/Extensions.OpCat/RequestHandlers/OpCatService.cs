@@ -10,6 +10,7 @@ using Microsoft.Dynamics.Commerce.Runtime.DataModel;
 using Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages;
 using Microsoft.Dynamics.Commerce.Runtime.Messages;
 using Microsoft.Dynamics.Commerce.Runtime.Services.Messages;
+using Newtonsoft.Json;
 
 namespace CDC.Commerce.Runtime.CustomOpCat.RequestHandlers
 {
@@ -39,16 +40,7 @@ namespace CDC.Commerce.Runtime.CustomOpCat.RequestHandlers
             if (request.GetType() == typeof(GetProductBarcodeDataRequest))
             {
                 GetProductBarcodeDataRequest barcodeDataRequest = (GetProductBarcodeDataRequest)request;
-
-                if (CheckIfLoyaltyCardId(barcodeDataRequest.RequestContext, barcodeDataRequest.Barcode))
-                {
-                    throw new CommerceException("Microsoft_Dynamics_Commerce_30104", "Loyalty Card")
-                    {
-                        LocalizedMessage = "There was an error reading card. Please contact support for further assitance.",
-                        LocalizedMessageParameters = new object[] { }
-                    };
-                }
-                
+ 
                 RequestContext requestContext = request.RequestContext;
                 ChannelConfiguration channelConfiguration = requestContext.GetChannelConfiguration();
                 channelConfiguration.SetProperty("Barcode", barcodeDataRequest.Barcode);
@@ -57,7 +49,10 @@ namespace CDC.Commerce.Runtime.CustomOpCat.RequestHandlers
                 {
                     RequestContext = requestContext
                 };
-                return await this.ExecuteNextAsync<Response>(productBarcodeDataRequest);
+
+                GetProductBarcodeDataResponse response = await this.ExecuteNextAsync<GetProductBarcodeDataResponse>(productBarcodeDataRequest);
+                
+                return response;
             }
 
             if (request.GetType() == typeof(GetVariantProductsServiceRequest))
@@ -83,7 +78,7 @@ namespace CDC.Commerce.Runtime.CustomOpCat.RequestHandlers
             GetProductDimensionValuesDataRequest getProductDimensionValues = (GetProductDimensionValuesDataRequest)request;
             EntityDataServiceResponse<ProductDimensionValue> dimensionValuesResponse = (EntityDataServiceResponse<ProductDimensionValue>)await ExecuteBaseRequestAsync(request);
 
-            if (getProductDimensionValues.RequestContext.GetChannelConfiguration().IsPropertyDefined("Barcode") && dimensionValuesResponse.First().DimensionType != ProductDimensionType.Configuration)
+            if (getProductDimensionValues.RequestContext.GetChannelConfiguration().IsPropertyDefined("Barcode") && !dimensionValuesResponse.IsNullOrEmpty() && dimensionValuesResponse.First().DimensionType != ProductDimensionType.Configuration)
             {
                 List<ProductDimensionValue> productDimensionValueList = new List<ProductDimensionValue>();
                 //Just to make it optimized (Run only once when selecting size)
@@ -136,7 +131,7 @@ namespace CDC.Commerce.Runtime.CustomOpCat.RequestHandlers
                 }
             }
 
-            if (dimensionValuesResponse.First().DimensionType == ProductDimensionType.Configuration)
+            if (!dimensionValuesResponse.IsNullOrEmpty() && dimensionValuesResponse.First().DimensionType == ProductDimensionType.Configuration)
             {   
                 getProductDimensionValues.RequestContext.GetChannelConfiguration().SetProperty("Barcode", string.Empty);
                 foreach (var item in dimensionValuesResponse)
@@ -283,45 +278,6 @@ namespace CDC.Commerce.Runtime.CustomOpCat.RequestHandlers
                 }
             }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="transaction"></param>
-        /// <param name="entities"></param>
-        private bool CheckIfLoyaltyCardId(RequestContext context, string barcode)
-        {
-            if (barcode == null || barcode.IsNullOrEmpty())
-            {
-                return false;
-            }
-
-            using (DatabaseContext databaseContext = new DatabaseContext(context))
-            {
-                SqlQuery query = new SqlQuery();
-                query.QueryString = $@"SELECT CARDNUMBER FROM AX.RETAILLOYALTYCARD WHERE CARDNUMBER = @cardNumber";
-                query.Parameters["@cardNumber"] = barcode;
-
-                try
-                {
-                    ExtensionsEntity entity = databaseContext.ReadEntity<ExtensionsEntity>(query).ToList().FirstOrDefault();
-                    string cardNumber = entity?.GetProperty("CARDNUMBER")?.ToString() ?? string.Empty;
-                    if (cardNumber == string.Empty)
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        return true;
-                    }
-                }
-                catch (Exception)
-                {
-                    return false;
-                }
-            }
-        }
-
+        
     }
 }

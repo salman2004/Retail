@@ -9,6 +9,7 @@ System.register([], function (exports_1, context_1) {
                 Global.AskariCardTenderMethod = "";
                 Global.AskariCardOperationType = "";
                 Global.AskariCardInfoCode = "";
+                Global.CreditSalesAllowedCustomerGroup = "";
             })(Global || (Global = {}));
             exports_1("Global", Global);
         }

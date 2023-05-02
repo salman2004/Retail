@@ -1,13 +1,17 @@
 ﻿import { GetChannelConfigurationClientRequest, GetChannelConfigurationClientResponse } from "PosApi/Consume/Device";
 import * as Triggers from "PosApi/Extend/Triggers/ApplicationTriggers";
 import { StringExtensions } from "PosApi/TypeExtensions";
-import { Global } from "../Global"
+import { Global } from "../Global";
 
 export default class PostLogOnTrigger extends Triggers.PostLogOnTrigger {
 
     public async execute(options: Triggers.IPostLogOnTriggerOptions): Promise<void> {
         let configRequest: GetChannelConfigurationClientRequest<GetChannelConfigurationClientResponse> = new GetChannelConfigurationClientRequest<GetChannelConfigurationClientResponse>("");
         const response = await(await this.context.runtime.executeAsync(configRequest)).data;
+
+        if (response.result.ExtensionProperties.filter(ep => ep.Key == "CreditSalesAllowedCustomerGroupAndPrefix").length > 0) {
+            Global.CreditSalesAllowedCustomerGroup = response.result.ExtensionProperties.filter(ep => ep.Key == "CreditSalesAllowedCustomerGroupAndPrefix")[0].Value.StringValue;
+        }
 
         if (response.result.ExtensionProperties.filter(ep => ep.Key == "AskariCardOperationType").length > 0) {
             Global.AskariCardOperationType = response.result.ExtensionProperties.filter(ep => ep.Key == "AskariCardOperationType")[0].Value.StringValue;

@@ -47,16 +47,6 @@
         "build": {
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
-      },
-      "CDC.RetailServer.AskariCardBinNumberVerification/1.0.0": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.6.1",
-        "compile": {
-          "bin/placeholder/CDC.RetailServer.AskariCardBinNumberVerification.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/CDC.RetailServer.AskariCardBinNumberVerification.dll": {}
-        }
       }
     }
   },
@@ -306,16 +296,11 @@
         "netstandard.library.2.0.3.nupkg.sha512",
         "netstandard.library.nuspec"
       ]
-    },
-    "CDC.RetailServer.AskariCardBinNumberVerification/1.0.0": {
-      "type": "project",
-      "path": "../../RetailServer/Extension.AskariCardBinNumberVerification/RetailServer.Extension.AskariCardBinNumberVerification.csproj",
-      "msbuildProject": "../../RetailServer/Extension.AskariCardBinNumberVerification/RetailServer.Extension.AskariCardBinNumberVerification.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
-      "CDC.RetailServer.AskariCardBinNumberVerification >= 1.0.0",
+      "C:\\RetailSDK\\Update\\RetailSDK_Version28\\Extensions\\RetailServer\\Extension.AskariCardBinNumberVerification\\RetailServer.Extension.AskariCardBinNumberVerification.csproj",
       "Microsoft.Dynamics.Commerce.Tools.ExtensionsProxyGenerator >= 9.38.22167.5",
       "Microsoft.TypeScript.MSBuild >= 2.2.2",
       "NETStandard.Library >= 2.0.3"
@@ -396,5 +381,16 @@
         "warn": true
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1105",
+      "level": "Error",
+      "message": "Unable to find project information for 'C:\\RetailSDK\\Update\\RetailSDK_Version28\\Extensions\\RetailServer\\Extension.AskariCardBinNumberVerification\\RetailServer.Extension.AskariCardBinNumberVerification.csproj'. Inside Visual Studio, this may be because the project is unloaded or not part of current solution. Otherwise the project file may be invalid or missing targets required for restore.",
+      "libraryId": "C:\\RetailSDK\\Update\\RetailSDK_Version28\\Extensions\\RetailServer\\Extension.AskariCardBinNumberVerification\\RetailServer.Extension.AskariCardBinNumberVerification.csproj",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.0"
+      ]
+    }
+  ]
 }

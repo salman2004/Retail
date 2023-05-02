@@ -1,16 +1,15 @@
 ﻿using Microsoft.Dynamics.Commerce.Runtime;
 using Microsoft.Dynamics.Commerce.Runtime.DataModel;
+using Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages;
 using Microsoft.Dynamics.Commerce.Runtime.Messages;
-using Microsoft.Dynamics.Commerce.Runtime.RealtimeServices.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CDC.Commerce.Runtime.FractionalSale
 {
-   public class FractionalSaleTrigger : IRequestTriggerAsync
+    public class FractionalSaleTrigger : IRequestTriggerAsync
     {
         /// <summary>
         /// Gets the collection of supported request types by this handler.
@@ -41,28 +40,24 @@ namespace CDC.Commerce.Runtime.FractionalSale
                     var updateCartLine = (UpdateCartLinesRequest)request;
                     var fractionSaleRequest = new FractionSaleRequest();
                     fractionSaleRequest.ProductsInformation = new List<ProductInformation>();
-                    foreach (var cartLine in updateCartLine.CartLines)
+
+                    var UnitNotAllowedForFractionalSale = GetRetailConfigurationParameter(request, "UnitNotAllowedForFractionalSale", channelConfigs.InventLocationDataAreaId);
+                    if (!string.IsNullOrWhiteSpace(UnitNotAllowedForFractionalSale))
                     {
-                        if (!(cartLine.Quantity % 1 == 0))
+                        var factionalSalesUnits = UnitNotAllowedForFractionalSale.ToLower().Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+
+                        foreach (var cartLine in updateCartLine.CartLines)
                         {
-                            fractionSaleRequest.ProductsInformation = new List<ProductInformation>();
-
-                            fractionSaleRequest.ProductsInformation.Add(new ProductInformation()
+                            if (!(cartLine.Quantity % 1 == 0))
                             {
-                                ProductId = cartLine.ProductId,
-                                RetailStoreId = channelConfigs.InventLocation,
-                                UnitOfMeasure = cartLine.UnitOfMeasureSymbol
-                            }
-                            );
-                            var response = await request.RequestContext.ExecuteAsync<FractionSaleResponse>(fractionSaleRequest).ConfigureAwait(false);
+                                if (factionalSalesUnits.Any(x => x == cartLine.UnitOfMeasureSymbol?.ToLower()))
+                                {
+                                    throw new CommerceException("Microsoft_Dynamics_Commerce_30104", "The product is not authorized for fractional sale.");
+                                }
 
-                            if (!response.Status)
-                            {
-                                throw new CommerceException("Microsoft_Dynamics_Commerce_30104", "The product is not authorized for fractional sale.");
                             }
                         }
                     }
-
                 }
                 catch (Exception exception)
                 {
@@ -70,12 +65,22 @@ namespace CDC.Commerce.Runtime.FractionalSale
                     {
                         LocalizedMessage = exception.Message
 
-                };
-            }
+                    };
+                }
 
             }
 
             await Task.CompletedTask;
         }
+        private string GetRetailConfigurationParameter(Request request, string name, string company)
+        {
+            var configurationRequest = new GetConfigurationParametersDataRequest(request.RequestContext.GetChannelConfiguration().RecordId);
+            var configurationResponse = request.RequestContext.ExecuteAsync<EntityDataServiceResponse<RetailConfigurationParameter>>(configurationRequest).Result;
+
+            string result = configurationResponse?.PagedEntityCollection?.Where(cp => string.Equals(cp.Name.ToUpper().Trim(), (name).ToUpper().Trim(), StringComparison.OrdinalIgnoreCase))?.FirstOrDefault()?.Value ?? string.Empty;
+            return result;
+        }
     }
+
+
 }

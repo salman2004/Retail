@@ -1,53 +1,87 @@
 ﻿using Microsoft.Dynamics.Commerce.Runtime.ComponentModel.DataAnnotations;
 using Microsoft.Dynamics.Commerce.Runtime.DataModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CDC.Commerce.Runtime.FractionalSale.Entities
 {
     class CDCProductFractionalSale : CommerceEntity
     {
+        private const string IdColumn = "RECID";
+        private const string CategoryColumn = "CATEGORY";
+        private const string CategoryHierarchyColumn = "CATEGORYHIERARCHY";
+        private const string ProductColumn = "PRODUCT";
+        private const string VariantColumn = "VARIANT";
+        private const string StoreNumberColumn = "STORENUMBER";
+        private const string NameColumn = "NAME";
+        private const string LineTypeColumn = "LINETYPE";
+
         public CDCProductFractionalSale() : base("CDCProductFractionalSale")
         {
         }
 
         [Key]
         [DataMember]
-        [Column("RECID")]
-        public long RECID { get; set; }
+        [Column(IdColumn)]
+        public long RECID
+        {
+            get { return (long)this[IdColumn]; }
+            set { this[IdColumn] = value; }
+        }
 
         [DataMember]
-        [Column("CATEGORY")]
-        public long CATEGORY { get; set; }
+        [Column(CategoryColumn)]
+        public long CATEGORY
+        {
+            get { return (long)this[CategoryColumn]; }
+            set { this[CategoryColumn] = value; }
+        }
 
         [DataMember]
-        [Column("PRODUCT")]
-        public long PRODUCT { get; set; }
+        [Column(ProductColumn)]
+        public long PRODUCT
+        {
+            get { return (long)this[ProductColumn]; }
+            set { this[ProductColumn] = value; }
+        }
 
         [DataMember]
-        [Column("VARIANT")]
-        public long VARIANT { get; set; }
+        [Column(VariantColumn)]
+        public long VARIANT
+        {
+            get { return (long)this[VariantColumn]; }
+            set { this[VariantColumn] = value; }
+        }
 
         [DataMember]
-        [Column("CATEGORYHIERARCHY")]
-        public long CATEGORYHIERARCHY { get; set; }
+        [Column(CategoryHierarchyColumn)]
+        public long CATEGORYHIERARCHY
+        {
+            get { return (long)this[CategoryHierarchyColumn]; }
+            set { this[CategoryHierarchyColumn] = value; }
+        }
 
         [DataMember]
-        [Column("STORENUMBER")]
-        public string STORENUMBER { get; set; }
+        [Column(StoreNumberColumn)]
+        public string STORENUMBER
+        {
+            get { return (string)this[StoreNumberColumn]; }
+            set { this[StoreNumberColumn] = value; }
+        }
 
         [DataMember]
-        [Column("NAME")]
-        public string NAME { get; set; }
+        [Column(NameColumn)]
+        public string NAME
+        {
+            get { return (string)this[NameColumn]; }
+            set { this[NameColumn] = value; }
+        }
 
         [DataMember]
-        [Column("LINETYPE")]
-        public int LINETYPE { get; set; }       
+        [Column(LineTypeColumn)]
+        public int LINETYPE
+        {
+            get { return (int)this[LineTypeColumn]; }
+            set { this[LineTypeColumn] = value; }
+        }
     }
-
-
 }

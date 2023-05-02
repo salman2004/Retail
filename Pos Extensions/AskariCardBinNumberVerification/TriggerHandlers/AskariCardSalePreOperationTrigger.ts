@@ -23,10 +23,18 @@ export default class AskariCardSalePreOperationTrigger extends Triggers.PreOpera
 
         if (Number(operationId) == Number(Global.AskariCardOperationType))
         {
+            let cartClientResponse: CartOperations.GetCurrentCartClientResponse = (await this.getCurrentCart());
+
             if (!ObjectExtensions.isNullOrUndefined(options.operationRequest["options"]["tenderType"])) {
                 const re = options.operationRequest["options"]["tenderType"];
 
                 if (Number(re.TenderTypeId) == Number(Global.AskariCardTenderMethod)) {
+                    
+                    if ((await this.getCurrentCart()).result.IsReturnByReceipt && cartClientResponse.result.AmountDue < 0) {
+                        this.showMessage("Tender type cannot be used in return transaction.", "Askari card");
+                        return Promise.resolve({ canceled: true });
+                    }
+
                     let numPadOptions: INumericInputDialogOptions = {
                         title: "Pay using askari card ",
                         subTitle: "For extra discount",
@@ -42,9 +50,7 @@ export default class AskariCardSalePreOperationTrigger extends Triggers.PreOpera
                             this.showMessage("Card number should be 16 digits", "Askari card");
                             return Promise.resolve({ canceled: true });
                         }
-
-                        let cartClientResponse: CartOperations.GetCurrentCartClientResponse = (await this.getCurrentCart());
-
+                        
                         const reasonCodeLine = new Commerce.Proxy.Entities.ReasonCodeLineClass();
                         reasonCodeLine.ReasonCodeId = Global.AskariCardInfoCode;
                         reasonCodeLine.Amount = 0;
@@ -70,8 +76,6 @@ export default class AskariCardSalePreOperationTrigger extends Triggers.PreOpera
                             
                         }
 
-                       
-                        
                         let validateBinNumberRequest: StoreOperations.ValidateBinNumberRequest<StoreOperations.ValidateBinNumberResponse> =
                             new StoreOperations.ValidateBinNumberRequest<StoreOperations.ValidateBinNumberResponse>(result.data.result.value, cartClientResponse.result.Id);
 

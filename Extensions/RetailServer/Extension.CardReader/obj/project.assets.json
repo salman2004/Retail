@@ -4401,7 +4401,6 @@
       },
       "frameworks": {
         "net461": {
-          "targetAlias": "net461",
           "projectReferences": {}
         }
       },
@@ -4413,14 +4412,12 @@
     },
     "frameworks": {
       "net461": {
-        "targetAlias": "net461",
         "dependencies": {
           "Microsoft.Dynamics.Commerce.Runtime.Hosting.Contracts": {
             "target": "Package",
             "version": "[10.6.*, 10.7.0)"
           }
-        },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
+        }
       }
     }
   }

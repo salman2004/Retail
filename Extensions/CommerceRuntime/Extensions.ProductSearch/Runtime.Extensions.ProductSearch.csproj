@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.props" />
+  <Import Project="..\..\..\BuildTools\Common.props" />
+  <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.settings" />
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>CDC.Commerce.Runtime.ProductSearch</AssemblyName>
+    <RootNamespace>CDC.Commerce.Runtime.ProductSearch</RootNamespace>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="GetCustomReceiptFieldsService.cs" />
+    <Compile Remove="GetCustomReceiptsRequestHandler.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Runtime.Messages" Version="$(ChannelRepoPackagesVersion)" />
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Runtime.Services" Version="$(ChannelRepoPackagesVersion)" />
+  </ItemGroup>
+
+  <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.targets" />
+</Project>

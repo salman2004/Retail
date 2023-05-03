@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.props" />
+  <Import Project="..\..\..\BuildTools\Common.props" />
+  <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.settings" />
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+    <AssemblyName>CDC.Commerce.Runtime.CustomOpCat</AssemblyName>
+    <RootNamespace>CDC.Commerce.Runtime.CustomOpCat</RootNamespace>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="RequestHandlers\BarcodeService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Runtime.Services" Version="$(ChannelRepoPackagesVersion)" />
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Runtime.Messages" Version="$(ChannelRepoPackagesVersion)" />
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Runtime.Workflow" Version="$(ChannelRepoPackagesVersion)" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+    
+  <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.targets" />
+</Project>

@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = CDC.RetailServer.CardReader
+build_property.ProjectDir = C:\RetailSDK\Extensions\RetailServer\Extension.CardReader\

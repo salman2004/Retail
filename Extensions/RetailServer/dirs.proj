@@ -1,0 +1,12 @@
+<Project ToolsVersion="14.0" DefaultTargets="Build" BuildInParallel="false" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.props" />
+  <Import Project="..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.settings" />
+    <ItemGroup>
+      <ProjectFiles Include="Extension.CardReader\RetailServer.Extensions.CardReader.csproj" />
+	  <ProjectFiles Include="Extension.EhsasProgram\RetailServer.Extensions.EhsasProgram.csproj" />
+	  <ProjectFiles Include="Extension.BackDateValidation\RetailServer.Extension.BackDateValidation.csproj" />
+	  <ProjectFiles Include="Extension.AskariCardBinNumberVerification\RetailServer.Extension.AskariCardBinNumberVerification.csproj" />
+	  <ProjectFiles Include="Extension.FractionalSale\RetailServer.Extensions.FractionalSale.csproj" />
+    </ItemGroup>
+    <Import Project="$(SdkRootPath)\BuildTools\Microsoft.Dynamics.RetailSdk.Build.traversal.targets" />
+</Project>

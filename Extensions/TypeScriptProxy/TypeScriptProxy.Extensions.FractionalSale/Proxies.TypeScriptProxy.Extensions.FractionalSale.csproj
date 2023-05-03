@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.props" />
+  <Import Project="..\..\..\BuildTools\Common.props" />
+  <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.settings" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>CDC.Commerce.TypeScriptProxy.FractionalSale</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <RootNamespace>Proxies.TypeScriptProxy.Extensions.FractionalSale</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup Label="Libraries">
+    <TypeReferences Include="..\..\..\Pos\Contracts\*.d.ts">
+      <Visible>false</Visible>
+    </TypeReferences>
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Dynamics.Commerce.Tools.ExtensionsProxyGenerator" Version="9.36.22107.2" />
+		<PackageReference Include="Microsoft.TypeScript.MSBuild" Version="2.2.2" />
+	</ItemGroup>
+  
+  <ItemGroup>
+    <RetailServerExtensionAssemblies Include="..\..\RetailServer\Extension.FractionalSale\bin\$(Configuration)\net461\CDC.RetailServer.FractionalSale.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DataService\" />
+  </ItemGroup>
+
+  <Target Name="CopyGeneratedContractsToPos" AfterTargets="AfterBuild">
+    <ItemGroup>
+      <GeneratedDataServiceContracts Include="DataService\*.g.ts" />
+    </ItemGroup>
+    <Copy SourceFiles="@(GeneratedDataServiceContracts)" DestinationFolder="$(SdkRootPath)\POS\Extensions\FractionalSaleExtension\DataService" SkipUnchangedFiles="true" />
+  </Target>
+
+  <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.targets" />
+</Project>

@@ -1,0 +1,8 @@
+C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.ProductSearch\bin\Debug\netstandard2.0\CDC.Commerce.Runtime.ProductSearch.deps.json
+C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.ProductSearch\bin\Debug\netstandard2.0\CDC.Commerce.Runtime.ProductSearch.dll
+C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.ProductSearch\bin\Debug\netstandard2.0\CDC.Commerce.Runtime.ProductSearch.pdb
+C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.ProductSearch\obj\Debug\netstandard2.0\Runtime.Extensions.ProductSearch.csproj.CoreCompileInputs.cache
+C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.ProductSearch\obj\Debug\netstandard2.0\Runtime.Extensions.ProductSearch.AssemblyInfoInputs.cache
+C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.ProductSearch\obj\Debug\netstandard2.0\Runtime.Extensions.ProductSearch.AssemblyInfo.cs
+C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.ProductSearch\obj\Debug\netstandard2.0\CDC.Commerce.Runtime.ProductSearch.dll
+C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.ProductSearch\obj\Debug\netstandard2.0\CDC.Commerce.Runtime.ProductSearch.pdb

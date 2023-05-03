@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.props" />
+  <Import Project="..\..\..\BuildTools\Common.props" />
+  <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.settings" />
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+    <AssemblyName>CDC.RetailServer.FractionalSale</AssemblyName>
+    <RootNamespace>CDC.RetailServer.FractionalSale</RootNamespace>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Runtime.Hosting.Contracts" Version="$(FrameworkRepoPackagesVersion)" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="CDC.Commerce.Runtime.FractionalSale">
+      <HintPath>..\..\CommerceRuntime\Extensions.FractionalSale\bin\Debug\net461\CDC.Commerce.Runtime.FractionalSale.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.targets" />
+</Project>

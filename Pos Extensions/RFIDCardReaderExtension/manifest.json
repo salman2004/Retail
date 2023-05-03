@@ -1,0 +1,34 @@
+﻿{
+    "$schema": "../manifestSchema.json",
+    "name": "Pos_Extensibility_RFIDCardReader",
+    "publisher": "Delcit",
+    "version": "1.0.0.6",
+    "minimumPosVersion": "1.0.0.0",
+  "components": {
+    "create": {
+      "operations": [
+        {
+          "operationId": "5001",
+          "operationRequestFactoryPath": "Operations/RFIDCardReaderOperationRequestFactory",
+          "operationRequestHandlerPath": "Operations/RFIDCardReaderOperationRequestHandler"
+        }
+      ]
+    },
+    "extend": {
+      "triggers": [
+        {
+          "triggerType": "PrePayment",
+          "modulePath": "TriggerHandlers/CardReaderPrePaymentTrigger"
+        },
+        {
+          "triggerType": "PostCustomerClear",
+          "modulePath": "TriggerHandlers/CardReaderPostCustomerClearTrigger"
+        },
+        {
+          "triggerType": "PreAddTenderLine",
+          "modulePath": "TriggerHandlers/CardReaderPreAddTenderLineTrigger"
+        }
+      ]
+      }
+    }
+  }

@@ -1,0 +1,328 @@
+{
+  "runtimeTarget": {
+    "name": ".NETStandard,Version=v2.0/",
+    "signature": "82e32763a36ac07e37e304863d014584037402b0"
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETStandard,Version=v2.0": {},
+    ".NETStandard,Version=v2.0/": {
+      "CDC.Commerce.TypeScriptProxy.CardReader/1.0.0": {
+        "dependencies": {
+          "CDC.RetailServer.CardReader": "1.0.0",
+          "Microsoft.Dynamics.Commerce.Tools.ExtensionsProxyGenerator": "9.38.22167.5",
+          "Microsoft.TypeScript.MSBuild": "2.2.2",
+          "NETStandard.Library": "2.0.3"
+        },
+        "runtime": {
+          "CDC.Commerce.TypeScriptProxy.CardReader.dll": {}
+        }
+      },
+      "Microsoft.Dynamics.Commerce.Tools.CoreProxyGenerator/10.19.21267.4": {},
+      "Microsoft.Dynamics.Commerce.Tools.ExtensionsProxyGenerator/9.38.22167.5": {
+        "dependencies": {
+          "Microsoft.Dynamics.Commerce.Tools.CoreProxyGenerator": "10.19.21267.4"
+        }
+      },
+      "Microsoft.NETCore.Platforms/1.1.0": {},
+      "Microsoft.TypeScript.MSBuild/2.2.2": {},
+      "NETStandard.Library/2.0.3": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "1.1.0"
+        }
+      },
+      "CDC.RetailServer.CardReader/1.0.0": {
+        "dependencies": {
+          "Microsoft.Dynamics.Commerce.Runtime.Hosting.Contracts": "7.0.0.0",
+          "CDC.Commerce.Runtime.CardReader": "1.0.0.0",
+          "Microsoft.Dynamics.Commerce.Runtime.Framework": "7.0.0.0",
+          "System.Composition.TypedParts": "1.0.33.0",
+          "System.Composition.AttributedModel": "1.0.33.0",
+          "Microsoft.Dynamics.Retail.Diagnostics": "7.0.0.0",
+          "System.Composition.Runtime": "1.0.33.0",
+          "System.Composition.Hosting": "1.0.33.0",
+          "System.Composition.Convention": "1.0.33.0",
+          "Microsoft.Extensions.DependencyInjection": "1.1.1.0",
+          "Microsoft.Extensions.Logging.Abstractions": "1.1.2.0",
+          "Microsoft.Extensions.Logging": "1.1.2.0",
+          "Microsoft.Extensions.Logging.Debug": "1.1.2.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.1.0",
+          "Microsoft.Extensions.Options": "1.1.2.0",
+          "Microsoft.Extensions.Primitives": "1.1.1.0",
+          "System.Runtime.CompilerServices.Unsafe": "4.0.2.0"
+        },
+        "runtime": {
+          "CDC.RetailServer.CardReader.dll": {}
+        }
+      },
+      "Microsoft.Dynamics.Commerce.Runtime.Hosting.Contracts.Reference/7.0.0.0": {
+        "runtime": {
+          "Microsoft.Dynamics.Commerce.Runtime.Hosting.Contracts.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "10.6.22165.1"
+          }
+        }
+      },
+      "CDC.Commerce.Runtime.CardReader.Reference/1.0.0.0": {
+        "runtime": {
+          "CDC.Commerce.Runtime.CardReader.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "10.0.28.8"
+          }
+        }
+      },
+      "Microsoft.Dynamics.Commerce.Runtime.Framework.Reference/7.0.0.0": {
+        "runtime": {
+          "Microsoft.Dynamics.Commerce.Runtime.Framework.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "10.6.22165.1"
+          }
+        }
+      },
+      "System.Composition.TypedParts.Reference/1.0.33.0": {
+        "runtime": {
+          "System.Composition.TypedParts.dll": {
+            "assemblyVersion": "1.0.33.0",
+            "fileVersion": "4.6.26515.6"
+          }
+        }
+      },
+      "System.Composition.AttributedModel.Reference/1.0.33.0": {
+        "runtime": {
+          "System.Composition.AttributedModel.dll": {
+            "assemblyVersion": "1.0.33.0",
+            "fileVersion": "4.6.26515.6"
+          }
+        }
+      },
+      "Microsoft.Dynamics.Retail.Diagnostics.Reference/7.0.0.0": {
+        "runtime": {
+          "Microsoft.Dynamics.Retail.Diagnostics.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "10.8.22111.1"
+          }
+        }
+      },
+      "System.Composition.Runtime.Reference/1.0.33.0": {
+        "runtime": {
+          "System.Composition.Runtime.dll": {
+            "assemblyVersion": "1.0.33.0",
+            "fileVersion": "4.6.26515.6"
+          }
+        }
+      },
+      "System.Composition.Hosting.Reference/1.0.33.0": {
+        "runtime": {
+          "System.Composition.Hosting.dll": {
+            "assemblyVersion": "1.0.33.0",
+            "fileVersion": "4.6.26515.6"
+          }
+        }
+      },
+      "System.Composition.Convention.Reference/1.0.33.0": {
+        "runtime": {
+          "System.Composition.Convention.dll": {
+            "assemblyVersion": "1.0.33.0",
+            "fileVersion": "4.6.26515.6"
+          }
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection.Reference/1.1.1.0": {
+        "runtime": {
+          "Microsoft.Extensions.DependencyInjection.dll": {
+            "assemblyVersion": "1.1.1.0",
+            "fileVersion": "1.1.1.30427"
+          }
+        }
+      },
+      "Microsoft.Extensions.Logging.Abstractions.Reference/1.1.2.0": {
+        "runtime": {
+          "Microsoft.Extensions.Logging.Abstractions.dll": {
+            "assemblyVersion": "1.1.2.0",
+            "fileVersion": "1.1.2.30427"
+          }
+        }
+      },
+      "Microsoft.Extensions.Logging.Reference/1.1.2.0": {
+        "runtime": {
+          "Microsoft.Extensions.Logging.dll": {
+            "assemblyVersion": "1.1.2.0",
+            "fileVersion": "1.1.2.30427"
+          }
+        }
+      },
+      "Microsoft.Extensions.Logging.Debug.Reference/1.1.2.0": {
+        "runtime": {
+          "Microsoft.Extensions.Logging.Debug.dll": {
+            "assemblyVersion": "1.1.2.0",
+            "fileVersion": "1.1.2.30427"
+          }
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection.Abstractions.Reference/1.1.1.0": {
+        "runtime": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "assemblyVersion": "1.1.1.0",
+            "fileVersion": "1.1.1.30427"
+          }
+        }
+      },
+      "Microsoft.Extensions.Options.Reference/1.1.2.0": {
+        "runtime": {
+          "Microsoft.Extensions.Options.dll": {
+            "assemblyVersion": "1.1.2.0",
+            "fileVersion": "1.1.2.30427"
+          }
+        }
+      },
+      "Microsoft.Extensions.Primitives.Reference/1.1.1.0": {
+        "runtime": {
+          "Microsoft.Extensions.Primitives.dll": {
+            "assemblyVersion": "1.1.1.0",
+            "fileVersion": "1.1.1.30427"
+          }
+        }
+      },
+      "System.Runtime.CompilerServices.Unsafe.Reference/4.0.2.0": {
+        "runtime": {
+          "System.Runtime.CompilerServices.Unsafe.dll": {
+            "assemblyVersion": "4.0.2.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CDC.Commerce.TypeScriptProxy.CardReader/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Dynamics.Commerce.Tools.CoreProxyGenerator/10.19.21267.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-5nOWV6r4xKA1HnVF4VS35Lmn/GXFUrNEzbki3VLgit46MqsGwwKayoZ+G+YpqH0yBO/duX7D8neJ7zODerNcxQ==",
+      "path": "microsoft.dynamics.commerce.tools.coreproxygenerator/10.19.21267.4",
+      "hashPath": "microsoft.dynamics.commerce.tools.coreproxygenerator.10.19.21267.4.nupkg.sha512"
+    },
+    "Microsoft.Dynamics.Commerce.Tools.ExtensionsProxyGenerator/9.38.22167.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-zflMHMJ+smYsAfQ2kR51F2lWDgRX/tf4jmEHHs06qjKDoyYdZovkdBUJhIxsrmJIL2gE+K0oUxRS/OrA4niBKQ==",
+      "path": "microsoft.dynamics.commerce.tools.extensionsproxygenerator/9.38.22167.5",
+      "hashPath": "microsoft.dynamics.commerce.tools.extensionsproxygenerator.9.38.22167.5.nupkg.sha512"
+    },
+    "Microsoft.NETCore.Platforms/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A==",
+      "path": "microsoft.netcore.platforms/1.1.0",
+      "hashPath": "microsoft.netcore.platforms.1.1.0.nupkg.sha512"
+    },
+    "Microsoft.TypeScript.MSBuild/2.2.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-t0scUvGc1vEieT7K/yASdTdexCXPs8OIJQDu9vj8hCPR4zKP1qtvDnrT3vXQS/s1jrOYIpCAZ3Ryg47bOuU+Lg==",
+      "path": "microsoft.typescript.msbuild/2.2.2",
+      "hashPath": "microsoft.typescript.msbuild.2.2.2.nupkg.sha512"
+    },
+    "NETStandard.Library/2.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
+      "path": "netstandard.library/2.0.3",
+      "hashPath": "netstandard.library.2.0.3.nupkg.sha512"
+    },
+    "CDC.RetailServer.CardReader/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Dynamics.Commerce.Runtime.Hosting.Contracts.Reference/7.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CDC.Commerce.Runtime.CardReader.Reference/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Dynamics.Commerce.Runtime.Framework.Reference/7.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Composition.TypedParts.Reference/1.0.33.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Composition.AttributedModel.Reference/1.0.33.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Dynamics.Retail.Diagnostics.Reference/7.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Composition.Runtime.Reference/1.0.33.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Composition.Hosting.Reference/1.0.33.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Composition.Convention.Reference/1.0.33.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.DependencyInjection.Reference/1.1.1.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Logging.Abstractions.Reference/1.1.2.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Logging.Reference/1.1.2.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Logging.Debug.Reference/1.1.2.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.DependencyInjection.Abstractions.Reference/1.1.1.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Options.Reference/1.1.2.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Primitives.Reference/1.1.1.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Runtime.CompilerServices.Unsafe.Reference/4.0.2.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

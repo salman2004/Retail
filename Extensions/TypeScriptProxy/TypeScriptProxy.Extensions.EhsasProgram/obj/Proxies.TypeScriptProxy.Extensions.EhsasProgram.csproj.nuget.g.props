@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <RestoreSuccess Condition=" '$(RestoreSuccess)' == '' ">True</RestoreSuccess>
+    <RestoreTool Condition=" '$(RestoreTool)' == '' ">NuGet</RestoreTool>
+    <ProjectAssetsFile Condition=" '$(ProjectAssetsFile)' == '' ">C:\RetailSDK\Update\RetailSDK_Version28\Extensions\TypeScriptProxy\TypeScriptProxy.Extensions.EhsasProgram\obj\project.assets.json</ProjectAssetsFile>
+    <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">C:\RetailSDK\Update\RetailSDK_Version28\References</NuGetPackageRoot>
+    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\RetailSDK\Update\RetailSDK_Version28\References;C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages;C:\Program Files (x86)\Microsoft\Xamarin\NuGet\;C:\Program Files\dotnet\sdk\NuGetFallbackFolder</NuGetPackageFolders>
+    <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
+    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">4.9.3</NuGetToolVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+  </PropertyGroup>
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)\microsoft.typescript.msbuild\2.2.2\build\Microsoft.TypeScript.MSBuild.props" Condition="Exists('$(NuGetPackageRoot)\microsoft.typescript.msbuild\2.2.2\build\Microsoft.TypeScript.MSBuild.props')" />
+    <Import Project="$(NuGetPackageRoot)\microsoft.dynamics.commerce.tools.coreproxygenerator\10.19.21267.4\build\Microsoft.Dynamics.Commerce.Tools.CoreProxyGenerator.props" Condition="Exists('$(NuGetPackageRoot)\microsoft.dynamics.commerce.tools.coreproxygenerator\10.19.21267.4\build\Microsoft.Dynamics.Commerce.Tools.CoreProxyGenerator.props')" />
+  </ImportGroup>
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgMicrosoft_TypeScript_MSBuild Condition=" '$(PkgMicrosoft_TypeScript_MSBuild)' == '' ">C:\RetailSDK\Update\RetailSDK_Version28\References\microsoft.typescript.msbuild\2.2.2</PkgMicrosoft_TypeScript_MSBuild>
+    <PkgMicrosoft_Dynamics_Commerce_Tools_CoreProxyGenerator Condition=" '$(PkgMicrosoft_Dynamics_Commerce_Tools_CoreProxyGenerator)' == '' ">C:\RetailSDK\Update\RetailSDK_Version28\References\microsoft.dynamics.commerce.tools.coreproxygenerator\10.19.21267.4</PkgMicrosoft_Dynamics_Commerce_Tools_CoreProxyGenerator>
+    <PkgMicrosoft_Dynamics_Commerce_Tools_ExtensionsProxyGenerator Condition=" '$(PkgMicrosoft_Dynamics_Commerce_Tools_ExtensionsProxyGenerator)' == '' ">C:\RetailSDK\Update\RetailSDK_Version28\References\microsoft.dynamics.commerce.tools.extensionsproxygenerator\9.38.22167.5</PkgMicrosoft_Dynamics_Commerce_Tools_ExtensionsProxyGenerator>
+  </PropertyGroup>
+</Project>

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\RetailSDK\\Update\\RetailSDK_Version28\\Extensions\\CommerceRuntime\\Extensions.ProductSearch\\Runtime.Extensions.ProductSearch.csproj": {}
+    "C:\\RetailSDK\\Update\\RetailSDK_FinalV28\\Extensions\\CommerceRuntime\\Extensions.ProductSearch\\Runtime.Extensions.ProductSearch.csproj": {}
   },
   "projects": {
-    "C:\\RetailSDK\\Update\\RetailSDK_Version28\\Extensions\\CommerceRuntime\\Extensions.ProductSearch\\Runtime.Extensions.ProductSearch.csproj": {
+    "C:\\RetailSDK\\Update\\RetailSDK_FinalV28\\Extensions\\CommerceRuntime\\Extensions.ProductSearch\\Runtime.Extensions.ProductSearch.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\RetailSDK\\Update\\RetailSDK_Version28\\Extensions\\CommerceRuntime\\Extensions.ProductSearch\\Runtime.Extensions.ProductSearch.csproj",
+        "projectUniqueName": "C:\\RetailSDK\\Update\\RetailSDK_FinalV28\\Extensions\\CommerceRuntime\\Extensions.ProductSearch\\Runtime.Extensions.ProductSearch.csproj",
         "projectName": "CDC.Commerce.Runtime.ProductSearch",
-        "projectPath": "C:\\RetailSDK\\Update\\RetailSDK_Version28\\Extensions\\CommerceRuntime\\Extensions.ProductSearch\\Runtime.Extensions.ProductSearch.csproj",
-        "packagesPath": "C:\\RetailSDK\\Update\\RetailSDK_Version28\\References",
-        "outputPath": "C:\\RetailSDK\\Update\\RetailSDK_Version28\\Extensions\\CommerceRuntime\\Extensions.ProductSearch\\obj\\",
+        "projectPath": "C:\\RetailSDK\\Update\\RetailSDK_FinalV28\\Extensions\\CommerceRuntime\\Extensions.ProductSearch\\Runtime.Extensions.ProductSearch.csproj",
+        "packagesPath": "C:\\RetailSDK\\Update\\RetailSDK_FinalV28\\References",
+        "outputPath": "C:\\RetailSDK\\Update\\RetailSDK_FinalV28\\Extensions\\CommerceRuntime\\Extensions.ProductSearch\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -19,7 +19,7 @@
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\RetailSDK\\Update\\RetailSDK_Version28\\NuGet.Config",
+          "C:\\RetailSDK\\Update\\RetailSDK_FinalV28\\NuGet.Config",
           "C:\\RetailSDK\\NuGet.Config",
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
@@ -30,7 +30,7 @@
           "netstandard2.0"
         ],
         "sources": {
-          "C:\\RetailSDK\\Update\\RetailSDK_Version28\\pkgs": {},
+          "C:\\RetailSDK\\Update\\RetailSDK_FinalV28\\pkgs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

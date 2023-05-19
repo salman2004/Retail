@@ -53,4 +53,4 @@ System.register(["PosApi/Entities", "PosApi/Consume/DataService"], function (exp
         }
     };
 });
-//# sourceMappingURL=C:/RetailSDK/Update/RetailSDK_Version28/Pos/Extensions/AskariCardBinNumberVerification/DataService/DataServiceRequests.g.js.map
+//# sourceMappingURL=C:/RetailSDK/Update/RetailSDK_FinalV28/Pos/Extensions/AskariCardBinNumberVerification/DataService/DataServiceRequests.g.js.map

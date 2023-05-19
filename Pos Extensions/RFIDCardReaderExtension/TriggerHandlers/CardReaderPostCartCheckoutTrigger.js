@@ -126,4 +126,4 @@ System.register(["PosApi/Extend/Triggers/TransactionTriggers", "PosApi/TypeExten
         }
     };
 });
-//# sourceMappingURL=C:/RetailSDK/Update/RetailSDK_Version28/Pos/Extensions/RFIDCardReaderExtension/TriggerHandlers/CardReaderPostCartCheckoutTrigger.js.map
+//# sourceMappingURL=C:/RetailSDK/Update/RetailSDK_FinalV28/Pos/Extensions/RFIDCardReaderExtension/TriggerHandlers/CardReaderPostCartCheckoutTrigger.js.map

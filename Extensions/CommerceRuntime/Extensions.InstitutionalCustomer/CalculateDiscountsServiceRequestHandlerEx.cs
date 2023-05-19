@@ -86,7 +86,7 @@
             if (!request.Transaction.LoyaltyCardId.IsNullOrEmpty() && request.Transaction.IsPropertyDefined("CSDCardBalance") && !char.IsDigit(request.Transaction.LoyaltyCardId[0]) && Convert.ToBoolean(request.Transaction?.GetProperty("checkLoyaltyLimit")?.ToString() ?? "false"))
             {
                 var affiliation = request.Transaction.AffiliationLoyaltyTierLines.Where(a => a.AffiliationType == RetailAffiliationType.Loyalty).FirstOrDefault();
-                GetAffiliationDiscounts(request.RequestContext, affiliation.AffiliationId.ToString() ?? string.Empty , out List<ExtensionsEntity> discountExtensionEntity);
+                GetAffiliationDiscounts(request.RequestContext, affiliation?.AffiliationId.ToString() ?? string.Empty , out List<ExtensionsEntity> discountExtensionEntity);
                 decimal.TryParse(request.Transaction?.GetProperty("CSDCardBalance")?.ToString()?.Trim() ?? string.Empty, out decimal cardBalance);
                 int balance = (int)request.Transaction.ActiveSalesLines.Where(sl => sl.DiscountAmount > 0 && !sl.DiscountLines.IsNullOrEmpty() && sl.DiscountLines.Any(dl=> discountExtensionEntity.Any(de => de.GetProperty("OFFERID").ToString() == dl.OfferId))).Sum(sl => sl.Price * sl.QuantityDiscounted);
                 request.Transaction.SetProperty("CSDMonthlyLimitUsed", Convert.ToString(cardBalance - balance).PadLeft(5, '0'));

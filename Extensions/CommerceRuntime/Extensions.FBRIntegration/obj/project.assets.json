@@ -34,11 +34,11 @@
           "lib/netstandard2.0/Microsoft.Dynamics.Retail.Resources.Strings.dll": {}
         }
       },
-      "Microsoft.Dynamics.Commerce.Runtime.Data/9.38.22167.5": {
+      "Microsoft.Dynamics.Commerce.Runtime.Data/9.38.22291.6": {
         "type": "package",
         "dependencies": {
           "Microsoft.Dynamics.Commerce.Diagnostics": "[10.9.22133.2, 10.10.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.Entities": "[9.38.22167.5, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.Entities": "[9.38.22291.6, 9.39.0)",
           "Microsoft.Dynamics.Commerce.Runtime.Framework": "[10.6.22165.1, 10.7.0)"
         },
         "compile": {
@@ -48,13 +48,13 @@
           "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Data.dll": {}
         }
       },
-      "Microsoft.Dynamics.Commerce.Runtime.DataManagers/9.38.22167.5": {
+      "Microsoft.Dynamics.Commerce.Runtime.DataManagers/9.38.22291.6": {
         "type": "package",
         "dependencies": {
           "Microsoft.Dynamics.Commerce.Diagnostics": "[10.9.22133.2, 10.10.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.Data": "[9.38.22167.5, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages": "[9.38.22167.5, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.Entities": "[9.38.22167.5, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.Data": "[9.38.22291.6, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages": "[9.38.22291.6, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.Entities": "[9.38.22291.6, 9.39.0)",
           "Microsoft.Dynamics.Commerce.Runtime.Framework": "[10.6.22165.1, 10.7.0)"
         },
         "compile": {
@@ -64,11 +64,11 @@
           "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataManagers.dll": {}
         }
       },
-      "Microsoft.Dynamics.Commerce.Runtime.DataModel.Brazil/9.38.22167.5": {
+      "Microsoft.Dynamics.Commerce.Runtime.DataModel.Brazil/9.38.22291.6": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Dynamics.Commerce.Runtime.Data": "[9.38.22167.5, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.Entities": "[9.38.22167.5, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.Data": "[9.38.22291.6, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.Entities": "[9.38.22291.6, 9.39.0)",
           "Microsoft.Dynamics.Commerce.Runtime.Framework": "[10.6.22165.1, 10.7.0)"
         },
         "compile": {
@@ -78,10 +78,10 @@
           "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.Brazil.dll": {}
         }
       },
-      "Microsoft.Dynamics.Commerce.Runtime.DataModel.India/9.38.22167.5": {
+      "Microsoft.Dynamics.Commerce.Runtime.DataModel.India/9.38.22291.6": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Dynamics.Commerce.Runtime.Entities": "[9.38.22167.5, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.Entities": "[9.38.22291.6, 9.39.0)",
           "Microsoft.Dynamics.Commerce.Runtime.Framework": "[10.6.22165.1, 10.7.0)",
           "System.ComponentModel.Annotations": "4.6.0"
         },
@@ -92,7 +92,7 @@
           "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.India.dll": {}
         }
       },
-      "Microsoft.Dynamics.Commerce.Runtime.DataModel.Italy/9.38.22167.5": {
+      "Microsoft.Dynamics.Commerce.Runtime.DataModel.Italy/9.38.22291.6": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.Italy.dll": {}
@@ -101,7 +101,7 @@
           "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.Italy.dll": {}
         }
       },
-      "Microsoft.Dynamics.Commerce.Runtime.DataModel.Poland/9.38.22167.5": {
+      "Microsoft.Dynamics.Commerce.Runtime.DataModel.Poland/9.38.22291.6": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.Poland.dll": {}
@@ -110,16 +110,16 @@
           "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.Poland.dll": {}
         }
       },
-      "Microsoft.Dynamics.Commerce.Runtime.DataServices/9.38.22167.5": {
+      "Microsoft.Dynamics.Commerce.Runtime.DataServices/9.38.22291.6": {
         "type": "package",
         "dependencies": {
           "Microsoft.Dynamics.Commerce.Diagnostics": "[10.9.22133.2, 10.10.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.Data": "[9.38.22167.5, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.DataManagers": "[9.38.22167.5, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages": "[9.38.22167.5, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.Entities": "[9.38.22167.5, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.Data": "[9.38.22291.6, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.DataManagers": "[9.38.22291.6, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages": "[9.38.22291.6, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.Entities": "[9.38.22291.6, 9.39.0)",
           "Microsoft.Dynamics.Commerce.Runtime.Framework": "[10.6.22165.1, 10.7.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.Localization": "[9.38.22167.5, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.Localization": "[9.38.22291.6, 9.39.0)",
           "System.Threading.Tasks.Dataflow": "4.11.1"
         },
         "compile": {
@@ -129,11 +129,11 @@
           "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataServices.dll": {}
         }
       },
-      "Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages/9.38.22167.5": {
+      "Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages/9.38.22291.6": {
         "type": "package",
         "dependencies": {
           "Microsoft.Dynamics.Commerce.Diagnostics": "[10.9.22133.2, 10.10.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.Entities": "[9.38.22167.5, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.Entities": "[9.38.22291.6, 9.39.0)",
           "Microsoft.Dynamics.Commerce.Runtime.Framework": "[10.6.22165.1, 10.7.0)"
         },
         "compile": {
@@ -143,7 +143,7 @@
           "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages.dll": {}
         }
       },
-      "Microsoft.Dynamics.Commerce.Runtime.Entities/9.38.22167.5": {
+      "Microsoft.Dynamics.Commerce.Runtime.Entities/9.38.22291.6": {
         "type": "package",
         "dependencies": {
           "Microsoft.Dynamics.Commerce.Diagnostics": "[10.9.22133.2, 10.10.0)",
@@ -172,13 +172,13 @@
           "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Framework.dll": {}
         }
       },
-      "Microsoft.Dynamics.Commerce.Runtime.Localization/9.38.22167.5": {
+      "Microsoft.Dynamics.Commerce.Runtime.Localization/9.38.22291.6": {
         "type": "package",
         "dependencies": {
           "Microsoft.Dynamics.Commerce.Diagnostics": "[10.9.22133.2, 10.10.0)",
           "Microsoft.Dynamics.Commerce.Resources.Strings": "[10.6.22165.1, 10.7.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages": "[9.38.22167.5, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.Entities": "[9.38.22167.5, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages": "[9.38.22291.6, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.Entities": "[9.38.22291.6, 9.39.0)",
           "Microsoft.Dynamics.Commerce.Runtime.Framework": "[10.6.22165.1, 10.7.0)",
           "System.Linq.Parallel": "4.3.0",
           "System.Runtime.Serialization.Primitives": "4.3.0",
@@ -347,14 +347,14 @@
           }
         }
       },
-      "Microsoft.Dynamics.Commerce.Runtime.Localization.Data.Services.Messages/9.38.22167.5": {
+      "Microsoft.Dynamics.Commerce.Runtime.Localization.Data.Services.Messages/9.38.22291.6": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Dynamics.Commerce.Runtime.DataModel.India": "[9.38.22167.5, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.DataModel.Italy": "[9.38.22167.5, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.DataModel.Poland": "[9.38.22167.5, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages": "[9.38.22167.5, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.Localization.Entities": "[9.38.22167.5, 9.39.0)"
+          "Microsoft.Dynamics.Commerce.Runtime.DataModel.India": "[9.38.22291.6, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.DataModel.Italy": "[9.38.22291.6, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.DataModel.Poland": "[9.38.22291.6, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages": "[9.38.22291.6, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.Localization.Entities": "[9.38.22291.6, 9.39.0)"
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Data.Services.Messages.dll": {}
@@ -363,11 +363,11 @@
           "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Data.Services.Messages.dll": {}
         }
       },
-      "Microsoft.Dynamics.Commerce.Runtime.Localization.Entities/9.38.22167.5": {
+      "Microsoft.Dynamics.Commerce.Runtime.Localization.Entities/9.38.22291.6": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Dynamics.Commerce.Runtime.Data": "[9.38.22167.5, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages": "[9.38.22167.5, 9.39.0)"
+          "Microsoft.Dynamics.Commerce.Runtime.Data": "[9.38.22291.6, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages": "[9.38.22291.6, 9.39.0)"
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Entities.dll": {}
@@ -376,17 +376,17 @@
           "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Entities.dll": {}
         }
       },
-      "Microsoft.Dynamics.Commerce.Runtime.Localization.Services.Messages/9.38.22167.5": {
+      "Microsoft.Dynamics.Commerce.Runtime.Localization.Services.Messages/9.38.22291.6": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Dynamics.Commerce.Runtime.DataModel.Brazil": "[9.38.22167.5, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.DataModel.India": "[9.38.22167.5, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.DataModel.Italy": "[9.38.22167.5, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.DataModel.Poland": "[9.38.22167.5, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages": "[9.38.22167.5, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.DataModel.Brazil": "[9.38.22291.6, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.DataModel.India": "[9.38.22291.6, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.DataModel.Italy": "[9.38.22291.6, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.DataModel.Poland": "[9.38.22291.6, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages": "[9.38.22291.6, 9.39.0)",
           "Microsoft.Dynamics.Commerce.Runtime.Framework": "[10.6.22165.1, 10.7.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.Localization.Entities": "[9.38.22167.5, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.Services.Messages": "[9.38.22167.5, 9.39.0)"
+          "Microsoft.Dynamics.Commerce.Runtime.Localization.Entities": "[9.38.22291.6, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.Services.Messages": "[9.38.22291.6, 9.39.0)"
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Services.Messages.dll": {}
@@ -395,11 +395,11 @@
           "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Services.Messages.dll": {}
         }
       },
-      "Microsoft.Dynamics.Commerce.Runtime.Services.Messages/9.38.22167.5": {
+      "Microsoft.Dynamics.Commerce.Runtime.Services.Messages/9.38.22291.6": {
         "type": "package",
         "dependencies": {
           "Microsoft.Dynamics.Commerce.Diagnostics": "[10.9.22133.2, 10.10.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.Entities": "[9.38.22167.5, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.Entities": "[9.38.22291.6, 9.39.0)",
           "Microsoft.Dynamics.Commerce.Runtime.Framework": "[10.6.22165.1, 10.7.0)"
         },
         "compile": {
@@ -1390,120 +1390,120 @@
         "microsoft.dynamics.commerce.resources.strings.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.Runtime.Data/9.38.22167.5": {
-      "sha512": "HXWXZ2otLUpxFWAh5JM7T3GlBCWXmk/8yvSIiL4rH3EY8mrYhTyM7FNaXIn42e/OqqD6kRGST3Gmffsc6gzk9A==",
+    "Microsoft.Dynamics.Commerce.Runtime.Data/9.38.22291.6": {
+      "sha512": "M6o8cNJ6JrFagJz5fltmIe05WyYp8WOoLnI+wJMc+wW/JYLPv67V1LZlccLCBFvOApBMwMXJVhPCETi5i3JpDg==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.runtime.data/9.38.22167.5",
+      "path": "microsoft.dynamics.commerce.runtime.data/9.38.22291.6",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Data.dll",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Data.pdb",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Data.xml",
-        "microsoft.dynamics.commerce.runtime.data.9.38.22167.5.nupkg.sha512",
+        "microsoft.dynamics.commerce.runtime.data.9.38.22291.6.nupkg.sha512",
         "microsoft.dynamics.commerce.runtime.data.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.Runtime.DataManagers/9.38.22167.5": {
-      "sha512": "LeLHsbADFOKfLmGlMiEgxafUngQ0n9e9k9cAU7tzZe2r7ULJdNAdtK6w9HCofiegHv+a2smP7NYESIouI14PAw==",
+    "Microsoft.Dynamics.Commerce.Runtime.DataManagers/9.38.22291.6": {
+      "sha512": "DG/n2X0zfqeIfE/w2F3Ke5vXj/hnt8smmhp7nm4UxIvpRxqxsg9xJMzGmRKFIEigCjr5Qeq+g9PLn5AsV7+FbA==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.runtime.datamanagers/9.38.22167.5",
+      "path": "microsoft.dynamics.commerce.runtime.datamanagers/9.38.22291.6",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataManagers.dll",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataManagers.pdb",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataManagers.xml",
-        "microsoft.dynamics.commerce.runtime.datamanagers.9.38.22167.5.nupkg.sha512",
+        "microsoft.dynamics.commerce.runtime.datamanagers.9.38.22291.6.nupkg.sha512",
         "microsoft.dynamics.commerce.runtime.datamanagers.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.Runtime.DataModel.Brazil/9.38.22167.5": {
-      "sha512": "qaETORzvWuFIVCnG2/VHys8stMwRpJBL9o+RjYMd26d1ONNi+h5gRbylvJwBe5S58+8EqNWxpmfXTTIWEB/NWg==",
+    "Microsoft.Dynamics.Commerce.Runtime.DataModel.Brazil/9.38.22291.6": {
+      "sha512": "eKyVQYCUJg/j00MNwWnWeGaToNsoqhHYY9SCt/IUtfVYT+LdAlyXLv4h78wdCto8tgz1Gs2EPAmQTNF9ggCZeQ==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.runtime.datamodel.brazil/9.38.22167.5",
+      "path": "microsoft.dynamics.commerce.runtime.datamodel.brazil/9.38.22291.6",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.Brazil.dll",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.Brazil.pdb",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.Brazil.xml",
-        "microsoft.dynamics.commerce.runtime.datamodel.brazil.9.38.22167.5.nupkg.sha512",
+        "microsoft.dynamics.commerce.runtime.datamodel.brazil.9.38.22291.6.nupkg.sha512",
         "microsoft.dynamics.commerce.runtime.datamodel.brazil.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.Runtime.DataModel.India/9.38.22167.5": {
-      "sha512": "0lFZOwKjauAAXOZN8xKvEiw/Pwg8p8KCmf44+ILyBq/iMF4s60H0ZJ4gMyjLRwR1uOVeUj57Fkyr41EhD5oIMw==",
+    "Microsoft.Dynamics.Commerce.Runtime.DataModel.India/9.38.22291.6": {
+      "sha512": "GvxM6rIqH8NJG2Sq9Z2V2mj/vC/MWODLkiPWu8V5a0kYjEJZHdRREHZkbSy7Z2b9gU7jHQxDn6TcKpOVLx9vBw==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.runtime.datamodel.india/9.38.22167.5",
+      "path": "microsoft.dynamics.commerce.runtime.datamodel.india/9.38.22291.6",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.India.dll",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.India.pdb",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.India.xml",
-        "microsoft.dynamics.commerce.runtime.datamodel.india.9.38.22167.5.nupkg.sha512",
+        "microsoft.dynamics.commerce.runtime.datamodel.india.9.38.22291.6.nupkg.sha512",
         "microsoft.dynamics.commerce.runtime.datamodel.india.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.Runtime.DataModel.Italy/9.38.22167.5": {
-      "sha512": "MM4d48mceHh0syT9TdrW92jaK3TSvbSoTmJqLjq2c162XtSewvxJ5xjePVSrLsnNhpjR4ERg8jhxQ/CbFy9LLw==",
+    "Microsoft.Dynamics.Commerce.Runtime.DataModel.Italy/9.38.22291.6": {
+      "sha512": "lxD/6Sr29GSUh3D2IReSq7X21SnW3zPYeNhyC31ImbeU2hGuWk6LcAh/E2cnq4ahsDOEmp6yQxYUGTsW0fwh9Q==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.runtime.datamodel.italy/9.38.22167.5",
+      "path": "microsoft.dynamics.commerce.runtime.datamodel.italy/9.38.22291.6",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.Italy.dll",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.Italy.pdb",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.Italy.xml",
-        "microsoft.dynamics.commerce.runtime.datamodel.italy.9.38.22167.5.nupkg.sha512",
+        "microsoft.dynamics.commerce.runtime.datamodel.italy.9.38.22291.6.nupkg.sha512",
         "microsoft.dynamics.commerce.runtime.datamodel.italy.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.Runtime.DataModel.Poland/9.38.22167.5": {
-      "sha512": "3Th2a4JHJF1KPqyIskVyihOPkrBQ+uZ35Ko2c8sTk2fHDn2vuJFEMdoPdm0aWiEx53sanK4ktpOqmx6Ij+7fCg==",
+    "Microsoft.Dynamics.Commerce.Runtime.DataModel.Poland/9.38.22291.6": {
+      "sha512": "u79fsbUviaKFBdPpPvRr8FLQo0/dHfn2+35kp+jbI+H9h10Ci/FrGnVcNdWxESyh0cymbbotG2CzGO5lQguMBQ==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.runtime.datamodel.poland/9.38.22167.5",
+      "path": "microsoft.dynamics.commerce.runtime.datamodel.poland/9.38.22291.6",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.Poland.dll",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.Poland.pdb",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.Poland.xml",
-        "microsoft.dynamics.commerce.runtime.datamodel.poland.9.38.22167.5.nupkg.sha512",
+        "microsoft.dynamics.commerce.runtime.datamodel.poland.9.38.22291.6.nupkg.sha512",
         "microsoft.dynamics.commerce.runtime.datamodel.poland.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.Runtime.DataServices/9.38.22167.5": {
-      "sha512": "BWOp0La0nsn4Uw55P+F+0FWRBpxqU8HuuLlAS1rlSctCUnBWclaq13E2hCUcm8+1luDoYyCLUhcGaqYdJDKYUA==",
+    "Microsoft.Dynamics.Commerce.Runtime.DataServices/9.38.22291.6": {
+      "sha512": "kt4fI0Pp6hIfxmYC4ilgVD8FXp/s0Txg2fLUpst0iTSjv120HuVdAst5IYv/05/srL3mx+okqAinTG9msQULiw==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.runtime.dataservices/9.38.22167.5",
+      "path": "microsoft.dynamics.commerce.runtime.dataservices/9.38.22291.6",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataServices.dll",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataServices.pdb",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataServices.xml",
-        "microsoft.dynamics.commerce.runtime.dataservices.9.38.22167.5.nupkg.sha512",
+        "microsoft.dynamics.commerce.runtime.dataservices.9.38.22291.6.nupkg.sha512",
         "microsoft.dynamics.commerce.runtime.dataservices.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages/9.38.22167.5": {
-      "sha512": "E0GfFHPxbL+qVR8pt58/d9HMh5+sTlqRGWgPeNRIh69l29rfRXhtJnZkf99QlSsX7bsG+0RRMWBW3H9LTNW5FQ==",
+    "Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages/9.38.22291.6": {
+      "sha512": "RCz8ZWSNN/8lGAmC4xhTJ7Y2xrQGm2l6eD/hWn0oQE/w28GHIjI5wAVFhmZ/Zb8eoEIvJaxqH4AGXs2dSFYR+w==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.runtime.dataservices.messages/9.38.22167.5",
+      "path": "microsoft.dynamics.commerce.runtime.dataservices.messages/9.38.22291.6",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages.dll",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages.pdb",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages.xml",
-        "microsoft.dynamics.commerce.runtime.dataservices.messages.9.38.22167.5.nupkg.sha512",
+        "microsoft.dynamics.commerce.runtime.dataservices.messages.9.38.22291.6.nupkg.sha512",
         "microsoft.dynamics.commerce.runtime.dataservices.messages.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.Runtime.Entities/9.38.22167.5": {
-      "sha512": "KUbf/IyGpu1TvGOc6FVoSFpfoVxXMaEgvWOo5MH5zXalPvdgDVW39c4N3/26gni472vKsby7HShQsujRS8+IAQ==",
+    "Microsoft.Dynamics.Commerce.Runtime.Entities/9.38.22291.6": {
+      "sha512": "A2KH9zCkLpAVPVbpTUqby/TyCBZI6WC1TYZGgcT5UxxpBOm3oOQxWYTvWZhmK1KMDfV+SAeeQXvMWIIHrr96lw==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.runtime.entities/9.38.22167.5",
+      "path": "microsoft.dynamics.commerce.runtime.entities/9.38.22291.6",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Entities.dll",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Entities.pdb",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Entities.xml",
-        "microsoft.dynamics.commerce.runtime.entities.9.38.22167.5.nupkg.sha512",
+        "microsoft.dynamics.commerce.runtime.entities.9.38.22291.6.nupkg.sha512",
         "microsoft.dynamics.commerce.runtime.entities.nuspec"
       ]
     },
@@ -1520,10 +1520,10 @@
         "microsoft.dynamics.commerce.runtime.framework.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.Runtime.Localization/9.38.22167.5": {
-      "sha512": "hGgXUskGmi4t5fH/NqfYdEbpRd7umxBz/vs1dyRWxbhdjWUsZO4BzWUugs0pJz7rh/ojfDsyyhk/7DFM7jQFiQ==",
+    "Microsoft.Dynamics.Commerce.Runtime.Localization/9.38.22291.6": {
+      "sha512": "ct2Rvglw9tnHhUjRcRRuOvGY4cUZ/s+VMgC8pERGCOzr3dOQl6GVrtB7VuyNZkgg0tf+c+2+rP77GQ3tNascNA==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.runtime.localization/9.38.22167.5",
+      "path": "microsoft.dynamics.commerce.runtime.localization/9.38.22291.6",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.dll",
@@ -1580,7 +1580,7 @@
         "lib/netstandard2.0/th/Microsoft.Dynamics.Commerce.Runtime.Localization.resources.dll",
         "lib/netstandard2.0/tr/Microsoft.Dynamics.Commerce.Runtime.Localization.resources.dll",
         "lib/netstandard2.0/zh-Hans/Microsoft.Dynamics.Commerce.Runtime.Localization.resources.dll",
-        "microsoft.dynamics.commerce.runtime.localization.9.38.22167.5.nupkg.sha512",
+        "microsoft.dynamics.commerce.runtime.localization.9.38.22291.6.nupkg.sha512",
         "microsoft.dynamics.commerce.runtime.localization.nuspec",
         "src/ResourceFiles/RuntimeExceptionMessages.resx",
         "src/ResourceFiles/RuntimeInventoryMessages.resx",
@@ -1590,55 +1590,55 @@
         "src/ResourceFiles/RuntimeUserAlertMessages.resx"
       ]
     },
-    "Microsoft.Dynamics.Commerce.Runtime.Localization.Data.Services.Messages/9.38.22167.5": {
-      "sha512": "yblMj4kzV5UG+MseKFDYhB3ksNocOJWaWZuL7VZdVYRppfFSiVGKYgQ4ZrWgmrwlTElS0YiP+hu4t/Jwxl/krA==",
+    "Microsoft.Dynamics.Commerce.Runtime.Localization.Data.Services.Messages/9.38.22291.6": {
+      "sha512": "8Cs7qBQwRClIEZ9sQ4/apLe6C/jfuqQI1LZDrkSqLnDSBgErs1XzE+bEfGuPQQXTJG5/+onvwzo3shnC5I4NyA==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.runtime.localization.data.services.messages/9.38.22167.5",
+      "path": "microsoft.dynamics.commerce.runtime.localization.data.services.messages/9.38.22291.6",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Data.Services.Messages.dll",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Data.Services.Messages.pdb",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Data.Services.Messages.xml",
-        "microsoft.dynamics.commerce.runtime.localization.data.services.messages.9.38.22167.5.nupkg.sha512",
+        "microsoft.dynamics.commerce.runtime.localization.data.services.messages.9.38.22291.6.nupkg.sha512",
         "microsoft.dynamics.commerce.runtime.localization.data.services.messages.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.Runtime.Localization.Entities/9.38.22167.5": {
-      "sha512": "T0+xgk2bctoJ/NoQVkwQXkrfsxc1fDht1/6f+td2HGHEpkXchDf7UIQv9aDwkIYj/5ljVysIjSGFaOAp9GKDkA==",
+    "Microsoft.Dynamics.Commerce.Runtime.Localization.Entities/9.38.22291.6": {
+      "sha512": "P9cxRl7tcfa82z2XJmbwuGIWs9VCdyln842o1WVsQ8jKLtAUosdgSnK7GEgEvhi+Fpd+WErOjxN+DVNcXIJ55Q==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.runtime.localization.entities/9.38.22167.5",
+      "path": "microsoft.dynamics.commerce.runtime.localization.entities/9.38.22291.6",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Entities.dll",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Entities.pdb",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Entities.xml",
-        "microsoft.dynamics.commerce.runtime.localization.entities.9.38.22167.5.nupkg.sha512",
+        "microsoft.dynamics.commerce.runtime.localization.entities.9.38.22291.6.nupkg.sha512",
         "microsoft.dynamics.commerce.runtime.localization.entities.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.Runtime.Localization.Services.Messages/9.38.22167.5": {
-      "sha512": "6lGNY1RJ2fLySmYt48250JbhTiEoXWVc9Hjuwtyj4cNZaTlJ5Uh2URyO1rvuD/TnK0Gu5dmU6Cl9SmQzEfVtUQ==",
+    "Microsoft.Dynamics.Commerce.Runtime.Localization.Services.Messages/9.38.22291.6": {
+      "sha512": "lm3jjUNzbOG0PMmPUAU5HbJNmnFXGACY8Px4WqvpLoKH+ciMXgaOELvOBI9OrXPuvx1SrxDtWPri59bDFJXsdQ==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.runtime.localization.services.messages/9.38.22167.5",
+      "path": "microsoft.dynamics.commerce.runtime.localization.services.messages/9.38.22291.6",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Services.Messages.dll",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Services.Messages.pdb",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Services.Messages.xml",
-        "microsoft.dynamics.commerce.runtime.localization.services.messages.9.38.22167.5.nupkg.sha512",
+        "microsoft.dynamics.commerce.runtime.localization.services.messages.9.38.22291.6.nupkg.sha512",
         "microsoft.dynamics.commerce.runtime.localization.services.messages.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.Runtime.Services.Messages/9.38.22167.5": {
-      "sha512": "ViyIgVL7APwuVIesF98Xeb+t0J/N5rkYcJMTC7cHr7gsvQPv1i39XPzyR1ByesUEkYsI2NsmL4KYmbyDBMjnDw==",
+    "Microsoft.Dynamics.Commerce.Runtime.Services.Messages/9.38.22291.6": {
+      "sha512": "hujsm7JPeOp6Qq9fnasyZbld3OV7CeFHavUnGWdbMM4IkMRUhlXUw1FBvlbbUXCypwwsDtwyKaYrVOvR3KePlg==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.runtime.services.messages/9.38.22167.5",
+      "path": "microsoft.dynamics.commerce.runtime.services.messages/9.38.22291.6",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Services.Messages.dll",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Services.Messages.pdb",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Services.Messages.xml",
-        "microsoft.dynamics.commerce.runtime.services.messages.9.38.22167.5.nupkg.sha512",
+        "microsoft.dynamics.commerce.runtime.services.messages.9.38.22291.6.nupkg.sha512",
         "microsoft.dynamics.commerce.runtime.services.messages.nuspec"
       ]
     },
@@ -5204,7 +5204,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\RetailSDK\\Update\\RetailSDK_Version28\\References": {},
+    "C:\\RetailSDK\\Update\\RetailSDK_FinalV28\\References": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
@@ -5212,11 +5212,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\RetailSDK\\Update\\RetailSDK_Version28\\Extensions\\CommerceRuntime\\Extensions.FBRIntegration\\Runtime.Extensions.FBRIntegration.csproj",
+      "projectUniqueName": "C:\\RetailSDK\\Update\\RetailSDK_FinalV28\\Extensions\\CommerceRuntime\\Extensions.FBRIntegration\\Runtime.Extensions.FBRIntegration.csproj",
       "projectName": "CDC.Commerce.Runtime.FBRIntegration",
-      "projectPath": "C:\\RetailSDK\\Update\\RetailSDK_Version28\\Extensions\\CommerceRuntime\\Extensions.FBRIntegration\\Runtime.Extensions.FBRIntegration.csproj",
-      "packagesPath": "C:\\RetailSDK\\Update\\RetailSDK_Version28\\References",
-      "outputPath": "C:\\RetailSDK\\Update\\RetailSDK_Version28\\Extensions\\CommerceRuntime\\Extensions.FBRIntegration\\obj\\",
+      "projectPath": "C:\\RetailSDK\\Update\\RetailSDK_FinalV28\\Extensions\\CommerceRuntime\\Extensions.FBRIntegration\\Runtime.Extensions.FBRIntegration.csproj",
+      "packagesPath": "C:\\RetailSDK\\Update\\RetailSDK_FinalV28\\References",
+      "outputPath": "C:\\RetailSDK\\Update\\RetailSDK_FinalV28\\Extensions\\CommerceRuntime\\Extensions.FBRIntegration\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -5224,7 +5224,7 @@
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\RetailSDK\\Update\\RetailSDK_Version28\\NuGet.Config",
+        "C:\\RetailSDK\\Update\\RetailSDK_FinalV28\\NuGet.Config",
         "C:\\RetailSDK\\NuGet.Config",
         "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
@@ -5235,7 +5235,7 @@
         "net461"
       ],
       "sources": {
-        "C:\\RetailSDK\\Update\\RetailSDK_Version28\\pkgs": {},
+        "C:\\RetailSDK\\Update\\RetailSDK_FinalV28\\pkgs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -5293,8 +5293,18 @@
       "code": "NU1603",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "CDC.Commerce.Runtime.FBRIntegration depends on Microsoft.Dynamics.Commerce.Runtime.DataServices (>= 9.36.22107.2) but Microsoft.Dynamics.Commerce.Runtime.DataServices 9.36.22107.2 was not found. An approximate best match of Microsoft.Dynamics.Commerce.Runtime.DataServices 9.38.22167.5 was resolved.",
+      "message": "CDC.Commerce.Runtime.FBRIntegration depends on Microsoft.Dynamics.Commerce.Runtime.DataServices (>= 9.36.22107.2) but Microsoft.Dynamics.Commerce.Runtime.DataServices 9.36.22107.2 was not found. An approximate best match of Microsoft.Dynamics.Commerce.Runtime.DataServices 9.38.22291.6 was resolved.",
       "libraryId": "Microsoft.Dynamics.Commerce.Runtime.DataServices",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.6.1"
+      ]
+    },
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "CDC.Commerce.Runtime.FBRIntegration depends on Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages (>= 9.38.22167.5) but Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages 9.38.22167.5 was not found. An approximate best match of Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages 9.38.22291.6 was resolved.",
+      "libraryId": "Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages",
       "targetGraphs": [
         ".NETFramework,Version=v4.6.1"
       ]
@@ -5313,7 +5323,7 @@
       "code": "NU1603",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "CDC.Commerce.Runtime.FBRIntegration depends on Microsoft.Dynamics.Commerce.Runtime.Localization.Data.Services.Messages (>= 9.36.22107.2) but Microsoft.Dynamics.Commerce.Runtime.Localization.Data.Services.Messages 9.36.22107.2 was not found. An approximate best match of Microsoft.Dynamics.Commerce.Runtime.Localization.Data.Services.Messages 9.38.22167.5 was resolved.",
+      "message": "CDC.Commerce.Runtime.FBRIntegration depends on Microsoft.Dynamics.Commerce.Runtime.Localization.Data.Services.Messages (>= 9.36.22107.2) but Microsoft.Dynamics.Commerce.Runtime.Localization.Data.Services.Messages 9.36.22107.2 was not found. An approximate best match of Microsoft.Dynamics.Commerce.Runtime.Localization.Data.Services.Messages 9.38.22291.6 was resolved.",
       "libraryId": "Microsoft.Dynamics.Commerce.Runtime.Localization.Data.Services.Messages",
       "targetGraphs": [
         ".NETFramework,Version=v4.6.1"
@@ -5323,8 +5333,18 @@
       "code": "NU1603",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "CDC.Commerce.Runtime.FBRIntegration depends on Microsoft.Dynamics.Commerce.Runtime.Localization.Services.Messages (>= 9.36.22107.2) but Microsoft.Dynamics.Commerce.Runtime.Localization.Services.Messages 9.36.22107.2 was not found. An approximate best match of Microsoft.Dynamics.Commerce.Runtime.Localization.Services.Messages 9.38.22167.5 was resolved.",
+      "message": "CDC.Commerce.Runtime.FBRIntegration depends on Microsoft.Dynamics.Commerce.Runtime.Localization.Services.Messages (>= 9.36.22107.2) but Microsoft.Dynamics.Commerce.Runtime.Localization.Services.Messages 9.36.22107.2 was not found. An approximate best match of Microsoft.Dynamics.Commerce.Runtime.Localization.Services.Messages 9.38.22291.6 was resolved.",
       "libraryId": "Microsoft.Dynamics.Commerce.Runtime.Localization.Services.Messages",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.6.1"
+      ]
+    },
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "CDC.Commerce.Runtime.FBRIntegration depends on Microsoft.Dynamics.Commerce.Runtime.Services.Messages (>= 9.38.22167.5) but Microsoft.Dynamics.Commerce.Runtime.Services.Messages 9.38.22167.5 was not found. An approximate best match of Microsoft.Dynamics.Commerce.Runtime.Services.Messages 9.38.22291.6 was resolved.",
+      "libraryId": "Microsoft.Dynamics.Commerce.Runtime.Services.Messages",
       "targetGraphs": [
         ".NETFramework,Version=v4.6.1"
       ]

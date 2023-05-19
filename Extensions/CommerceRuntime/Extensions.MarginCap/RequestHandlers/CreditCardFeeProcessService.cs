@@ -49,8 +49,9 @@ namespace CDC.Commerce.Runtime.MarginCap.RequestHandlers
                         List<TenderLine> tenderLists = priceServiceResponse.Transaction.RefundableTenderLines.Where(m => supportedTenderTypes.Contains(m.TenderTypeId)).ToList();
                         List<SalesLine> productReturnableLines = priceServiceResponse.Transaction.ActiveSalesLines.Where(sl => sl.IsReturnLine()).ToList();//.Sum(sl => sl.Price * sl.Quantity);  //RefundableTenderLines.Where(m => supportedTenderTypes.Contains(m.TenderTypeId)).ToList();
                         decimal returnSalesLines = productReturnableLines.Sum(sl => (sl.Price * (sl.QuantityReturnable ?? sl.Quantity)) - sl.DiscountAmount);
-                        
-                        if (productReturnableLines.Count > 0)
+                        //bool isSupportedTenderType = priceServiceResponse.Transaction.RefundableTenderLines.Where(m => supportedTenderTypes.Contains(m.TenderTypeId)).ToList().IsNullOrEmpty();
+
+                        if (productReturnableLines.Count > 0 && !tenderLists.IsNullOrEmpty())
                         {
                             decimal processingFees = returnSalesLines * (Convert.ToDecimal((cardFee)) / 100);
                             ChargeLine ccrChargeLine = priceServiceResponse.Transaction.ChargeLines?.Where(a => a.ChargeCode == cardRefundChargeCode)?.FirstOrDefault() ?? null;

@@ -15,4 +15,4 @@ System.register([], function (exports_1, context_1) {
         }
     };
 });
-//# sourceMappingURL=C:/RetailSDK/Update/RetailSDK_Version28/Pos/Extensions/AskariCardBinNumberVerification/Global.js.map
+//# sourceMappingURL=C:/RetailSDK/Update/RetailSDK_FinalV28/Pos/Extensions/AskariCardBinNumberVerification/Global.js.map

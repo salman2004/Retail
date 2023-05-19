@@ -77,8 +77,8 @@ namespace CDC.Commerce.Runtime.CardReader
                 try
                 {
                     List<ExtensionsEntity> entity = databaseContext.ReadEntity<ExtensionsEntity>(query).ToList();
-                    isCardBlocked = Convert.ToBoolean(entity?.FirstOrDefault()?.GetProperty("CDCISCARDBLOCKED").ToString() ?? Boolean.FalseString);
-                    isRebateCard = Convert.ToBoolean(entity?.FirstOrDefault()?.GetProperty("CDCPROTECTMONTHLYCAT").ToString() ?? Boolean.FalseString);
+                    isCardBlocked = Convert.ToBoolean(Convert.ToInt16(entity?.FirstOrDefault()?.GetProperty("CDCISCARDBLOCKED")?.ToString() ?? decimal.Zero.ToString()));
+                    isRebateCard = Convert.ToBoolean(Convert.ToInt16(entity?.FirstOrDefault()?.GetProperty("CDCPROTECTMONTHLYCAT")?.ToString() ?? decimal.Zero.ToString()));
                 }
                 catch (Exception ex)
                 {

@@ -20,4 +20,4 @@ System.register(["./RFIDCardReaderOperationRequest"], function (exports_1, conte
         }
     };
 });
-//# sourceMappingURL=C:/RetailSDK/Update/RetailSDK_Version28/Pos/Extensions/RFIDCardReaderExtension/Operations/RFIDCardReaderOperationRequestFactory.js.map
+//# sourceMappingURL=C:/RetailSDK/Update/RetailSDK_FinalV28/Pos/Extensions/RFIDCardReaderExtension/Operations/RFIDCardReaderOperationRequestFactory.js.map

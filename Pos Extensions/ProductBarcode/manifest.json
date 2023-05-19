@@ -1,0 +1,16 @@
+﻿{
+    "$schema": "../manifestSchema.json",
+    "name": "Pos_Extensibility_Barcode",
+    "publisher": "Delcit",
+    "version": "1.0.0.1",
+    "minimumPosVersion": "1.0.0.0",
+  "components": {
+    "extend": {
+      "requestHandlers": [
+        {
+          "modulePath": "RequestHandlers/ScanResultClientRequestHandler"
+        }
+      ]
+    }
+    }
+  }

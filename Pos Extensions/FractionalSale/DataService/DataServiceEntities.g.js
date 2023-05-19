@@ -26,4 +26,4 @@ System.register(["PosApi/Entities"], function (exports_1, context_1) {
         }
     };
 });
-//# sourceMappingURL=C:/RetailSDK/Update/RetailSDK_Version28/Pos/Extensions/FractionalSale/DataService/DataServiceEntities.g.js.map
+//# sourceMappingURL=C:/RetailSDK/Update/RetailSDK_FinalV28/Pos/Extensions/FractionalSale/DataService/DataServiceEntities.g.js.map

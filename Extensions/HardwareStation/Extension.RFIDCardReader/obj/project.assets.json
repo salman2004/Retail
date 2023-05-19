@@ -16,190 +16,242 @@
           "System.Xml.XmlSerializer": "4.3.0"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Retail.Diagnostics.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Retail.Diagnostics.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Retail.Diagnostics.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Retail.Diagnostics.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
-      "Microsoft.Dynamics.Commerce.HardwareStation.CardPayment/9.38.22167.14": {
+      "Microsoft.Dynamics.Commerce.HardwareStation.CardPayment/9.38.22291.13": {
         "type": "package",
         "dependencies": {
           "Microsoft.Dynamics.Commerce.Diagnostics": "[10.9.22133.2, 10.10.0)",
-          "Microsoft.Dynamics.Commerce.HardwareStation.Configuration": "[9.38.22167.14, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.HardwareStation.Core": "[9.38.22167.14, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.HardwareStation.PeripheralRequests": "[9.38.22167.14, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Contracts": "[9.38.22167.14, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Entities": "[9.38.22167.14, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.PaymentSDK.Portable": "[10.38.22120.2, 10.39.0)",
+          "Microsoft.Dynamics.Commerce.HardwareStation.Configuration": "[9.38.22291.13, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.HardwareStation.Core": "[9.38.22291.13, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.HardwareStation.PeripheralRequests": "[9.38.22291.13, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Contracts": "[9.38.22291.13, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Entities": "[9.38.22291.13, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.PaymentSDK.Portable": "[10.38.22245.3, 10.39.0)",
           "Microsoft.Dynamics.Commerce.Runtime.Framework": "[10.6.22165.1, 10.7.0)",
-          "Microsoft.Dynamics.Commerce.SDKManager.Portable": "[10.38.22120.2, 10.39.0)"
+          "Microsoft.Dynamics.Commerce.SDKManager.Portable": "[10.38.22245.3, 10.39.0)"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.CardPayment.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.CardPayment.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.CardPayment.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.CardPayment.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
-      "Microsoft.Dynamics.Commerce.HardwareStation.Configuration/9.38.22167.14": {
+      "Microsoft.Dynamics.Commerce.HardwareStation.Configuration/9.38.22291.13": {
         "type": "package",
         "dependencies": {
           "Microsoft.Dynamics.Commerce.Diagnostics": "[10.9.22133.2, 10.10.0)",
-          "Microsoft.Dynamics.Commerce.HardwareStation.Core": "9.38.22167.14",
-          "Microsoft.Dynamics.Commerce.PaymentSDK.Portable": "[10.38.22120.2, 10.39.0)",
+          "Microsoft.Dynamics.Commerce.HardwareStation.Core": "9.38.22291.13",
+          "Microsoft.Dynamics.Commerce.PaymentSDK.Portable": "[10.38.22245.3, 10.39.0)",
           "Microsoft.Dynamics.Commerce.Runtime.ConfigurationProviders": "[10.6.22165.1, 10.7.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.Extensibility.Configuration": "[9.38.22167.5, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.Extensibility.Configuration": "[9.38.22291.6, 9.39.0)",
           "System.Configuration.ConfigurationManager": "4.5.0"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Configuration.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Configuration.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Configuration.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Configuration.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Microsoft.Dynamics.Commerce.HardwareStation.Core/9.38.22167.14": {
+      "Microsoft.Dynamics.Commerce.HardwareStation.Core/9.38.22291.13": {
         "type": "package",
         "dependencies": {
           "Microsoft.Dynamics.Commerce.Diagnostics": "[10.9.22133.2, 10.10.0)",
-          "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Contracts": "[9.38.22167.14, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Entities": "[9.38.22167.14, 9.39.0)"
+          "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Contracts": "[9.38.22291.13, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Entities": "[9.38.22291.13, 9.39.0)"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Core.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Core.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Core.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Core.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
-      "Microsoft.Dynamics.Commerce.HardwareStation.PayTerminal/9.38.22167.14": {
+      "Microsoft.Dynamics.Commerce.HardwareStation.PayTerminal/9.38.22291.13": {
         "type": "package",
         "compile": {
-          "lib/net461/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.PaymentTerminalLibrary.dll": {}
+          "lib/net461/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.PaymentTerminalLibrary.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/net461/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.PaymentTerminalLibrary.dll": {}
+          "lib/net461/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.PaymentTerminalLibrary.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
-      "Microsoft.Dynamics.Commerce.HardwareStation.PeripheralRequests/9.38.22167.14": {
+      "Microsoft.Dynamics.Commerce.HardwareStation.PeripheralRequests/9.38.22291.13": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Dynamics.Commerce.HardwareStation.Core": "[9.38.22167.14, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Entities": "[9.38.22167.14, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.PaymentSDK.Portable": "[10.38.22120.2, 10.39.0)",
+          "Microsoft.Dynamics.Commerce.HardwareStation.Core": "[9.38.22291.13, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Entities": "[9.38.22291.13, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.PaymentSDK.Portable": "[10.38.22245.3, 10.39.0)",
           "Microsoft.Dynamics.Commerce.Runtime.Framework": "[10.6.22165.1, 10.7.0)"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.PeripheralRequests.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.PeripheralRequests.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.PeripheralRequests.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.PeripheralRequests.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
-      "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Contracts/9.38.22167.14": {
+      "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Contracts/9.38.22291.13": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Entities": "[9.38.22167.14, 9.39.0)"
+          "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Entities": "[9.38.22291.13, 9.39.0)"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Contracts.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Contracts.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Contracts.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Contracts.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
-      "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Entities/9.38.22167.14": {
+      "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Entities/9.38.22291.13": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Dynamics.Commerce.PaymentSDK.Portable": "[10.38.22120.2, 10.39.0)",
+          "Microsoft.Dynamics.Commerce.PaymentSDK.Portable": "[10.38.22245.3, 10.39.0)",
           "Microsoft.Dynamics.Commerce.Runtime.Framework": "[10.6.22165.1, 10.7.0)",
           "Newtonsoft.Json": "11.0.2"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Entities.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Entities.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Entities.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Entities.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
-      "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Opos/9.38.22167.14": {
+      "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Opos/9.38.22291.13": {
         "type": "package",
         "dependencies": {
           "Microsoft.Dynamics.Commerce.Diagnostics": "[10.9.22133.2, 10.10.0)",
-          "Microsoft.Dynamics.Commerce.HardwareStation.CardPayment": "[9.38.22167.14, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.HardwareStation.Configuration": "[9.38.22167.14, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.HardwareStation.Core": "[9.38.22167.14, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.HardwareStation.PayTerminal": "[9.38.22167.14, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.HardwareStation.PeripheralRequests": "[9.38.22167.14, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Contracts": "[9.38.22167.14, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Entities": "[9.38.22167.14, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.OposLibrary": "[9.38.22167.14, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.PrintLib": "[9.38.22167.14, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.SigCap": "[9.38.22167.14, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.HardwareStation.Runtime": "[9.38.22167.14, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.HardwareStation.CardPayment": "[9.38.22291.13, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.HardwareStation.Configuration": "[9.38.22291.13, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.HardwareStation.Core": "[9.38.22291.13, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.HardwareStation.PayTerminal": "[9.38.22291.13, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.HardwareStation.PeripheralRequests": "[9.38.22291.13, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Contracts": "[9.38.22291.13, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Entities": "[9.38.22291.13, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.OposLibrary": "[9.38.22291.13, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.PrintLib": "[9.38.22291.13, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.SigCap": "[9.38.22291.13, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.HardwareStation.Runtime": "[9.38.22291.13, 9.39.0)",
           "Microsoft.Dynamics.Commerce.OposInterop": "5.0.4",
           "Microsoft.Dynamics.Commerce.Runtime.Framework": "[10.6.22165.1, 10.7.0)",
           "System.Threading.Tasks.Dataflow": "4.5.25"
         },
         "compile": {
-          "lib/net461/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Opos.dll": {}
+          "lib/net461/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Opos.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/net461/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Opos.dll": {}
+          "lib/net461/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Opos.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
-      "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.OposLibrary/9.38.22167.14": {
+      "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.OposLibrary/9.38.22291.13": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Dynamics.Commerce.HardwareStation.Core": "[9.38.22167.14, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.HardwareStation.Core": "[9.38.22291.13, 9.39.0)",
           "Microsoft.Dynamics.Commerce.OposInterop": "5.0.4"
         },
         "compile": {
-          "lib/net461/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.OposLibrary.dll": {}
+          "lib/net461/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.OposLibrary.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/net461/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.OposLibrary.dll": {}
+          "lib/net461/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.OposLibrary.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
-      "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.PrintLib/9.38.22167.14": {
+      "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.PrintLib/9.38.22291.13": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Dynamics.Commerce.HardwareStation.Core": "[9.38.22167.14, 9.39.0)"
+          "Microsoft.Dynamics.Commerce.HardwareStation.Core": "[9.38.22291.13, 9.39.0)"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.PrinterLibrary.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.PrinterLibrary.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.PrinterLibrary.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.PrinterLibrary.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
-      "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.SigCap/9.38.22167.14": {
+      "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.SigCap/9.38.22291.13": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Entities": "[9.38.22167.14, 9.39.0)"
+          "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Entities": "[9.38.22291.13, 9.39.0)"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.SignatureCaptureLibrary.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.SignatureCaptureLibrary.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.SignatureCaptureLibrary.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.SignatureCaptureLibrary.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
-      "Microsoft.Dynamics.Commerce.HardwareStation.Runtime/9.38.22167.14": {
+      "Microsoft.Dynamics.Commerce.HardwareStation.Runtime/9.38.22291.13": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Dynamics.Commerce.HardwareStation.Configuration": "[9.38.22167.14, 9.39.0)",
-          "Microsoft.Dynamics.Commerce.HardwareStation.Core": "[9.38.22167.14, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.HardwareStation.Configuration": "[9.38.22291.13, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.HardwareStation.Core": "[9.38.22291.13, 9.39.0)",
           "Microsoft.Dynamics.Commerce.Runtime": "[10.6.22165.1, 10.7.0)",
-          "Microsoft.Dynamics.Commerce.Runtime.Entities": "[9.38.22167.5, 9.39.0)",
+          "Microsoft.Dynamics.Commerce.Runtime.Entities": "[9.38.22291.6, 9.39.0)",
           "Microsoft.Dynamics.Commerce.Runtime.Framework": "[10.6.22165.1, 10.7.0)"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Runtime.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Runtime.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Runtime.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Runtime.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Microsoft.Dynamics.Commerce.OposInterop/5.0.4": {
@@ -233,16 +285,20 @@
           "lib/net451/Interop.OposSigCap.dll": {}
         }
       },
-      "Microsoft.Dynamics.Commerce.PaymentSDK.Portable/10.38.22120.2": {
+      "Microsoft.Dynamics.Commerce.PaymentSDK.Portable/10.38.22245.3": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Dynamics.Commerce.Diagnostics": "[10.9.22118.1, 10.10.0)"
+          "Microsoft.Dynamics.Commerce.Diagnostics": "[10.9.22133.2, 10.10.0)"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Retail.PaymentSDK.Portable.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Retail.PaymentSDK.Portable.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Retail.PaymentSDK.Portable.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Retail.PaymentSDK.Portable.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Microsoft.Dynamics.Commerce.Runtime/10.6.22165.1": {
@@ -256,10 +312,14 @@
           "System.Xml.XmlSerializer": "4.3.0"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Microsoft.Dynamics.Commerce.Runtime.ConfigurationProviders/10.6.22165.1": {
@@ -270,26 +330,34 @@
           "System.Configuration.ConfigurationManager": "4.4.0"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.ConfigurationProviders.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.ConfigurationProviders.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.ConfigurationProviders.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.ConfigurationProviders.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
-      "Microsoft.Dynamics.Commerce.Runtime.Entities/9.38.22167.5": {
+      "Microsoft.Dynamics.Commerce.Runtime.Entities/9.38.22291.6": {
         "type": "package",
         "dependencies": {
           "Microsoft.Dynamics.Commerce.Diagnostics": "[10.9.22133.2, 10.10.0)",
           "Microsoft.Dynamics.Commerce.Runtime.Framework": "[10.6.22165.1, 10.7.0)"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Entities.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Entities.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Entities.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Entities.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
-      "Microsoft.Dynamics.Commerce.Runtime.Extensibility.Configuration/9.38.22167.5": {
+      "Microsoft.Dynamics.Commerce.Runtime.Extensibility.Configuration/9.38.22291.6": {
         "type": "package",
         "dependencies": {
           "Microsoft.Dynamics.Commerce.Diagnostics": "[10.9.22133.2, 10.10.0)",
@@ -297,10 +365,14 @@
           "System.Configuration.ConfigurationManager": "4.4.0"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Extensibility.Configuration.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Extensibility.Configuration.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Extensibility.Configuration.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Extensibility.Configuration.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Microsoft.Dynamics.Commerce.Runtime.Framework/10.6.22165.1": {
@@ -313,10 +385,14 @@
           "System.Xml.XmlSerializer": "4.3.0"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Framework.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Framework.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Framework.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Framework.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Microsoft.Dynamics.Commerce.Runtime.Hosting.Contracts/10.6.22165.1": {
@@ -325,23 +401,31 @@
           "Microsoft.Dynamics.Commerce.Runtime.Framework": "[10.6.22165.1, 10.7.0)"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Hosting.Contracts.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Hosting.Contracts.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Hosting.Contracts.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Hosting.Contracts.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
-      "Microsoft.Dynamics.Commerce.SDKManager.Portable/10.38.22120.2": {
+      "Microsoft.Dynamics.Commerce.SDKManager.Portable/10.38.22245.3": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Dynamics.Commerce.Diagnostics": "[10.9.22118.1, 10.10.0)",
-          "Microsoft.Dynamics.Commerce.PaymentSDK.Portable": "[10.38.22120.2, 10.39.0)"
+          "Microsoft.Dynamics.Commerce.Diagnostics": "[10.9.22133.2, 10.10.0)",
+          "Microsoft.Dynamics.Commerce.PaymentSDK.Portable": "[10.38.22245.3, 10.39.0)"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Retail.SDKManager.Portable.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Retail.SDKManager.Portable.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Retail.SDKManager.Portable.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Retail.SDKManager.Portable.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Microsoft.Extensions.DependencyInjection/1.1.1": {
@@ -351,10 +435,14 @@
           "NETStandard.Library": "1.6.1"
         },
         "compile": {
-          "lib/netstandard1.1/Microsoft.Extensions.DependencyInjection.dll": {}
+          "lib/netstandard1.1/Microsoft.Extensions.DependencyInjection.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.1/Microsoft.Extensions.DependencyInjection.dll": {}
+          "lib/netstandard1.1/Microsoft.Extensions.DependencyInjection.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Extensions.DependencyInjection.Abstractions/1.1.1": {
@@ -364,10 +452,14 @@
           "System.ComponentModel": "4.3.0"
         },
         "compile": {
-          "lib/netstandard1.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
+          "lib/netstandard1.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
+          "lib/netstandard1.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Extensions.Logging/1.1.2": {
@@ -378,10 +470,14 @@
           "NETStandard.Library": "1.6.1"
         },
         "compile": {
-          "lib/netstandard1.1/Microsoft.Extensions.Logging.dll": {}
+          "lib/netstandard1.1/Microsoft.Extensions.Logging.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.1/Microsoft.Extensions.Logging.dll": {}
+          "lib/netstandard1.1/Microsoft.Extensions.Logging.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Extensions.Logging.Abstractions/1.1.2": {
@@ -390,10 +486,14 @@
           "NETStandard.Library": "1.6.1"
         },
         "compile": {
-          "lib/netstandard1.1/Microsoft.Extensions.Logging.Abstractions.dll": {}
+          "lib/netstandard1.1/Microsoft.Extensions.Logging.Abstractions.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.1/Microsoft.Extensions.Logging.Abstractions.dll": {}
+          "lib/netstandard1.1/Microsoft.Extensions.Logging.Abstractions.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Extensions.Logging.Debug/1.1.2": {
@@ -403,10 +503,14 @@
           "NETStandard.Library": "1.6.1"
         },
         "compile": {
-          "lib/net451/Microsoft.Extensions.Logging.Debug.dll": {}
+          "lib/net451/Microsoft.Extensions.Logging.Debug.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net451/Microsoft.Extensions.Logging.Debug.dll": {}
+          "lib/net451/Microsoft.Extensions.Logging.Debug.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Extensions.Options/1.1.2": {
@@ -418,10 +522,14 @@
           "System.ComponentModel": "4.3.0"
         },
         "compile": {
-          "lib/netstandard1.0/Microsoft.Extensions.Options.dll": {}
+          "lib/netstandard1.0/Microsoft.Extensions.Options.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.0/Microsoft.Extensions.Options.dll": {}
+          "lib/netstandard1.0/Microsoft.Extensions.Options.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Extensions.Primitives/1.1.1": {
@@ -431,10 +539,14 @@
           "System.Runtime.CompilerServices.Unsafe": "4.3.0"
         },
         "compile": {
-          "lib/netstandard1.0/Microsoft.Extensions.Primitives.dll": {}
+          "lib/netstandard1.0/Microsoft.Extensions.Primitives.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.0/Microsoft.Extensions.Primitives.dll": {}
+          "lib/netstandard1.0/Microsoft.Extensions.Primitives.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.NETCore.Platforms/1.1.0": {
@@ -511,10 +623,14 @@
       "Newtonsoft.Json/11.0.2": {
         "type": "package",
         "compile": {
-          "lib/net45/Newtonsoft.Json.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/Newtonsoft.Json.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.AppContext/4.3.0": {
@@ -645,7 +761,9 @@
           "mscorlib"
         ],
         "compile": {
-          "ref/net461/System.Configuration.ConfigurationManager.dll": {}
+          "ref/net461/System.Configuration.ConfigurationManager.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
           "lib/net461/System.Configuration.ConfigurationManager.dll": {}
@@ -678,10 +796,14 @@
       "System.Diagnostics.DiagnosticSource/4.3.0": {
         "type": "package",
         "compile": {
-          "lib/net46/_._": {}
+          "lib/net46/_._": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net46/System.Diagnostics.DiagnosticSource.dll": {}
+          "lib/net46/System.Diagnostics.DiagnosticSource.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Diagnostics.Tools/4.3.0": {
@@ -858,7 +980,9 @@
           "mscorlib"
         ],
         "compile": {
-          "ref/net46/System.Net.Http.dll": {}
+          "ref/net46/System.Net.Http.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
           "lib/net46/System.Net.Http.dll": {}
@@ -964,10 +1088,14 @@
       "System.Runtime.CompilerServices.Unsafe/4.3.0": {
         "type": "package",
         "compile": {
-          "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll": {}
+          "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll": {}
+          "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Runtime.Extensions/4.3.0": {
@@ -1089,7 +1217,9 @@
           "mscorlib"
         ],
         "compile": {
-          "ref/net461/System.Security.AccessControl.dll": {}
+          "ref/net461/System.Security.AccessControl.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
           "lib/net461/System.Security.AccessControl.dll": {}
@@ -1210,7 +1340,9 @@
           "mscorlib"
         ],
         "compile": {
-          "ref/net461/System.Security.Permissions.dll": {}
+          "ref/net461/System.Security.Permissions.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
           "lib/net461/System.Security.Permissions.dll": {}
@@ -1232,7 +1364,9 @@
           "mscorlib"
         ],
         "compile": {
-          "ref/net461/System.Security.Principal.Windows.dll": {}
+          "ref/net461/System.Security.Principal.Windows.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
           "lib/net461/System.Security.Principal.Windows.dll": {}
@@ -1315,10 +1449,14 @@
           "System.Threading.Tasks": "4.0.0"
         },
         "compile": {
-          "lib/dotnet/System.Threading.Tasks.Dataflow.dll": {}
+          "lib/dotnet/System.Threading.Tasks.Dataflow.dll": {
+            "related": ".XML"
+          }
         },
         "runtime": {
-          "lib/dotnet/System.Threading.Tasks.Dataflow.dll": {}
+          "lib/dotnet/System.Threading.Tasks.Dataflow.dll": {
+            "related": ".XML"
+          }
         }
       },
       "System.Threading.Timer/4.3.0": {
@@ -1383,160 +1521,160 @@
         "microsoft.dynamics.commerce.diagnostics.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.HardwareStation.CardPayment/9.38.22167.14": {
-      "sha512": "aTMdgb4PbimWgPFv5NQEzB6jPYkp9XUAXx0HLdCvsd9oJs0nUH4tGmzFYWdLQfHViwIAGqnqLYEakWCIbt9aAw==",
+    "Microsoft.Dynamics.Commerce.HardwareStation.CardPayment/9.38.22291.13": {
+      "sha512": "eH5ScclEtVBuK6jh+p0xYjXdy2KUX7g8rEiyq7xTSVdgP+xQ/rYrCtCmqs4sbnKbBeuKIs3IIgmLkvi+F5EZ+g==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.hardwarestation.cardpayment/9.38.22167.14",
+      "path": "microsoft.dynamics.commerce.hardwarestation.cardpayment/9.38.22291.13",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.CardPayment.dll",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.CardPayment.pdb",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.CardPayment.xml",
-        "microsoft.dynamics.commerce.hardwarestation.cardpayment.9.38.22167.14.nupkg.sha512",
+        "microsoft.dynamics.commerce.hardwarestation.cardpayment.9.38.22291.13.nupkg.sha512",
         "microsoft.dynamics.commerce.hardwarestation.cardpayment.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.HardwareStation.Configuration/9.38.22167.14": {
-      "sha512": "kLdGNNL+IGl6O54JRplORgetfPQftcn+Jz4g0IkWM/FxEDn/iG+kNdi1tZp+i5bAxiMqhPYHhWGraNVXjV6zbA==",
+    "Microsoft.Dynamics.Commerce.HardwareStation.Configuration/9.38.22291.13": {
+      "sha512": "KjRILNbgn5y1UX2Y/INKUywaQ8QX7wCfbnoWGKk5QGdX7+xcUg4RRn5JAALMbyhrEDvSAlHcmUpxEdxIwuJPOA==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.hardwarestation.configuration/9.38.22167.14",
+      "path": "microsoft.dynamics.commerce.hardwarestation.configuration/9.38.22291.13",
       "files": [
         ".nupkg.metadata",
         "lib/monoandroid81/Microsoft.Dynamics.Commerce.HardwareStation.Configuration.dll",
         "lib/monoandroid81/Microsoft.Dynamics.Commerce.HardwareStation.Configuration.xml",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Configuration.dll",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Configuration.xml",
-        "microsoft.dynamics.commerce.hardwarestation.configuration.9.38.22167.14.nupkg.sha512",
+        "microsoft.dynamics.commerce.hardwarestation.configuration.9.38.22291.13.nupkg.sha512",
         "microsoft.dynamics.commerce.hardwarestation.configuration.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.HardwareStation.Core/9.38.22167.14": {
-      "sha512": "fvbZGWC/fKa9CAgY72rfVPxnoxGcbYA7hc4nnI/fw2P/GQ0PxqgcSpU6F/ltlKIcFf63+N7SBQTMRBY0Wfm2SA==",
+    "Microsoft.Dynamics.Commerce.HardwareStation.Core/9.38.22291.13": {
+      "sha512": "FMMGgPNU8q4nOAsouB9At0ipdMb17hkWawZYyxyXNYhqurGJ1OMJQLffLWxDg8X/dTcD9knGk8gzE0pghhed7A==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.hardwarestation.core/9.38.22167.14",
+      "path": "microsoft.dynamics.commerce.hardwarestation.core/9.38.22291.13",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Core.dll",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Core.pdb",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Core.xml",
-        "microsoft.dynamics.commerce.hardwarestation.core.9.38.22167.14.nupkg.sha512",
+        "microsoft.dynamics.commerce.hardwarestation.core.9.38.22291.13.nupkg.sha512",
         "microsoft.dynamics.commerce.hardwarestation.core.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.HardwareStation.PayTerminal/9.38.22167.14": {
-      "sha512": "JyfH2pVGbp0XL/qmM2oMEwvXJEGpOiiyRYp0vW5XFj8Z1MNSUouyEGcBo+VO2oEC0dwk0ew+JR/sAQ7643eMpw==",
+    "Microsoft.Dynamics.Commerce.HardwareStation.PayTerminal/9.38.22291.13": {
+      "sha512": "2ieGVTnG3Nghd2iMslgzurs1Srz3Y1vnGquJ//yTfWFfqaO6zNp8sqqI8uM3lvFegOGSwn7KRP4rhh3PasbWPQ==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.hardwarestation.payterminal/9.38.22167.14",
+      "path": "microsoft.dynamics.commerce.hardwarestation.payterminal/9.38.22291.13",
       "files": [
         ".nupkg.metadata",
         "lib/net461/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.PaymentTerminalLibrary.dll",
         "lib/net461/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.PaymentTerminalLibrary.pdb",
         "lib/net461/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.PaymentTerminalLibrary.xml",
-        "microsoft.dynamics.commerce.hardwarestation.payterminal.9.38.22167.14.nupkg.sha512",
+        "microsoft.dynamics.commerce.hardwarestation.payterminal.9.38.22291.13.nupkg.sha512",
         "microsoft.dynamics.commerce.hardwarestation.payterminal.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.HardwareStation.PeripheralRequests/9.38.22167.14": {
-      "sha512": "fsLK5U35sQ0zc1EoEYvTjrY5cm9AepatiLd4l02y7D+BWC38gZTo901j45/xscDcSgrJcl5SyF+kkhgryCKWPQ==",
+    "Microsoft.Dynamics.Commerce.HardwareStation.PeripheralRequests/9.38.22291.13": {
+      "sha512": "iB95DEAPbvfZxgqB/03P88elYzc1GGTxp+fB9UmRKxv1lHRTkWpApY48QHLY+hM3yxhlnwatT8spE6JNMOwTCw==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.hardwarestation.peripheralrequests/9.38.22167.14",
+      "path": "microsoft.dynamics.commerce.hardwarestation.peripheralrequests/9.38.22291.13",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.PeripheralRequests.dll",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.PeripheralRequests.pdb",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.PeripheralRequests.xml",
-        "microsoft.dynamics.commerce.hardwarestation.peripheralrequests.9.38.22167.14.nupkg.sha512",
+        "microsoft.dynamics.commerce.hardwarestation.peripheralrequests.9.38.22291.13.nupkg.sha512",
         "microsoft.dynamics.commerce.hardwarestation.peripheralrequests.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Contracts/9.38.22167.14": {
-      "sha512": "XPGwy9tQLYkvEhMaCBNxMZzcaKuaP7cI+5r/j+yO7RNl6UYGNrMeIZVdihP0BJ32rtRkGRqHrLyynsGVl0RTHw==",
+    "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Contracts/9.38.22291.13": {
+      "sha512": "jy+LZNozJ6nbj6f+nIDTf+YllwuogAM+Og4+0Jl4DwH0+ziPQ/lEh/8FMyhtFv00UgulDRXaNCg9Ab3I4pEaqQ==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.hardwarestation.peripherals.contracts/9.38.22167.14",
+      "path": "microsoft.dynamics.commerce.hardwarestation.peripherals.contracts/9.38.22291.13",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Contracts.dll",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Contracts.pdb",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Contracts.xml",
-        "microsoft.dynamics.commerce.hardwarestation.peripherals.contracts.9.38.22167.14.nupkg.sha512",
+        "microsoft.dynamics.commerce.hardwarestation.peripherals.contracts.9.38.22291.13.nupkg.sha512",
         "microsoft.dynamics.commerce.hardwarestation.peripherals.contracts.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Entities/9.38.22167.14": {
-      "sha512": "wep/qZvumCD9wbhn5StRNhP9utxd5iHsK3NIOhu0Lu2Ahb7vRWV24qqHGEXWbJnVecj3Y9B592oaxX6ZN4Uz8A==",
+    "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Entities/9.38.22291.13": {
+      "sha512": "TwEHJAMFAVWBw4MDdywero1mFv98gNyQRGP24g+3n8orr/I0s50phS/zTjHewk1qAfD4FplfHpt40ObWiTeDXg==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.hardwarestation.peripherals.entities/9.38.22167.14",
+      "path": "microsoft.dynamics.commerce.hardwarestation.peripherals.entities/9.38.22291.13",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Entities.dll",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Entities.pdb",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Entities.xml",
-        "microsoft.dynamics.commerce.hardwarestation.peripherals.entities.9.38.22167.14.nupkg.sha512",
+        "microsoft.dynamics.commerce.hardwarestation.peripherals.entities.9.38.22291.13.nupkg.sha512",
         "microsoft.dynamics.commerce.hardwarestation.peripherals.entities.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Opos/9.38.22167.14": {
-      "sha512": "FKR6tJJGa4VgZq/t9KM2wQ4LLL2piOqRRYbjJcbdRmDvRv6gVXbXxHXyKFPkr/Ex/16mg3/8j3JdlgkIfzLWCw==",
+    "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Opos/9.38.22291.13": {
+      "sha512": "qY1Xq4oUB9znxAY6eiiugiPDklIAmysxmJ5D4E+nSwDwALwY78mMzW+M+axPTuM9JD82ds0DTHP4wbrFl9wffA==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.hardwarestation.peripherals.opos/9.38.22167.14",
+      "path": "microsoft.dynamics.commerce.hardwarestation.peripherals.opos/9.38.22291.13",
       "files": [
         ".nupkg.metadata",
         "lib/net461/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Opos.dll",
         "lib/net461/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Opos.pdb",
         "lib/net461/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Opos.xml",
-        "microsoft.dynamics.commerce.hardwarestation.peripherals.opos.9.38.22167.14.nupkg.sha512",
+        "microsoft.dynamics.commerce.hardwarestation.peripherals.opos.9.38.22291.13.nupkg.sha512",
         "microsoft.dynamics.commerce.hardwarestation.peripherals.opos.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.OposLibrary/9.38.22167.14": {
-      "sha512": "DftmXVIqo/CsLG5eea//HFZRNcZ/z7bgDZ8tBJgNVrVs2NH+TyCf4ZwQT9qKGo1bhWzrFW9DBdVtIZMr9sOuOg==",
+    "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.OposLibrary/9.38.22291.13": {
+      "sha512": "76QXpGsAJqRZawBt0QBlRJwRjz76uBPAfZtqeApZSdbYkh8FkWbUD473BK7NilJ/qEb0rl7uNw1mKJwj2P3rmQ==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.hardwarestation.peripherals.oposlibrary/9.38.22167.14",
+      "path": "microsoft.dynamics.commerce.hardwarestation.peripherals.oposlibrary/9.38.22291.13",
       "files": [
         ".nupkg.metadata",
         "lib/net461/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.OposLibrary.dll",
         "lib/net461/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.OposLibrary.pdb",
         "lib/net461/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.OposLibrary.xml",
-        "microsoft.dynamics.commerce.hardwarestation.peripherals.oposlibrary.9.38.22167.14.nupkg.sha512",
+        "microsoft.dynamics.commerce.hardwarestation.peripherals.oposlibrary.9.38.22291.13.nupkg.sha512",
         "microsoft.dynamics.commerce.hardwarestation.peripherals.oposlibrary.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.PrintLib/9.38.22167.14": {
-      "sha512": "278Z+ezfLpajYLR1DhChj0nC7qeXUisQwk/eXFR+OUaeMsjMXrokRfw9+s8kRp/f365zDHnBiZGOUKe5tHCFRA==",
+    "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.PrintLib/9.38.22291.13": {
+      "sha512": "OrtCXSfDB7q02Sq4w/d7R+XUhGlOUJLwI9vNr6jxLwhqwv8NY96irBIHSnheuefZvXn9K0Q1CyQmdKHVQNFz6Q==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.hardwarestation.peripherals.printlib/9.38.22167.14",
+      "path": "microsoft.dynamics.commerce.hardwarestation.peripherals.printlib/9.38.22291.13",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.PrinterLibrary.dll",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.PrinterLibrary.pdb",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.PrinterLibrary.xml",
-        "microsoft.dynamics.commerce.hardwarestation.peripherals.printlib.9.38.22167.14.nupkg.sha512",
+        "microsoft.dynamics.commerce.hardwarestation.peripherals.printlib.9.38.22291.13.nupkg.sha512",
         "microsoft.dynamics.commerce.hardwarestation.peripherals.printlib.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.SigCap/9.38.22167.14": {
-      "sha512": "TnkkqOyqJvuAON29toS8lAvgFjrcrb80H5Uwep6GDmt0H5R6voQZEQeAb8DQlQRgD/Ub7toRqeEylD/fAUPLjQ==",
+    "Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.SigCap/9.38.22291.13": {
+      "sha512": "Lbc8EaAo6KRkV4dVMxAuhV4FpzugI9ZzA/YHfdr398yB8EJ6hHYpwyduUXlA/5mpEo8pJkP7l9VqyLCm/orPSg==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.hardwarestation.peripherals.sigcap/9.38.22167.14",
+      "path": "microsoft.dynamics.commerce.hardwarestation.peripherals.sigcap/9.38.22291.13",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.SignatureCaptureLibrary.dll",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.SignatureCaptureLibrary.pdb",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.SignatureCaptureLibrary.xml",
-        "microsoft.dynamics.commerce.hardwarestation.peripherals.sigcap.9.38.22167.14.nupkg.sha512",
+        "microsoft.dynamics.commerce.hardwarestation.peripherals.sigcap.9.38.22291.13.nupkg.sha512",
         "microsoft.dynamics.commerce.hardwarestation.peripherals.sigcap.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.HardwareStation.Runtime/9.38.22167.14": {
-      "sha512": "I47AXmZUZS86+4eVTuaCHTOW5VISx68W54dOysnh24VZFvKTyiJtaH824Yky5dOcRMD51LyHbAuXd+vtnnK/tw==",
+    "Microsoft.Dynamics.Commerce.HardwareStation.Runtime/9.38.22291.13": {
+      "sha512": "kuN8E/cMZzAOx3tHwIL2ZgqJFQvkWqSkK3hGxe+rcrMvuQDq1MZRWdUtZid3C+79P/9YN20a+Ajzzejmh/a00Q==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.hardwarestation.runtime/9.38.22167.14",
+      "path": "microsoft.dynamics.commerce.hardwarestation.runtime/9.38.22291.13",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Runtime.dll",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Runtime.pdb",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.HardwareStation.Runtime.xml",
-        "microsoft.dynamics.commerce.hardwarestation.runtime.9.38.22167.14.nupkg.sha512",
+        "microsoft.dynamics.commerce.hardwarestation.runtime.9.38.22291.13.nupkg.sha512",
         "microsoft.dynamics.commerce.hardwarestation.runtime.nuspec"
       ]
     },
@@ -1562,16 +1700,16 @@
         "microsoft.dynamics.commerce.oposinterop.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.PaymentSDK.Portable/10.38.22120.2": {
-      "sha512": "9QZb/E22rL3UIMwFC5KfytVDfvsFQkiKhZNj4lZMEg8Qr1fgDswkcIL/6jT3JmgM4HxFa8mFs+NDKfqW4mtleQ==",
+    "Microsoft.Dynamics.Commerce.PaymentSDK.Portable/10.38.22245.3": {
+      "sha512": "P+Vc1ZK1WDxgKc+3DS+KuIzHnkioMMwx8f+3/aThcYwBCJado+eAuSNCKciy0INqP+95QolN5QyH5k/gT/PFSA==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.paymentsdk.portable/10.38.22120.2",
+      "path": "microsoft.dynamics.commerce.paymentsdk.portable/10.38.22245.3",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Dynamics.Retail.PaymentSDK.Portable.dll",
         "lib/netstandard2.0/Microsoft.Dynamics.Retail.PaymentSDK.Portable.pdb",
         "lib/netstandard2.0/Microsoft.Dynamics.Retail.PaymentSDK.Portable.xml",
-        "microsoft.dynamics.commerce.paymentsdk.portable.10.38.22120.2.nupkg.sha512",
+        "microsoft.dynamics.commerce.paymentsdk.portable.10.38.22245.3.nupkg.sha512",
         "microsoft.dynamics.commerce.paymentsdk.portable.nuspec"
       ]
     },
@@ -1601,29 +1739,29 @@
         "microsoft.dynamics.commerce.runtime.configurationproviders.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.Runtime.Entities/9.38.22167.5": {
-      "sha512": "KUbf/IyGpu1TvGOc6FVoSFpfoVxXMaEgvWOo5MH5zXalPvdgDVW39c4N3/26gni472vKsby7HShQsujRS8+IAQ==",
+    "Microsoft.Dynamics.Commerce.Runtime.Entities/9.38.22291.6": {
+      "sha512": "A2KH9zCkLpAVPVbpTUqby/TyCBZI6WC1TYZGgcT5UxxpBOm3oOQxWYTvWZhmK1KMDfV+SAeeQXvMWIIHrr96lw==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.runtime.entities/9.38.22167.5",
+      "path": "microsoft.dynamics.commerce.runtime.entities/9.38.22291.6",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Entities.dll",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Entities.pdb",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Entities.xml",
-        "microsoft.dynamics.commerce.runtime.entities.9.38.22167.5.nupkg.sha512",
+        "microsoft.dynamics.commerce.runtime.entities.9.38.22291.6.nupkg.sha512",
         "microsoft.dynamics.commerce.runtime.entities.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.Runtime.Extensibility.Configuration/9.38.22167.5": {
-      "sha512": "R/iWWb9i9SAvAvLhRGRgOZgWR1LAG0AqEXj71M2vTFTRTZ2F48ImQmCXCCaYkFCx4z+ByRuCf7cgqmtLLE/H/g==",
+    "Microsoft.Dynamics.Commerce.Runtime.Extensibility.Configuration/9.38.22291.6": {
+      "sha512": "NvM2IWWBVu49C/YJB+JxDY9oWnle9v3d9IZgANWnuBqGUQIcbZBUuJbHtWjfhEArFzjiusU+HnnDIok2kFEhFA==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.runtime.extensibility.configuration/9.38.22167.5",
+      "path": "microsoft.dynamics.commerce.runtime.extensibility.configuration/9.38.22291.6",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Extensibility.Configuration.dll",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Extensibility.Configuration.pdb",
         "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Extensibility.Configuration.xml",
-        "microsoft.dynamics.commerce.runtime.extensibility.configuration.9.38.22167.5.nupkg.sha512",
+        "microsoft.dynamics.commerce.runtime.extensibility.configuration.9.38.22291.6.nupkg.sha512",
         "microsoft.dynamics.commerce.runtime.extensibility.configuration.nuspec"
       ]
     },
@@ -1653,16 +1791,16 @@
         "microsoft.dynamics.commerce.runtime.hosting.contracts.nuspec"
       ]
     },
-    "Microsoft.Dynamics.Commerce.SDKManager.Portable/10.38.22120.2": {
-      "sha512": "glGV2B3dAsWYpL1aLygOoFrWxj2e0zxmF/uN4PmMbKIojBMQ0tuLb+jQVP3YoGNX3+51RYYUAEIULBmaj5HpKg==",
+    "Microsoft.Dynamics.Commerce.SDKManager.Portable/10.38.22245.3": {
+      "sha512": "k3CqRUAIm1nxkq3LTpDy8qXPNEP4MaJ1ueMymNFt+DPuXE1PRBJ/zAykf28P32ktxC/YQENOeb/EusTyz9MMFw==",
       "type": "package",
-      "path": "microsoft.dynamics.commerce.sdkmanager.portable/10.38.22120.2",
+      "path": "microsoft.dynamics.commerce.sdkmanager.portable/10.38.22245.3",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Dynamics.Retail.SDKManager.Portable.dll",
         "lib/netstandard2.0/Microsoft.Dynamics.Retail.SDKManager.Portable.pdb",
         "lib/netstandard2.0/Microsoft.Dynamics.Retail.SDKManager.Portable.xml",
-        "microsoft.dynamics.commerce.sdkmanager.portable.10.38.22120.2.nupkg.sha512",
+        "microsoft.dynamics.commerce.sdkmanager.portable.10.38.22245.3.nupkg.sha512",
         "microsoft.dynamics.commerce.sdkmanager.portable.nuspec"
       ]
     },
@@ -5264,7 +5402,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\RetailSDK\\Update\\RetailSDK_Version28\\References": {},
+    "C:\\RetailSDK\\Update\\RetailSDK_FinalV28\\References": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
@@ -5272,11 +5410,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\RetailSDK\\Update\\RetailSDK_Version28\\Extensions\\HardwareStation\\Extension.RFIDCardReader\\HardwareStation.Extension.RFIDCardReader.csproj",
+      "projectUniqueName": "C:\\RetailSDK\\Update\\RetailSDK_FinalV28\\Extensions\\HardwareStation\\Extension.RFIDCardReader\\HardwareStation.Extension.RFIDCardReader.csproj",
       "projectName": "CDC.Commerce.HardwareStation.RFIDCardReader",
-      "projectPath": "C:\\RetailSDK\\Update\\RetailSDK_Version28\\Extensions\\HardwareStation\\Extension.RFIDCardReader\\HardwareStation.Extension.RFIDCardReader.csproj",
-      "packagesPath": "C:\\RetailSDK\\Update\\RetailSDK_Version28\\References",
-      "outputPath": "C:\\RetailSDK\\Update\\RetailSDK_Version28\\Extensions\\HardwareStation\\Extension.RFIDCardReader\\obj\\",
+      "projectPath": "C:\\RetailSDK\\Update\\RetailSDK_FinalV28\\Extensions\\HardwareStation\\Extension.RFIDCardReader\\HardwareStation.Extension.RFIDCardReader.csproj",
+      "packagesPath": "C:\\RetailSDK\\Update\\RetailSDK_FinalV28\\References",
+      "outputPath": "C:\\RetailSDK\\Update\\RetailSDK_FinalV28\\Extensions\\HardwareStation\\Extension.RFIDCardReader\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -5284,7 +5422,7 @@
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\RetailSDK\\Update\\RetailSDK_Version28\\NuGet.Config",
+        "C:\\RetailSDK\\Update\\RetailSDK_FinalV28\\NuGet.Config",
         "C:\\RetailSDK\\NuGet.Config",
         "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
@@ -5295,11 +5433,12 @@
         "net461"
       ],
       "sources": {
-        "C:\\RetailSDK\\Update\\RetailSDK_Version28\\pkgs": {},
+        "C:\\RetailSDK\\Update\\RetailSDK_FinalV28\\pkgs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net461": {
+          "targetAlias": "net461",
           "projectReferences": {}
         }
       },
@@ -5311,6 +5450,7 @@
     },
     "frameworks": {
       "net461": {
+        "targetAlias": "net461",
         "dependencies": {
           "Microsoft.Dynamics.Commerce.HardwareStation.Core": {
             "target": "Package",

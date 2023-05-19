@@ -5,11 +5,8 @@ using Microsoft.Dynamics.Commerce.Runtime.DataModel;
 using Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages;
 using Microsoft.Dynamics.Commerce.Runtime.Messages;
 using Microsoft.Dynamics.Commerce.Runtime.Services.Messages;
-using Microsoft.Dynamics.Retail.Diagnostics;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -44,9 +41,14 @@ namespace CDC.Commerce.Runtime.FBRIntegration
         private async Task<GetCustomReceiptFieldServiceResponse> GetCustomReceiptFieldForSalesTransactionReceiptsAsync(GetSalesTransactionCustomReceiptFieldServiceRequest request)
         {
             string receiptFieldName = request.CustomReceiptField.Trim();
-            string returnValue = null;            
+            string returnValue = null;
             switch (receiptFieldName)
             {
+                case "TOTALDISCOUNT":
+                    {
+                        returnValue = GetTotalDiscount(request);
+                    }
+                    break;
                 case "FBRINVOICEID":
                     {
                         returnValue = await GetFBRIntegartionInvoiceIdAsync(request);                        
@@ -124,6 +126,17 @@ namespace CDC.Commerce.Runtime.FBRIntegration
                     break;
             }
             return new GetCustomReceiptFieldServiceResponse(returnValue);
+        }
+
+        /// <summary>
+        /// Total Discount
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>Total Discount</returns>
+        private static string GetTotalDiscount(GetSalesTransactionCustomReceiptFieldServiceRequest request)
+        {
+            decimal totalDiscount = request.SalesOrder.ActiveSalesLines.Sum(sl => sl.DiscountAmount);
+            return String.Format("{0:0.00}", totalDiscount);
         }
 
         /// <summary>

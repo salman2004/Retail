@@ -238,4 +238,4 @@ System.register(["PosApi/Create/Operations", "./RFIDCardReaderOperationRequest",
         }
     };
 });
-//# sourceMappingURL=C:/RetailSDK/Update/RetailSDK_Version28/Pos/Extensions/RFIDCardReaderExtension/Operations/RFIDCardReaderOperationRequestHandler.js.map
+//# sourceMappingURL=C:/RetailSDK/Update/RetailSDK_FinalV28/Pos/Extensions/RFIDCardReaderExtension/Operations/RFIDCardReaderOperationRequestHandler.js.map

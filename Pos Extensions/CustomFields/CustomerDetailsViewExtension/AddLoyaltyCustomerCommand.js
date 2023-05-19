@@ -47,4 +47,4 @@ System.register(["PosApi/Extend/Views/CustomerDetailsView"], function (exports_1
         }
     };
 });
-//# sourceMappingURL=C:/RetailSDK/Update/RetailSDK_Version28/Pos/Extensions/CustomFields/CustomerDetailsViewExtension/AddLoyaltyCustomerCommand.js.map
+//# sourceMappingURL=C:/RetailSDK/Update/RetailSDK_FinalV28/Pos/Extensions/CustomFields/CustomerDetailsViewExtension/AddLoyaltyCustomerCommand.js.map

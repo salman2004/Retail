@@ -99,4 +99,4 @@ System.register(["PosApi/Consume/Device", "PosApi/Extend/Triggers/ApplicationTri
         }
     };
 });
-//# sourceMappingURL=C:/RetailSDK/Update/RetailSDK_Version28/Pos/Extensions/AskariCardBinNumberVerification/TriggerHandlers/PostLogOnTrigger.js.map
+//# sourceMappingURL=C:/RetailSDK/Update/RetailSDK_FinalV28/Pos/Extensions/AskariCardBinNumberVerification/TriggerHandlers/PostLogOnTrigger.js.map

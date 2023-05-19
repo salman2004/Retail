@@ -144,4 +144,4 @@ System.register(["PosApi/Consume/Cart", "PosApi/Consume/Customer", "PosApi/Consu
         }
     };
 });
-//# sourceMappingURL=C:/RetailSDK/Update/RetailSDK_Version28/Pos/Extensions/CreditSale/TriggerHandlers/CreditSalePreOperationTrigger.js.map
+//# sourceMappingURL=C:/RetailSDK/Update/RetailSDK_FinalV28/Pos/Extensions/CreditSale/TriggerHandlers/CreditSalePreOperationTrigger.js.map

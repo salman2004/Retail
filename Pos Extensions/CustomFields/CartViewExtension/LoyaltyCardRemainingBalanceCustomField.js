@@ -38,4 +38,4 @@ System.register(["PosApi/Extend/Views/CartView"], function (exports_1, context_1
         }
     };
 });
-//# sourceMappingURL=C:/RetailSDK/Update/RetailSDK_Version28/Pos/Extensions/CustomFields/CartViewExtension/LoyaltyCardRemainingBalanceCustomField.js.map
+//# sourceMappingURL=C:/RetailSDK/Update/RetailSDK_FinalV28/Pos/Extensions/CustomFields/CartViewExtension/LoyaltyCardRemainingBalanceCustomField.js.map

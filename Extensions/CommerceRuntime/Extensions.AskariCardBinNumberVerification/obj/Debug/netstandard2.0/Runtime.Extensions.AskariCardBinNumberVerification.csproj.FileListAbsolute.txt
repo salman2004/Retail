@@ -7,3 +7,11 @@ C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.As
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.AskariCardBinNumberVerification\obj\Debug\netstandard2.0\CDC.Commerce.Runtime.AskariCardBinNumberVerification.dll
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.AskariCardBinNumberVerification\obj\Debug\netstandard2.0\CDC.Commerce.Runtime.AskariCardBinNumberVerification.pdb
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.AskariCardBinNumberVerification\obj\Debug\netstandard2.0\Runtime.Extensions.AskariCardBinNumberVerification.csprojAssemblyReference.cache
+C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.AskariCardBinNumberVerification\bin\Debug\netstandard2.0\CDC.Commerce.Runtime.AskariCardBinNumberVerification.deps.json
+C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.AskariCardBinNumberVerification\bin\Debug\netstandard2.0\CDC.Commerce.Runtime.AskariCardBinNumberVerification.dll
+C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.AskariCardBinNumberVerification\bin\Debug\netstandard2.0\CDC.Commerce.Runtime.AskariCardBinNumberVerification.pdb
+C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.AskariCardBinNumberVerification\obj\Debug\netstandard2.0\Runtime.Extensions.AskariCardBinNumberVerification.csproj.CoreCompileInputs.cache
+C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.AskariCardBinNumberVerification\obj\Debug\netstandard2.0\Runtime.Extensions.AskariCardBinNumberVerification.AssemblyInfoInputs.cache
+C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.AskariCardBinNumberVerification\obj\Debug\netstandard2.0\Runtime.Extensions.AskariCardBinNumberVerification.AssemblyInfo.cs
+C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.AskariCardBinNumberVerification\obj\Debug\netstandard2.0\CDC.Commerce.Runtime.AskariCardBinNumberVerification.dll
+C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.AskariCardBinNumberVerification\obj\Debug\netstandard2.0\CDC.Commerce.Runtime.AskariCardBinNumberVerification.pdb

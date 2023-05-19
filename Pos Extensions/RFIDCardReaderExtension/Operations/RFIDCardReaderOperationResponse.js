@@ -30,4 +30,4 @@ System.register(["PosApi/Create/RequestHandlers"], function (exports_1, context_
         }
     };
 });
-//# sourceMappingURL=C:/RetailSDK/Update/RetailSDK_Version28/Pos/Extensions/RFIDCardReaderExtension/Operations/RFIDCardReaderOperationResponse.js.map
+//# sourceMappingURL=C:/RetailSDK/Update/RetailSDK_FinalV28/Pos/Extensions/RFIDCardReaderExtension/Operations/RFIDCardReaderOperationResponse.js.map

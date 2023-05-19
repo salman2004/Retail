@@ -116,4 +116,4 @@ System.register(["PosApi/Extend/Triggers/OperationTriggers", "PosApi/TypeExtensi
         }
     };
 });
-//# sourceMappingURL=C:/RetailSDK/Update/RetailSDK_Version28/Pos/Extensions/FractionalSale/TriggerHandlers/FractionalSalePreOperationTrigger.js.map
+//# sourceMappingURL=C:/RetailSDK/Update/RetailSDK_FinalV28/Pos/Extensions/FractionalSale/TriggerHandlers/FractionalSalePreOperationTrigger.js.map

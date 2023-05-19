@@ -99,4 +99,4 @@ System.register(["PosApi/Extend/Triggers/CustomerTriggers", "PosApi/Consume/Cart
         }
     };
 });
-//# sourceMappingURL=C:/RetailSDK/Update/RetailSDK_Version28/Pos/Extensions/RFIDCardReaderExtension/TriggerHandlers/CardReaderPostCustomerClearTrigger.js.map
+//# sourceMappingURL=C:/RetailSDK/Update/RetailSDK_FinalV28/Pos/Extensions/RFIDCardReaderExtension/TriggerHandlers/CardReaderPostCustomerClearTrigger.js.map

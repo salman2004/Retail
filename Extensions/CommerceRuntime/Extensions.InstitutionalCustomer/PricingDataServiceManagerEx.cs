@@ -82,9 +82,9 @@
         }
 
         private ReadOnlyCollection<PeriodicDiscount> FilterMonthlyCapDiscounts(ReadOnlyCollection<PeriodicDiscount> retailDiscounts)
-        {
+        { 
             GetLoyaltyCardDetails(out string cardNumber, out decimal cardBalance, this.RequestContext, out DateTime lastTransactionDateTime);
-
+           
             if (lastTransactionDateTime != DateTime.MinValue && lastTransactionDateTime > DateTime.Now)
             {
                 this.MonthlyLimitUsed = decimal.Zero;
@@ -108,7 +108,7 @@
             SalesAffiliationLoyaltyTier affiliationLoyaltyTier = this.Transaction.AffiliationLoyaltyTierLines.FirstOrDefault(alt => alt.AffiliationType == RetailAffiliationType.Loyalty);
             GetLoyaltyDetails(this.RequestContext, affiliationLoyaltyTier.AffiliationId, out decimal loyaltyLimit, out bool checkLoyaltyLimit);
             this.Transaction.SetProperty("checkLoyaltyLimit", checkLoyaltyLimit);
-
+            
             if (!checkLoyaltyLimit)
             {
                 this.MonthlyLimitUsed = decimal.Zero;
@@ -164,9 +164,27 @@
                         }
                         else
                         {
+
                             cartTotal += lineTotal;
                             itemPriceTotal.Add(string.Format("{0}::{1}", retailDiscount.ItemId, retailDiscount.InventoryDimensionId), lineTotal);
                             filteredRetailDiscounts.Add(retailDiscount);
+                        }
+                    }
+                }
+
+                List<PeriodicDiscount> remainingPeriodicDiscounts = retailDiscounts.Except(filteredRetailDiscounts).ToList();
+                if (!remainingPeriodicDiscounts.IsNullOrEmpty())
+                {
+                    foreach (var salesLine in this.Transaction.ActiveSalesLines.Where(sl => remainingPeriodicDiscounts.Any(rpd => rpd.ItemId == sl.ItemId && rpd.InventoryDimensionId == sl.InventoryDimensionId)))
+                    {
+                        decimal remainingAmount = cardBalance - cartTotal;
+                        if (salesLine.GrossAmount > remainingAmount)
+                        {
+                            List<PeriodicDiscount> periodicDiscount = remainingPeriodicDiscounts.Where(rpd => rpd.ItemId == salesLine.ItemId && rpd.InventoryDimensionId == salesLine.InventoryDimensionId).ToList();
+                            decimal discountAmount = (salesLine.GrossAmount * periodicDiscount.Sum(rpd => rpd.DiscountPercent))/100;
+                            periodicDiscount.FirstOrDefault().DiscountPercent = (discountAmount / remainingAmount) * 100;
+                            filteredRetailDiscounts.Add(periodicDiscount.FirstOrDefault());
+                            cartTotal += remainingAmount;
                         }
                     }
                 }

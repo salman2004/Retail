@@ -57,7 +57,6 @@ namespace CDC.Commerce.HardwareStation.RFIDCardReader
             stringBuilder.Append(cardId.PadRight(16));
             stringBuilder.Append(limit.PadLeft(5 , '0'));
             string result = stringBuilder.ToString().PadRight(117);
-            Console.WriteLine(result.Length);
 
             return result;
         }

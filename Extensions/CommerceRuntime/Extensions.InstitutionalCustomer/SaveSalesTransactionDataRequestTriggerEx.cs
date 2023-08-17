@@ -10,6 +10,7 @@
     using Microsoft.Dynamics.Commerce.Runtime.DataModel;
     using Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages;
     using Microsoft.Dynamics.Commerce.Runtime.Messages;
+    using Microsoft.Dynamics.Commerce.Runtime.RealtimeServices.Messages;
     using Microsoft.Dynamics.Retail.Diagnostics;
 
     public class SaveSalesTransactionDataRequestTriggerEx : IRequestTriggerAsync
@@ -97,9 +98,16 @@
                 }
             }
 
+            bool.TryParse(salesTransaction.GetProperty("checkLoyaltyLimit")?.ToString() ?? string.Empty, out bool checkLoyaltyLimit);
+            if (!salesTransaction.LoyaltyCardId.IsNullOrEmpty() 
+                && salesTransaction.IsPropertyDefined("CSDCardBalance")
+                && checkLoyaltyLimit)
+            {
+                await SaveRebateQtyLimitChanges(context, salesTransaction);
+            }
+
             return new SaveSalesTransactionDataRequest(salesTransaction) { RequestContext = context };
         }
-
         
         private void GetCostPriceAsync(RequestContext context, SalesTransaction transaction)
         {
@@ -134,6 +142,18 @@
                 }
             }
             
+        }
+
+        private async Task SaveRebateQtyLimitChanges(RequestContext context, SalesTransaction transaction)
+        {
+            string categoryQuantityLimitedUpdated = transaction.GetProperty("SaveRebateQtyLimit")?.ToString() ?? string.Empty;
+            if (!categoryQuantityLimitedUpdated.IsNullOrEmpty() && context.Runtime.Configuration.IsMasterDatabaseConnectionString)
+            {
+                InvokeExtensionMethodRealtimeRequest extensionRequest = new InvokeExtensionMethodRealtimeRequest("SetRebateQtyLimitByLoyaltyCardId", transaction.LoyaltyCardId, categoryQuantityLimitedUpdated, context.GetChannelConfiguration().InventLocationDataAreaId);
+                InvokeExtensionMethodRealtimeResponse response = await context.ExecuteAsync<InvokeExtensionMethodRealtimeResponse>(extensionRequest).ConfigureAwait(false);
+                string responseFlag = response.Result[0].ToString();
+                bool.TryParse(responseFlag, out bool isResponseValid);                
+            }
         }
         
     }

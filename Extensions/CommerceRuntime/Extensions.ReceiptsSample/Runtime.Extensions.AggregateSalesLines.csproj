@@ -16,6 +16,10 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath></OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="GetCustomReceiptFieldsService.cs" />
     <Compile Remove="GetCustomReceiptsRequestHandler.cs" />

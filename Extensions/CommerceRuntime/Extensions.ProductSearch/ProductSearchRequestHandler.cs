@@ -37,19 +37,18 @@ namespace CDC.Commerce.Runtime.CustomerSearch
             GetProductSearchResultsDataRequest getProductSearchResultsDataRequest = (GetProductSearchResultsDataRequest)request;
             EntityDataServiceResponse<ProductSearchResult> response = await this.ExecuteNextAsync<EntityDataServiceResponse<ProductSearchResult>>(request);
 
-            if (response.IsNullOrEmpty() && CheckIfLoyaltyCardId(request.RequestContext, getProductSearchResultsDataRequest.SearchText))
-            {
-                throw new CommerceException("Microsoft_Dynamics_Commerce_30104", "Loyalty Card")
-                {
-                    LocalizedMessage = "There was an error reading card. Please contact support for further assitance.",
-                    LocalizedMessageParameters = new object[] { }
-                };
-            }
+            //Logic shifted to CustomerBlockingRequestHandler
+            //if (response.IsNullOrEmpty() && CheckIfLoyaltyCardId(request.RequestContext, getProductSearchResultsDataRequest.SearchText))
+            //{
+            //    throw new CommerceException("Microsoft_Dynamics_Commerce_30104", "Loyalty Card")
+            //    {
+            //        LocalizedMessage = "There was an error reading card. Please contact support for further assitance.",
+            //        LocalizedMessageParameters = new object[] { }
+            //    };
+            //}
 
             response = await  FilterProductsByInventoryAsync(response, request.RequestContext);
-
-            return response;
-            
+            return response;            
         }
 
         /// <summary>

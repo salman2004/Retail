@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -44,6 +45,11 @@ namespace CDC.Commerce.Runtime.FBRIntegration
             string returnValue = null;
             switch (receiptFieldName)
             {
+                case "CSDCTOTALDISC":
+                    {
+                        returnValue = GetTotalDiscount(request);
+                    }
+                    break;
                 case "TOTALDISCOUNT":
                     {
                         returnValue = GetTotalDiscount(request);
@@ -124,8 +130,27 @@ namespace CDC.Commerce.Runtime.FBRIntegration
                         returnValue = GetCCRCharge(request);
                     }
                     break;
+                case "EMPLOYEECREDITLIMIT":
+                    {
+                        returnValue = GetEmployeeCreditLimit(request);
+                    }
+                    break;
             }
             return new GetCustomReceiptFieldServiceResponse(returnValue);
+        }
+
+        /// <summary>
+        /// Total Discount
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>Total Discount</returns>
+        private static string GetEmployeeCreditLimit(GetSalesTransactionCustomReceiptFieldServiceRequest request)
+        {
+            GetConfigurationParameters(request.RequestContext, "AllowedPaymentMethodForEmployeeCreditLimit", out string allowedPaymentMethodForEmployeeCreditLimit);
+            var paymentMethodsForEmployeeCreditLimit = allowedPaymentMethodForEmployeeCreditLimit.ToLower().Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            decimal oldCreditLimit = Convert.ToDecimal(request.SalesOrder?.AttributeValues.Where(av => av.Name == "EmployeeCreditLimit").FirstOrDefault().ToString() ?? decimal.Zero.ToString());
+            decimal newCreditLimit = request.SalesOrder?.TenderLines?.Where(tl => paymentMethodsForEmployeeCreditLimit.Any(x => x== tl.TenderTypeId))?.Sum(tl => tl.Amount) ?? decimal.Zero;
+            return string.Format(CultureInfo.InvariantCulture, "{0:#,0.00}", oldCreditLimit - newCreditLimit);
         }
 
         /// <summary>
@@ -136,7 +161,7 @@ namespace CDC.Commerce.Runtime.FBRIntegration
         private static string GetTotalDiscount(GetSalesTransactionCustomReceiptFieldServiceRequest request)
         {
             decimal totalDiscount = request.SalesOrder.ActiveSalesLines.Sum(sl => sl.DiscountAmount);
-            return String.Format("{0:0.00}", totalDiscount);
+            return string.Format(CultureInfo.InvariantCulture, "{0:#,0.00}", totalDiscount);
         }
 
         /// <summary>
@@ -146,7 +171,7 @@ namespace CDC.Commerce.Runtime.FBRIntegration
         /// <returns></returns>
         private static string GetCCRCharge(GetSalesTransactionCustomReceiptFieldServiceRequest request)
         {
-            string ccrCharges = String.Format("{0:0.00}", request.SalesOrder.ChargeLines?.Where(cl => cl.ChargeCode == GetConfigurationParameters(request, "CardRefundChargeCode").Value)?.FirstOrDefault()?.CalculatedAmount ?? decimal.Zero);
+            string ccrCharges = string.Format(CultureInfo.InvariantCulture, "{0:#,0.00}", request.SalesOrder.ChargeLines?.Where(cl => cl.ChargeCode == GetConfigurationParameters(request, "CardRefundChargeCode").Value)?.FirstOrDefault()?.CalculatedAmount ?? decimal.Zero);
             return ccrCharges == decimal.Zero.ToString() ? string.Empty : ccrCharges;
         }
 
@@ -158,7 +183,7 @@ namespace CDC.Commerce.Runtime.FBRIntegration
         private static string GetTotalChargesWithoutEhsaasdDiscount(GetSalesTransactionCustomReceiptFieldServiceRequest request)
         {
             string ehsasDiscount = GetEhsasDiscountAmount(request);
-            return String.Format("{0:0.00}", request.SalesOrder.ChargeLines.Sum(a=> a.CalculatedAmount) - Convert.ToDecimal(ehsasDiscount));
+            return string.Format(CultureInfo.InvariantCulture, "{0:#,0.00}", request.SalesOrder.ChargeLines.Sum(a=> a.CalculatedAmount) - Convert.ToDecimal(ehsasDiscount));
         }
 
         /// <summary>
@@ -170,7 +195,7 @@ namespace CDC.Commerce.Runtime.FBRIntegration
         {
             string rebateOrLoyaltyDiscount = GetRebateLoyalty(request);
             rebateOrLoyaltyDiscount = rebateOrLoyaltyDiscount == string.Empty ? decimal.Zero.ToString() : rebateOrLoyaltyDiscount;
-            return String.Format("{0:0.00}", request.SalesOrder.ActiveSalesLines.Sum(sl => sl.DiscountAmount) - Convert.ToDecimal(rebateOrLoyaltyDiscount));
+            return string.Format(CultureInfo.InvariantCulture, "{0:#,0.00}", request.SalesOrder.ActiveSalesLines.Sum(sl => sl.DiscountAmount) - Convert.ToDecimal(rebateOrLoyaltyDiscount));
         }
 
         /// <summary>
@@ -180,7 +205,7 @@ namespace CDC.Commerce.Runtime.FBRIntegration
         /// <returns></returns>
         private static string GetToBePaid(GetSalesTransactionCustomReceiptFieldServiceRequest request)
         {
-            return String.Format("{0:0.00}", Convert.ToDecimal(GetGrandTotal(request)) - request.SalesOrder.ActiveSalesLines.Sum(sl => sl.DiscountAmount) + (request.SalesOrder.ChargeLines.Sum(cl => cl.CalculatedAmount) -  Convert.ToDecimal(GetFbrChargeAmount(request))));
+            return string.Format(CultureInfo.InvariantCulture, "{0:#,0.00}", Convert.ToDecimal(GetGrandTotal(request)) - request.SalesOrder.ActiveSalesLines.Sum(sl => sl.DiscountAmount) + (request.SalesOrder.ChargeLines.Sum(cl => cl.CalculatedAmount) - Convert.ToDecimal(GetFbrChargeAmount(request))));
         }
 
         /// <summary>
@@ -202,7 +227,7 @@ namespace CDC.Commerce.Runtime.FBRIntegration
                     List<string> offerIds = discountExtensionEntity.Select(a => a.GetProperty("OFFERID").ToString()).ToList();
                     discount = request.SalesOrder.ActiveSalesLines.Where(sl => sl.DiscountAmount > 0 && !sl.DiscountLines.IsNullOrEmpty()).Sum(sl => sl.DiscountLines.Where(dl => offerIds.Contains(dl.OfferId)).Sum(dl => dl.EffectiveAmount));
                 }
-                value = String.Format("{0:0.00}", discount);
+                value = string.Format(CultureInfo.InvariantCulture, "{0:#,0.00}", discount);
             }
             return value;
         }
@@ -215,7 +240,7 @@ namespace CDC.Commerce.Runtime.FBRIntegration
         /// <returns></returns>
         private static string GetGrandTotal(GetSalesTransactionCustomReceiptFieldServiceRequest request)
         {
-            return String.Format("{0:0.00}", decimal.Add(Convert.ToDecimal(GetReceiptSubtotal(request)), Convert.ToDecimal(GetFbrChargeAmount(request))));
+            return string.Format(CultureInfo.InvariantCulture, "{0:#,0.00}", decimal.Add(Convert.ToDecimal(GetReceiptSubtotal(request)), Convert.ToDecimal(GetFbrChargeAmount(request))));
         }
 
         /// <summary>
@@ -226,7 +251,7 @@ namespace CDC.Commerce.Runtime.FBRIntegration
         /// <returns></returns>
         private static string GetTotalExcludingGst(GetSalesTransactionCustomReceiptFieldServiceRequest request)
         {
-            return String.Format("{0:0.00}", request.SalesOrder.ActiveSalesLines?.Sum(sl => (sl.Price * sl.Quantity) - sl.TaxAmount) ?? decimal.Zero);       
+            return string.Format(CultureInfo.InvariantCulture, "{0:#,0.00}", request.SalesOrder.ActiveSalesLines?.Sum(sl => (sl.Price * sl.Quantity) - sl.TaxAmount) ?? decimal.Zero);       
         }
         
         /// <summary>
@@ -236,7 +261,7 @@ namespace CDC.Commerce.Runtime.FBRIntegration
         /// <returns></returns>
         private static string GetReceiptItems(GetSalesTransactionCustomReceiptFieldServiceRequest request)
         {
-            return String.Format("{0:0.00}", request.SalesOrder.ActiveSalesLines?.Count ?? decimal.Zero);
+            return string.Format(CultureInfo.InvariantCulture, "{0:#,0.00}", request.SalesOrder.ActiveSalesLines?.Count ?? decimal.Zero);
         }
 
         /// <summary>
@@ -246,7 +271,7 @@ namespace CDC.Commerce.Runtime.FBRIntegration
         /// <returns></returns>
         private static string GetReceiptSubtotal(GetSalesTransactionCustomReceiptFieldServiceRequest request)
         {
-            return String.Format("{0:0.00}", request.SalesOrder.ActiveSalesLines?.Sum(sl => sl.Price * sl.Quantity) ?? decimal.Zero);
+            return string.Format(CultureInfo.InvariantCulture, "{0:#,0.00}", request.SalesOrder.ActiveSalesLines?.Sum(sl => sl.Price * sl.Quantity) ?? decimal.Zero);
         }
 
         /// <summary>
@@ -257,7 +282,7 @@ namespace CDC.Commerce.Runtime.FBRIntegration
         private static string GetEhsasDiscountAmount(GetSalesTransactionCustomReceiptFieldServiceRequest request)
         {
             GetConfigurationParameters(request.RequestContext, "EhsaasChargeCode", out string result);
-            return String.Format("{0:0.00}", request.SalesOrder.ChargeLines.Where(cl => cl.ChargeCode == result)?.FirstOrDefault()?.CalculatedAmount ?? decimal.Zero);
+            return string.Format(CultureInfo.InvariantCulture, "{0:#,0.00}", request.SalesOrder.ChargeLines.Where(cl => cl.ChargeCode == result)?.FirstOrDefault()?.CalculatedAmount ?? decimal.Zero);
         }
 
         /// <summary>
@@ -268,7 +293,7 @@ namespace CDC.Commerce.Runtime.FBRIntegration
         private static string GetFbrChargeAmount(GetSalesTransactionCustomReceiptFieldServiceRequest request)
         {
             GetConfigurationParameters(request.RequestContext, "FbrChargeCode", out string result);
-            return String.Format("{0:0.00}", request.SalesOrder.ChargeLines.Where(cl => cl.ChargeCode == result).FirstOrDefault()?.CalculatedAmount ?? decimal.Zero);
+            return string.Format(CultureInfo.InvariantCulture, "{0:#,0.00}", request.SalesOrder.ChargeLines.Where(cl => cl.ChargeCode == result).FirstOrDefault()?.CalculatedAmount ?? decimal.Zero);
         }
 
         /// <summary>
@@ -283,6 +308,11 @@ namespace CDC.Commerce.Runtime.FBRIntegration
             {
                 value = value.TrimStart('0');
             }
+            if (!value.IsNullOrEmpty())
+            {
+                value = string.Format(CultureInfo.InvariantCulture, "{0:#,0.00}", Convert.ToDecimal(value));
+            }
+            
             return value;
         }
         
@@ -297,6 +327,10 @@ namespace CDC.Commerce.Runtime.FBRIntegration
             if (!value?.All(a => a.Equals('0')) ?? false)
             {
                 value = value.TrimStart('0');
+            }
+            if (!value.IsNullOrEmpty())
+            {
+                value = string.Format(CultureInfo.InvariantCulture, "{0:#,0.00}", Convert.ToDecimal(value));
             }
             return value;
         }

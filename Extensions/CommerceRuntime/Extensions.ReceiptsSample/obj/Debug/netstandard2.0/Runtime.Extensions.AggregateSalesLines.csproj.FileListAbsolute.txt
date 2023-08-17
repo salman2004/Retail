@@ -7,6 +7,9 @@ C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.Re
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.ReceiptsSample\obj\Debug\netstandard2.0\Runtime.Extensions.AggregateSalesLines.AssemblyInfo.cs
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.ReceiptsSample\obj\Debug\netstandard2.0\CDC.Commerce.Runtime.AggregateSalesLines.dll
 C:\RetailSDK\Update\RetailSDK_Version28\Extensions\CommerceRuntime\Extensions.ReceiptsSample\obj\Debug\netstandard2.0\CDC.Commerce.Runtime.AggregateSalesLines.pdb
+C:\Users\Administrator\Desktop\New folder\netstandard2.0\CDC.Commerce.Runtime.AggregateSalesLines.deps.json
+C:\Users\Administrator\Desktop\New folder\netstandard2.0\CDC.Commerce.Runtime.AggregateSalesLines.dll
+C:\Users\Administrator\Desktop\New folder\netstandard2.0\CDC.Commerce.Runtime.AggregateSalesLines.pdb
 C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.ReceiptsSample\bin\Debug\netstandard2.0\CDC.Commerce.Runtime.AggregateSalesLines.deps.json
 C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.ReceiptsSample\bin\Debug\netstandard2.0\CDC.Commerce.Runtime.AggregateSalesLines.dll
 C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.ReceiptsSample\bin\Debug\netstandard2.0\CDC.Commerce.Runtime.AggregateSalesLines.pdb

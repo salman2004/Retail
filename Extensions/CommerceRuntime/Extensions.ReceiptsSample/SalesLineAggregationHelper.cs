@@ -37,13 +37,13 @@ namespace CDC
                     AggregatedLine.GrossAmount += salesLine.GrossAmount;
                     AggregatedLine.Quantity += salesLine.Quantity;
                     AggregatedLine.TaxAmount += salesLine.TaxAmount;
-                    AggregatedLine.NetAmount += salesLine.NetAmount;
+                   // AggregatedLine.NetAmount += salesLine.NetAmount;
                     AggregatedLine.TaxAmountExemptInclusive += salesLine.TaxAmountExemptInclusive;
                     AggregatedLine.TaxAmountInclusive += salesLine.TaxAmountInclusive;
                     AggregatedLine.TaxAmountExclusive += salesLine.TaxAmountExclusive;
-                    AggregatedLine.NetAmountWithAllInclusiveTax += salesLine.NetAmountWithAllInclusiveTax;
-                    AggregatedLine.TotalAmount += salesLine.TotalAmount;
-                    AggregatedLine.NetAmountWithoutTax += salesLine.NetAmountWithoutTax;
+                //    AggregatedLine.NetAmountWithAllInclusiveTax += salesLine.NetAmountWithAllInclusiveTax;
+               //     AggregatedLine.TotalAmount += salesLine.TotalAmount;
+                 //   AggregatedLine.NetAmountWithoutTax += salesLine.NetAmountWithoutTax;
                     AggregatedLine.DiscountAmount += salesLine.DiscountAmount;
                     AggregatedLine.TotalDiscount += salesLine.TotalDiscount;
                     AggregatedLine.LineDiscount += salesLine.LineDiscount;

@@ -15,3 +15,4 @@ C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.Bac
 C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.BackDateValidation\obj\Debug\netstandard2.0\Runtime.Extensions.BackDateValidation.AssemblyInfo.cs
 C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.BackDateValidation\obj\Debug\netstandard2.0\CDC.Commerce.Runtime.BackDateValidation.dll
 C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.BackDateValidation\obj\Debug\netstandard2.0\CDC.Commerce.Runtime.BackDateValidation.pdb
+C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.BackDateValidation\obj\Debug\netstandard2.0\Runtime.Extensions.BackDateValidation.csprojAssemblyReference.cache

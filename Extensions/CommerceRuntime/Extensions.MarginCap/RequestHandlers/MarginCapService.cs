@@ -15,7 +15,7 @@
     using Microsoft.Dynamics.Commerce.Runtime.Messages;
     using Microsoft.Dynamics.Commerce.Runtime.Services.Messages;
     using Newtonsoft.Json;
-
+    
     public class MarginCapService : IRequestHandlerAsync
     {
 

@@ -77,7 +77,7 @@ namespace CDC.Commerce.HardwareStation.RFIDCardReader
             }
             catch (Exception ex)
             {
-                throw new PeripheralException("Microsoft_Dynamics_Commerce_HardwareStation_RFID_Card_Error", "Please do not lift the card when reading from card. " + ex.Message, ex);
+                throw new PeripheralException("Microsoft_Dynamics_Commerce_HardwareStation_RFID_Card_Error", "Please do not lift the card when reading from card. " + ex.Message + tmpTime, ex);
             }
             return cardReaderResponse;
         }
@@ -109,7 +109,7 @@ namespace CDC.Commerce.HardwareStation.RFIDCardReader
             }
             catch (Exception ex)
             {
-                throw new PeripheralException("Microsoft_Dynamics_Commerce_HardwareStation_RFID_Card_Error", "Please do not lift the card when reading from card. " + ex.Message, ex);
+                throw new PeripheralException("Microsoft_Dynamics_Commerce_HardwareStation_RFID_Card_Error", "Please do not lift the card when reading from card. " + ex.Message + tmpTime, ex);
             }
 
             return cardReaderResponse;

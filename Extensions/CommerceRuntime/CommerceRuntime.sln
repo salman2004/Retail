@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Runtime.Extensions.Fraction
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Runtime.Extensions.EmployeeCreditLimit", "Extensions.EmployeeCreditLimit\Runtime.Extensions.EmployeeCreditLimit.csproj", "{CD4ED55D-9397-4C69-AB30-43B235B24021}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Runtime.Extensions.UnitConversion", "Extensions.UnitConversion\Runtime.Extensions.UnitConversion.csproj", "{6D8182FA-FF03-4F39-8394-06B0D77961E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{CD4ED55D-9397-4C69-AB30-43B235B24021}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD4ED55D-9397-4C69-AB30-43B235B24021}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD4ED55D-9397-4C69-AB30-43B235B24021}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D8182FA-FF03-4F39-8394-06B0D77961E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D8182FA-FF03-4F39-8394-06B0D77961E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D8182FA-FF03-4F39-8394-06B0D77961E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D8182FA-FF03-4F39-8394-06B0D77961E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,7 +113,7 @@ Global
 		SolutionGuid = {8F651935-32F7-4420-B359-A3B7C37E58EF}
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 16
+		SccNumberOfProjects = 17
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://dev.azure.com/delcit
 		SccLocalPath0 = .
@@ -156,5 +162,8 @@ Global
 		SccProjectUniqueName15 = Extensions.EmployeeCreditLimit\\Runtime.Extensions.EmployeeCreditLimit.csproj
 		SccProjectName15 = Extensions.EmployeeCreditLimit
 		SccLocalPath15 = Extensions.EmployeeCreditLimit
+		SccProjectUniqueName16 = Extensions.UnitConversion\\Runtime.Extensions.UnitConversion.csproj
+		SccProjectName16 = Extensions.UnitConversion
+		SccLocalPath16 = Extensions.UnitConversion
 	EndGlobalSection
 EndGlobal

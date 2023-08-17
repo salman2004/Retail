@@ -92,7 +92,7 @@
             // Validate scanned quantity
             if (qtyToValidate > availableQty)
             {
-                string messageËrror = string.Format("There is an insufficient quantity of the product available.");
+                string messageËrror = string.Format("There is an insufficient quantity of the product {0} {1} available.", line.ItemId, line.Description);
                 string messageInventory = string.Format("Available physical quantity for item {0} is {1}.", line.ItemId, Math.Round(availableQty, 2));
                 Exception exception = new CartValidationException(DataValidationErrors.Microsoft_Dynamics_Commerce_Runtime_InsufficientQuantityAvailable, request.Cart.Id, messageInventory);
 

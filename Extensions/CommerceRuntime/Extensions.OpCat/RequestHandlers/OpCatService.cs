@@ -40,7 +40,7 @@ namespace CDC.Commerce.Runtime.CustomOpCat.RequestHandlers
             if (request.GetType() == typeof(GetProductBarcodeDataRequest))
             {
                 GetProductBarcodeDataRequest barcodeDataRequest = (GetProductBarcodeDataRequest)request;
- 
+                
                 RequestContext requestContext = request.RequestContext;
                 ChannelConfiguration channelConfiguration = requestContext.GetChannelConfiguration();
                 channelConfiguration.SetProperty("Barcode", barcodeDataRequest.Barcode);
@@ -278,6 +278,5 @@ namespace CDC.Commerce.Runtime.CustomOpCat.RequestHandlers
                 }
             }
         }
-        
     }
 }

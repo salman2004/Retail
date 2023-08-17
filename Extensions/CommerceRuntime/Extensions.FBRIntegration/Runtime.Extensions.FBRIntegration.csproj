@@ -15,6 +15,11 @@
     <RootNamespace>CDC.Commerce.Runtime.FBRIntegration</RootNamespace>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="CalculateDiscountServiceRequestEx.cs" />
+    <Compile Remove="CalculateTenderDiscountRequestHandlerEx.cs" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Dynamics.Commerce.Runtime.Framework" Version="10.4.21344.1" />
     <PackageReference Include="Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages" Version="9.38.22167.5" />
@@ -29,9 +34,9 @@
     <Reference Include="Microsoft.Dynamics.Commerce.Runtime.ElectronicReporting">
       <HintPath>..\..\..\..\..\..\RetailServer\webroot\bin\Microsoft.Dynamics.Commerce.Runtime.ElectronicReporting.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entities\" />
+    <Reference Include="Microsoft.Dynamics.Commerce.Runtime.Messages">
+      <HintPath>..\..\..\References\microsoft.dynamics.commerce.runtime.messages\9.38.22291.6\lib\netstandard2.0\Microsoft.Dynamics.Commerce.Runtime.Messages.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   

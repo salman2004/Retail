@@ -425,4 +425,3 @@ C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.Ins
 C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.InstitutionalCustomer\obj\Debug\net461\Runtime.Extensions.InstitutionalCustomer.csproj.CopyComplete
 C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.InstitutionalCustomer\obj\Debug\net461\CDC.Commerce.Runtime.InstitutionalCustomer.dll
 C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.InstitutionalCustomer\obj\Debug\net461\CDC.Commerce.Runtime.InstitutionalCustomer.pdb
-C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.InstitutionalCustomer\obj\Debug\net461\Runtime.Extensions.InstitutionalCustomer.csprojAssemblyReference.cache

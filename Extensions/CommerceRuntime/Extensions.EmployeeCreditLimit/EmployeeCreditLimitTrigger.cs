@@ -1,16 +1,16 @@
-﻿using Microsoft.Dynamics.Commerce.Runtime;
-using Microsoft.Dynamics.Commerce.Runtime.DataModel;
-using Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages;
-using Microsoft.Dynamics.Commerce.Runtime.Messages;
-using Microsoft.Dynamics.Commerce.Runtime.RealtimeServices.Messages;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+﻿
 namespace CDC.Commerce.Runtime.EmployeeCreditLimit
 {
+    using Microsoft.Dynamics.Commerce.Runtime;
+    using Microsoft.Dynamics.Commerce.Runtime.DataModel;
+    using Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages;
+    using Microsoft.Dynamics.Commerce.Runtime.Messages;
+    using Microsoft.Dynamics.Commerce.Runtime.RealtimeServices.Messages;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     public class EmployeeCreditLimitTrigger : IRequestTriggerAsync
     {
         /// <summary>
@@ -68,24 +68,26 @@ namespace CDC.Commerce.Runtime.EmployeeCreditLimit
                                 var tenderTypeId = tenderLine?.TenderTypeId;
                                 var orderAmount = tenderLine?.Amount;
 
-                                if (paymentMethodsForEmployeeCreditLimit.Any(x => x == tenderTypeId) && cardTypesForCreditLimit.Any(cardtype => loyalityCard.StartsWith(loyalityCard)))
+                                if (paymentMethodsForEmployeeCreditLimit.Any(x => x == tenderTypeId) && cardTypesForCreditLimit.Any(cardtype => loyalityCard.ToUpper().StartsWith(cardtype.ToUpper())))
                                 {
-                                    var employeeRemainingCreditLimit = await GetEomployeeCreditLimitAsync(request, accountNumber, channelConfigs.InventLocationDataAreaId);
-                                    if (orderAmount > employeeRemainingCreditLimit)
+                                    string employeeRemainingCreditLimit = GetEomployeeCreditLimitAsync(transaction);
+                                    if (!employeeRemainingCreditLimit.IsNullOrEmpty())
                                     {
-                                        throw new Exception($"Only amount '{employeeRemainingCreditLimit}'is available for credit. Please pay remaining amount using another tender.");
-                                    }
-                                    else
-                                    {
-                                        var newCreditLimit = employeeRemainingCreditLimit - orderAmount;
-                                        await InsertUpdateEomployeeCreditLimitAsync(request, channelConfigs.InventLocationDataAreaId, accountNumber, transaction.Id, channelConfigs.ChannelNaturalId, (decimal)orderAmount, loyalityCard, employeeRemainingCreditLimit, (decimal)newCreditLimit);
+                                        var employeeRemainingCreditLimitValue = Convert.ToDecimal(employeeRemainingCreditLimit ?? decimal.Zero.ToString());
+                                        if (orderAmount > employeeRemainingCreditLimitValue)
+                                        {
+                                            throw new Exception($"Only amount '{employeeRemainingCreditLimit}'is available for credit. Please pay remaining amount using another tender.");
+                                        }
+                                        else
+                                        {
+                                            var newCreditLimit = employeeRemainingCreditLimitValue - orderAmount;
+                                            await InsertUpdateEomployeeCreditLimitAsync(request, channelConfigs.InventLocationDataAreaId, accountNumber, transaction.Id, channelConfigs.ChannelNaturalId, (decimal)orderAmount, loyalityCard, employeeRemainingCreditLimitValue, (decimal)newCreditLimit);
+                                        }
                                     }
                                 } 
                             }
                         }
                     }
-
-
                 }
                 catch (Exception exception)
                 {
@@ -110,19 +112,9 @@ namespace CDC.Commerce.Runtime.EmployeeCreditLimit
             return result;
         }
 
-        private async Task<decimal> GetEomployeeCreditLimitAsync(Request request, string accountNumber, string company)
+        private string GetEomployeeCreditLimitAsync(SalesTransaction transaction)
         {
-            InvokeExtensionMethodRealtimeRequest extensionRequest = new InvokeExtensionMethodRealtimeRequest("GetEmployeeRemainingCreditLimit", accountNumber, company);
-            InvokeExtensionMethodRealtimeResponse response = await request.RequestContext.ExecuteAsync<InvokeExtensionMethodRealtimeResponse>(extensionRequest).ConfigureAwait(false);
-            if ((bool)response.Result[0])
-            {
-                return Convert.ToDecimal(response.Result[1]);
-            }
-            else
-            {
-                throw new Exception(Convert.ToString(response.Result[1]));
-            }
-
+            return transaction?.GetProperty("EmployeeCreditLimit")?.ToString() ?? string.Empty;            
         }
 
         private async Task<bool> InsertUpdateEomployeeCreditLimitAsync(Request request, string company, string accountNumber, string transactionId, string storeNumber, decimal tenderAmount, string cardNumber, decimal previousCreditLimit, decimal newCreditLimit)

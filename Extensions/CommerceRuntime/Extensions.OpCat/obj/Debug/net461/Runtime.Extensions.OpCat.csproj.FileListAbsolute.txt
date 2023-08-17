@@ -425,3 +425,4 @@ C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.OpC
 C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.OpCat\obj\Debug\net461\Runtime.Extensions.OpCat.csproj.CopyComplete
 C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.OpCat\obj\Debug\net461\CDC.Commerce.Runtime.CustomOpCat.dll
 C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.OpCat\obj\Debug\net461\CDC.Commerce.Runtime.CustomOpCat.pdb
+C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.OpCat\obj\Debug\net461\Runtime.Extensions.OpCat.csprojAssemblyReference.cache

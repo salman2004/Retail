@@ -15,3 +15,4 @@ C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.Pro
 C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.ProductSearch\obj\Debug\netstandard2.0\Runtime.Extensions.ProductSearch.AssemblyInfo.cs
 C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.ProductSearch\obj\Debug\netstandard2.0\CDC.Commerce.Runtime.ProductSearch.dll
 C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.ProductSearch\obj\Debug\netstandard2.0\CDC.Commerce.Runtime.ProductSearch.pdb
+C:\RetailSDK\Update\RetailSDK_FinalV28\Extensions\CommerceRuntime\Extensions.ProductSearch\obj\Debug\netstandard2.0\Runtime.Extensions.ProductSearch.csprojAssemblyReference.cache

@@ -3,7 +3,7 @@
   <Import Project="..\..\..\BuildTools\Common.props" />
   <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.settings" />
   <PropertyGroup Label="Globals">
-    <SccProjectName>%24/CSD/Trunk/DEV/RetailSDK/Extensions/CommerceRuntime/Extensions.ReturnTransactions</SccProjectName>
+    <SccProjectName>%24/CSD/Trunk/DEV/RetailSDKFinalUpdate28/Extensions/CommerceRuntime/Extensions.ReturnTransactions</SccProjectName>
     <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
     <SccAuxPath>https://dev.azure.com/delcit</SccAuxPath>
     <SccLocalPath>.</SccLocalPath>

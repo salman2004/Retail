@@ -22,25 +22,33 @@ namespace CDC.Commerce.Runtime.CardReader
             {
                 return new[]
                 {
-                    typeof(GetLoyaltyCardAffiliationsDataRequest),
-                    typeof(InsertLoyaltyCardDataRequest)
+                    typeof(GetLoyaltyCardAffiliationsDataRequest)
                 };
             }
         }
 
         public async Task<Response> Execute(Request request)
         {
-
             if (request.GetType() == typeof(GetLoyaltyCardAffiliationsDataRequest))
             {
                 GetLoyaltyCardAffiliationsDataRequest affiliationsDataRequest = (GetLoyaltyCardAffiliationsDataRequest)request;
+                bool isReturnTransaction = affiliationsDataRequest?.Transaction?.ActiveSalesLines?.Any(sl => sl.IsReturnLine() == true) ?? false;
+                if (!affiliationsDataRequest.Transaction.ActiveSalesLines.IsNullOrEmpty() && isReturnTransaction == false && !affiliationsDataRequest.Transaction.IsPropertyDefined("CSDCardNumber") && !affiliationsDataRequest.Transaction.IsPropertyDefined("CDCCardReaderValue"))
+                {
+                    throw new CommerceException("Microsoft_Dynamics_Commerce_30104", "Loyalty Card")
+                    {
+                        LocalizedMessage = "There was an error reading card. Please contact support for further assitance.",
+                        LocalizedMessageParameters = new object[] { }
+                    };
+                }
                 IsCardBlockedAsync(affiliationsDataRequest, out bool isCardBlocked, out bool isRebateCard);
                 if(!isCardBlocked)
                 {
-                    //if (isRebateCard && request.RequestContext.Runtime.Configuration.IsMasterDatabaseConnectionString)
-                    //{
-                    //    GetRebateQtyLimitFromHeadQuarters(request.RequestContext, affiliationsDataRequest.LoyaltyCardNumber, affiliationsDataRequest.Transaction);
-                    //}
+                    await FilterEmployeeCreditLimitCardAsync(affiliationsDataRequest);
+                    if (isRebateCard && request.RequestContext.Runtime.Configuration.IsMasterDatabaseConnectionString)
+                    {
+                        GetRebateQtyLimitFromHeadQuarters(request.RequestContext, affiliationsDataRequest.LoyaltyCardNumber, affiliationsDataRequest.Transaction);
+                    }
                     return await ExecuteBaseRequestAsync(request);
                 }
                 else
@@ -56,6 +64,47 @@ namespace CDC.Commerce.Runtime.CardReader
                 throw new NotSupportedException();
             }
         }
+
+        public async Task FilterEmployeeCreditLimitCardAsync(GetLoyaltyCardAffiliationsDataRequest request)
+        {
+            var allowedPaymentMethodForEmployeeCreditLimit = GetRetailConfigurationParameter(request, "AllowedPaymentMethodForEmployeeCreditLimit", request.RequestContext.GetChannelConfiguration().InventLocationDataAreaId);
+            var allowedCardForCreditLimit = GetRetailConfigurationParameter(request, "AllowedCardForCreditLimit", request.RequestContext.GetChannelConfiguration().InventLocationDataAreaId);
+
+            if (!string.IsNullOrWhiteSpace(allowedPaymentMethodForEmployeeCreditLimit) && !string.IsNullOrWhiteSpace(allowedCardForCreditLimit))
+            {
+                var cardTypesForCreditLimit = allowedCardForCreditLimit.ToLower().Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                if (cardTypesForCreditLimit.Any(cardtype => request.Transaction.LoyaltyCardId.ToUpper().StartsWith(cardtype.ToUpper())))
+                {
+                    var employeeRemainingCreditLimit = await GetEomployeeCreditLimitAsync(request, request.Transaction.CustomerId, request.RequestContext.GetChannelConfiguration().InventLocationDataAreaId);
+                    request.Transaction.SetProperty("EmployeeCreditLimit", employeeRemainingCreditLimit.ToString());
+                }
+            }
+        }
+        
+        private async Task<decimal> GetEomployeeCreditLimitAsync(Request request, string accountNumber, string company)
+        {
+            InvokeExtensionMethodRealtimeRequest extensionRequest = new InvokeExtensionMethodRealtimeRequest("GetEmployeeRemainingCreditLimit", accountNumber, company);
+            InvokeExtensionMethodRealtimeResponse response = await request.RequestContext.ExecuteAsync<InvokeExtensionMethodRealtimeResponse>(extensionRequest).ConfigureAwait(false);
+            if ((bool)response.Result[0])
+            {
+                return Convert.ToDecimal(response.Result[1]);
+            }
+            else
+            {
+                throw new Exception(Convert.ToString(response.Result[1]));
+            }
+
+        }
+
+        private string GetRetailConfigurationParameter(Request request, string name, string company)
+        {
+            var configurationRequest = new GetConfigurationParametersDataRequest(request.RequestContext.GetChannelConfiguration().RecordId);
+            var configurationResponse = request.RequestContext.ExecuteAsync<EntityDataServiceResponse<RetailConfigurationParameter>>(configurationRequest).Result;
+
+            string result = configurationResponse?.PagedEntityCollection?.Where(cp => string.Equals(cp.Name.ToUpper().Trim(), (name).ToUpper().Trim(), StringComparison.OrdinalIgnoreCase))?.FirstOrDefault()?.Value ?? string.Empty;
+            return result;
+        }
+        
         public async Task<Response> ExecuteBaseRequestAsync(Request request)
         {
             var requestHandler = request.RequestContext.Runtime.GetNextAsyncRequestHandler(request.GetType(), this);
@@ -91,9 +140,12 @@ namespace CDC.Commerce.Runtime.CardReader
         {
             InvokeExtensionMethodRealtimeRequest extensionRequest = new InvokeExtensionMethodRealtimeRequest("GetRebateQtyLimitByLoyaltyCardId", loyaltyCardNumber, context.GetChannelConfiguration().InventLocationDataAreaId);
             InvokeExtensionMethodRealtimeResponse response = await context.ExecuteAsync<InvokeExtensionMethodRealtimeResponse>(extensionRequest).ConfigureAwait(false);
-            if (!(bool)response.Result[0])
+            string responseFlag = response.Result[0].ToString();
+            bool.TryParse(responseFlag, out bool isResponseValid);
+            if (isResponseValid)
             {
-                transaction.SetProperty("RebateQtyLimit", Convert.ToString(response.Result[1]));
+                string result = Convert.ToString(response.Result[1]);
+                transaction.SetProperty("RebateQtyLimit", result);
             }
             else
             {

@@ -1,0 +1,9 @@
+K:\RetailSDK\Update\SGI_RetailSDK\Extensions\CommerceRuntime\SGI_CRT_ShippingAddress\bin\Debug\netstandard2.0\SGI.Commerce.Runtime.Extension.ShippingAddress.deps.json
+K:\RetailSDK\Update\SGI_RetailSDK\Extensions\CommerceRuntime\SGI_CRT_ShippingAddress\bin\Debug\netstandard2.0\SGI.Commerce.Runtime.Extension.ShippingAddress.dll
+K:\RetailSDK\Update\SGI_RetailSDK\Extensions\CommerceRuntime\SGI_CRT_ShippingAddress\bin\Debug\netstandard2.0\SGI.Commerce.Runtime.Extension.ShippingAddress.pdb
+K:\RetailSDK\Update\SGI_RetailSDK\Extensions\CommerceRuntime\SGI_CRT_ShippingAddress\obj\Debug\netstandard2.0\SGI_CRT_ShippingAddress.csproj.CoreCompileInputs.cache
+K:\RetailSDK\Update\SGI_RetailSDK\Extensions\CommerceRuntime\SGI_CRT_ShippingAddress\obj\Debug\netstandard2.0\SGI_CRT_ShippingAddress.AssemblyInfoInputs.cache
+K:\RetailSDK\Update\SGI_RetailSDK\Extensions\CommerceRuntime\SGI_CRT_ShippingAddress\obj\Debug\netstandard2.0\SGI_CRT_ShippingAddress.AssemblyInfo.cs
+K:\RetailSDK\Update\SGI_RetailSDK\Extensions\CommerceRuntime\SGI_CRT_ShippingAddress\obj\Debug\netstandard2.0\SGI.Commerce.Runtime.Extension.ShippingAddress.dll
+K:\RetailSDK\Update\SGI_RetailSDK\Extensions\CommerceRuntime\SGI_CRT_ShippingAddress\obj\Debug\netstandard2.0\SGI.Commerce.Runtime.Extension.ShippingAddress.pdb
+K:\RetailSDK\Update\SGI_RetailSDK\Extensions\CommerceRuntime\SGI_CRT_ShippingAddress\obj\Debug\netstandard2.0\SGI_CRT_ShippingAddress.csprojAssemblyReference.cache

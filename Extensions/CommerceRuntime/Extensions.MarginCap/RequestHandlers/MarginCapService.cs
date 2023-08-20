@@ -52,7 +52,7 @@
 
             getMarginCapOnStoreAndLoyalty = GetMarginCapOnStoreAndLoyaltyProgram(request);
             isMarginCapEnabledForStoreAndLoyaltyProgram = Convert.ToBoolean(Convert.ToInt32(getMarginCapOnStoreAndLoyalty?.GetProperty("ISMARGINCAPALLOWEDONSTOREANDLOYALTY")?.ToString() ?? decimal.Zero.ToString()));
-            marginCapPercentageOnStoreAndEntity = Convert.ToDecimal(getMarginCapOnStoreAndLoyalty?.GetProperty("MARGINCAPPERCENTAGE")?.ToString() ?? decimal.Zero.ToString());
+            marginCapPercentageOnStoreAndEntity = ( Convert.ToDecimal(getMarginCapOnStoreAndLoyalty?.GetProperty("MARGINCAPPERCENTAGE")?.ToString() ?? decimal.Zero.ToString()));
             GetTenderDiscountOfferIds(request.RequestContext, out List<string> offerIds);
 
             if (!isMarginCapEnabledForStoreAndLoyaltyProgram)
@@ -60,9 +60,10 @@
                 return getPriceServiceResponse;
             }
 
-            foreach (var item in getPriceServiceResponse.Transaction.ActiveSalesLines)
+            foreach (var item in getPriceServiceResponse.Transaction.SalesLines)
             {
-                if (item.IsReturnLine())
+                
+                if (item.IsReturnLine() || item.IsVoided)
                 {
                     continue;
                 }
@@ -71,7 +72,7 @@
                     capOnProductAndProductCategory = GetMarginCapOnProductAndProductCategory(request, item.ItemId, await GetProductIdAsync(request, item));
                     isMarginCapEnabledOnProductAndProductCategory = Convert.ToBoolean(Convert.ToInt32(capOnProductAndProductCategory?.GetProperty("ISMARGINCAPALLOWED")?.ToString() ?? decimal.Zero.ToString()));
                     excludeDiscount = Convert.ToBoolean(Convert.ToInt32(capOnProductAndProductCategory?.GetProperty("EXCLUDEDISCOUNT")?.ToString() ?? decimal.Zero.ToString()));
-                    marginCapPercentageOnProductAndProductCategory = Convert.ToDecimal(capOnProductAndProductCategory?.GetProperty("MARGINCAPPERCENTAGE")?.ToString() ?? decimal.Zero.ToString());
+                    marginCapPercentageOnProductAndProductCategory =( Convert.ToDecimal(capOnProductAndProductCategory?.GetProperty("MARGINCAPPERCENTAGE")?.ToString() ?? decimal.Zero.ToString()));
 
 
                     if (excludeDiscount)
@@ -93,49 +94,66 @@
 
                         var costPrice = GetCostPrice(item, request);
                         var grossMargin = CalculateGrossMargin(costPrice, item?.Price ?? decimal.Zero);
-                        grossMargin = Convert.ToDecimal(String.Format("{0:0.00}", grossMargin));
+                        grossMargin = (Convert.ToDecimal(String.Format("{0:0.00}", grossMargin)));
 
                         if ((grossMargin - marginCapPercentageOnProductAndProductCategory) <= totalDiscountPercentageWithoutTenderDiscount)
                         {
-                            decimal newDiscount = grossMargin - marginCapPercentageOnProductAndProductCategory;
+                            decimal newDiscount = (grossMargin - marginCapPercentageOnProductAndProductCategory);
                             if (newDiscount < Decimal.Zero)
                             {
                                 newDiscount = Decimal.Zero;
                             }
-                            decimal numberOfLinesWithoutAskariDiscount = ((item.DiscountLines.Where(a => !offerIds.Contains(a.OfferId)).ToList().Count != (int)decimal.Zero) ? item.DiscountLines.Where(a => !offerIds.Contains(a.OfferId)).ToList().Count : decimal.One);
-                            decimal newDistributedDiscount = newDiscount / numberOfLinesWithoutAskariDiscount;
+                            decimal numberOfLinesWithoutAskariDiscount = (((item.DiscountLines.Where(a => !offerIds.Contains(a.OfferId)).ToList().Count != (int)decimal.Zero) ? item.DiscountLines.Where(a => !offerIds.Contains(a.OfferId)).ToList().Count : decimal.One));
+                            decimal newDistributedDiscount = (newDiscount / numberOfLinesWithoutAskariDiscount);
                             foreach (var discountLine in item.DiscountLines)
                             {
                                 if (!offerIds.Contains(discountLine.OfferId))
                                 {
                                     discountLine.EffectivePercentage = newDistributedDiscount;
                                     discountLine.Percentage = newDistributedDiscount;
-                                    discountLine.Amount = item.AgreementPrice * item.Quantity * (discountLine.EffectivePercentage / 100);
-                                    discountLine.EffectiveAmount = item.AgreementPrice * item.Quantity * (discountLine.EffectivePercentage / 100);
+                                    discountLine.Amount = (item.AgreementPrice * item.Quantity * (discountLine.EffectivePercentage / 100));
+                                    discountLine.EffectiveAmount = (item.AgreementPrice * item.Quantity * (discountLine.EffectivePercentage / 100));
                                 }
                             }
 
-                            foreach (var discountLine in item.DiscountLines.Where(a => offerIds.Contains(a.OfferId)).ToList())
+                         /*   foreach (var discountLine in item.DiscountLines.Where(a => offerIds.Contains(a.OfferId)).ToList())
                             {
-                                discountLine.EffectiveAmount = item.AgreementPrice * item.Quantity * (discountLine.EffectivePercentage / 100);
-                            }
+                                discountLine.EffectiveAmount =( item.AgreementPrice * item.Quantity)-item. * (discountLine.EffectivePercentage / 100));
+                            }*/
+                            var applicableDiscountAmount = ((item.Price * item.Quantity));
 
-                            item.TenderDiscountAmount = item.DiscountLines.Where(dl => dl.DiscountLineType == DiscountLineType.TenderTypeDiscount).Sum(dl => dl.EffectiveAmount);
-                            item.DiscountAmount = item.DiscountLines.Sum(a => a.EffectiveAmount);
-                            item.DiscountAmountWithoutTax = item.DiscountAmount;
-                            item.PeriodicDiscount = item.DiscountAmount;
-                            item.PeriodicPercentageDiscount = newDiscount;
-                            item.TotalPercentageDiscount = newDiscount;
+                            var applicableOnMRPDiscountAmount =((item.Price*item.Quantity)-item.TaxAmount);
+
+                           // item.TenderDiscountAmount = item.DiscountLines.Where(dl => dl.DiscountLineType == DiscountLineType.TenderTypeDiscount).Sum(dl => dl.EffectiveAmount);
+                             item.DiscountAmount = item.DiscountLines.Sum(a => a.EffectiveAmount);
+                             item.DiscountAmountWithoutTax = item.DiscountAmount;
+                             item.PeriodicDiscount = item.DiscountAmount;
+                             item.PeriodicPercentageDiscount = newDiscount;
+                             //item.TotalPercentageDiscount = newDiscount;
+
+                            //item.DiscountAmount = 211;// item.DiscountLines.Sum(a => a.EffectiveAmount);
+                            //item.DiscountAmountWithoutTax = item.DiscountLines.Sum(a => a.DiscountCost);
+                            //item.PeriodicDiscount = item.DiscountLines.Where(a => a.DiscountLineType == DiscountLineType.PeriodicDiscount).Sum(line => line.EffectiveAmount);
+                            //item.TenderDiscountAmount = item.DiscountLines.Where(a => a.DiscountLineType == DiscountLineType.TenderTypeDiscount).Sum(line => line.EffectiveAmount);
+
                         }
                     }
                 }
-            }
-            getPriceServiceResponse.Transaction.DiscountAmount = getPriceServiceResponse.Transaction.ActiveSalesLines.Sum(a => a.DiscountAmount);
-            getPriceServiceResponse.Transaction.DiscountAmountWithoutTax = getPriceServiceResponse.Transaction.ActiveSalesLines.Sum(a => a.DiscountAmount);
-            getPriceServiceResponse.Transaction.PeriodicDiscountAmount = getPriceServiceResponse.Transaction.ActiveSalesLines.Sum(a => a.DiscountAmount);
 
-            CalculateTaxServiceRequest calculateTax = new CalculateTaxServiceRequest(getPriceServiceResponse.Transaction);
-            return new GetPriceServiceResponse(calculateTax.Transaction);
+                
+                }
+            /*  getPriceServiceResponse.Transaction.DiscountAmount = getPriceServiceResponse.Transaction.SalesLines.Where(a=>!a.IsVoided).Sum(a => a.DiscountAmount);
+              getPriceServiceResponse.Transaction.DiscountAmountWithoutTax = getPriceServiceResponse.Transaction.SalesLines.Where(a => !a.IsVoided).Sum(a => a.DiscountAmount);
+              getPriceServiceResponse.Transaction.PeriodicDiscountAmount = getPriceServiceResponse.Transaction.SalesLines.Where(a => !a.IsVoided).Sum(a => a.DiscountAmount);*/
+
+            getPriceServiceResponse.Transaction.DiscountAmount = getPriceServiceResponse.Transaction.SalesLines.Where(sl => !sl.IsVoided).Sum(a => a.DiscountAmount);
+            getPriceServiceResponse.Transaction.DiscountAmountWithoutTax = getPriceServiceResponse.Transaction.SalesLines.Where(sl => !sl.IsVoided).Sum(a => a.DiscountAmountWithoutTax);
+            getPriceServiceResponse.Transaction.PeriodicDiscountAmount = getPriceServiceResponse.Transaction.SalesLines.Where(sl => !sl.IsVoided).Sum(a => a.PeriodicDiscount);
+            getPriceServiceResponse.Transaction.TenderDiscountAmount = getPriceServiceResponse.Transaction.SalesLines.Where(sl => !sl.IsVoided).Sum(a => a.TenderDiscountAmount);
+
+
+         //     CalculateTaxServiceRequest calculateTax = new CalculateTaxServiceRequest(getPriceServiceResponse.Transaction);*/
+            return new GetPriceServiceResponse(getPriceServiceResponse.Transaction);
         }
         public GetMarginCapOnStoreAndLoyaltyProgram GetMarginCapOnStoreAndLoyaltyProgram(Request request)
         {
@@ -206,7 +224,7 @@
                 var itemCostPrice = databaseContext.ReadEntity<ItemCostPrice>(query);
                 if (!itemCostPrice.Results.IsNullOrEmpty())
                 {
-                    decimal costPrice = Convert.ToDecimal(Convert.ToString(itemCostPrice.FirstOrDefault().GetProperty("COSTPRICE")));
+                    decimal costPrice =(Convert.ToDecimal(Convert.ToString(itemCostPrice.FirstOrDefault().GetProperty("COSTPRICE"))));
                     return costPrice;
                 }
                 else

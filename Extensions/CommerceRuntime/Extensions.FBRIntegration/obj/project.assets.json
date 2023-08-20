@@ -16,10 +16,14 @@
           "System.Xml.XmlSerializer": "4.3.0"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Retail.Diagnostics.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Retail.Diagnostics.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Retail.Diagnostics.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Retail.Diagnostics.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Microsoft.Dynamics.Commerce.Resources.Strings/10.6.22165.1": {
@@ -28,10 +32,14 @@
           "Microsoft.Dynamics.Commerce.Diagnostics": "10.8.22111.1"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Retail.Resources.Strings.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Retail.Resources.Strings.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Retail.Resources.Strings.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Retail.Resources.Strings.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Microsoft.Dynamics.Commerce.Runtime.Data/9.38.22291.6": {
@@ -42,10 +50,14 @@
           "Microsoft.Dynamics.Commerce.Runtime.Framework": "[10.6.22165.1, 10.7.0)"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Data.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Data.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Data.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Data.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Microsoft.Dynamics.Commerce.Runtime.DataManagers/9.38.22291.6": {
@@ -58,10 +70,14 @@
           "Microsoft.Dynamics.Commerce.Runtime.Framework": "[10.6.22165.1, 10.7.0)"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataManagers.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataManagers.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataManagers.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataManagers.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Microsoft.Dynamics.Commerce.Runtime.DataModel.Brazil/9.38.22291.6": {
@@ -72,10 +88,14 @@
           "Microsoft.Dynamics.Commerce.Runtime.Framework": "[10.6.22165.1, 10.7.0)"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.Brazil.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.Brazil.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.Brazil.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.Brazil.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Microsoft.Dynamics.Commerce.Runtime.DataModel.India/9.38.22291.6": {
@@ -86,28 +106,40 @@
           "System.ComponentModel.Annotations": "4.6.0"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.India.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.India.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.India.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.India.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Microsoft.Dynamics.Commerce.Runtime.DataModel.Italy/9.38.22291.6": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.Italy.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.Italy.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.Italy.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.Italy.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Microsoft.Dynamics.Commerce.Runtime.DataModel.Poland/9.38.22291.6": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.Poland.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.Poland.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.Poland.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataModel.Poland.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Microsoft.Dynamics.Commerce.Runtime.DataServices/9.38.22291.6": {
@@ -123,10 +155,14 @@
           "System.Threading.Tasks.Dataflow": "4.11.1"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataServices.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataServices.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataServices.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataServices.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages/9.38.22291.6": {
@@ -137,10 +173,14 @@
           "Microsoft.Dynamics.Commerce.Runtime.Framework": "[10.6.22165.1, 10.7.0)"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Microsoft.Dynamics.Commerce.Runtime.Entities/9.38.22291.6": {
@@ -150,10 +190,14 @@
           "Microsoft.Dynamics.Commerce.Runtime.Framework": "[10.6.22165.1, 10.7.0)"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Entities.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Entities.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Entities.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Entities.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Microsoft.Dynamics.Commerce.Runtime.Framework/10.6.22165.1": {
@@ -166,10 +210,14 @@
           "System.Xml.XmlSerializer": "4.3.0"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Framework.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Framework.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Framework.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Framework.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Microsoft.Dynamics.Commerce.Runtime.Localization/9.38.22291.6": {
@@ -186,10 +234,14 @@
           "System.Xml.XmlSerializer": "4.3.0"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "resource": {
           "lib/netstandard2.0/ar-AE/Microsoft.Dynamics.Commerce.Runtime.Localization.resources.dll": {
@@ -357,10 +409,14 @@
           "Microsoft.Dynamics.Commerce.Runtime.Localization.Entities": "[9.38.22291.6, 9.39.0)"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Data.Services.Messages.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Data.Services.Messages.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Data.Services.Messages.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Data.Services.Messages.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Microsoft.Dynamics.Commerce.Runtime.Localization.Entities/9.38.22291.6": {
@@ -370,10 +426,14 @@
           "Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages": "[9.38.22291.6, 9.39.0)"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Entities.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Entities.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Entities.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Entities.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Microsoft.Dynamics.Commerce.Runtime.Localization.Services.Messages/9.38.22291.6": {
@@ -389,10 +449,14 @@
           "Microsoft.Dynamics.Commerce.Runtime.Services.Messages": "[9.38.22291.6, 9.39.0)"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Services.Messages.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Services.Messages.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Services.Messages.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Localization.Services.Messages.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Microsoft.Dynamics.Commerce.Runtime.Services.Messages/9.38.22291.6": {
@@ -403,10 +467,14 @@
           "Microsoft.Dynamics.Commerce.Runtime.Framework": "[10.6.22165.1, 10.7.0)"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Services.Messages.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Services.Messages.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Services.Messages.dll": {}
+          "lib/netstandard2.0/Microsoft.Dynamics.Commerce.Runtime.Services.Messages.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Microsoft.Extensions.DependencyInjection/1.1.1": {
@@ -416,10 +484,14 @@
           "NETStandard.Library": "1.6.1"
         },
         "compile": {
-          "lib/netstandard1.1/Microsoft.Extensions.DependencyInjection.dll": {}
+          "lib/netstandard1.1/Microsoft.Extensions.DependencyInjection.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.1/Microsoft.Extensions.DependencyInjection.dll": {}
+          "lib/netstandard1.1/Microsoft.Extensions.DependencyInjection.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Extensions.DependencyInjection.Abstractions/1.1.1": {
@@ -429,10 +501,14 @@
           "System.ComponentModel": "4.3.0"
         },
         "compile": {
-          "lib/netstandard1.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
+          "lib/netstandard1.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
+          "lib/netstandard1.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Extensions.Logging/1.1.2": {
@@ -443,10 +519,14 @@
           "NETStandard.Library": "1.6.1"
         },
         "compile": {
-          "lib/netstandard1.1/Microsoft.Extensions.Logging.dll": {}
+          "lib/netstandard1.1/Microsoft.Extensions.Logging.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.1/Microsoft.Extensions.Logging.dll": {}
+          "lib/netstandard1.1/Microsoft.Extensions.Logging.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Extensions.Logging.Abstractions/1.1.2": {
@@ -455,10 +535,14 @@
           "NETStandard.Library": "1.6.1"
         },
         "compile": {
-          "lib/netstandard1.1/Microsoft.Extensions.Logging.Abstractions.dll": {}
+          "lib/netstandard1.1/Microsoft.Extensions.Logging.Abstractions.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.1/Microsoft.Extensions.Logging.Abstractions.dll": {}
+          "lib/netstandard1.1/Microsoft.Extensions.Logging.Abstractions.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Extensions.Logging.Debug/1.1.2": {
@@ -468,10 +552,14 @@
           "NETStandard.Library": "1.6.1"
         },
         "compile": {
-          "lib/net451/Microsoft.Extensions.Logging.Debug.dll": {}
+          "lib/net451/Microsoft.Extensions.Logging.Debug.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net451/Microsoft.Extensions.Logging.Debug.dll": {}
+          "lib/net451/Microsoft.Extensions.Logging.Debug.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Extensions.Options/1.1.2": {
@@ -483,10 +571,14 @@
           "System.ComponentModel": "4.3.0"
         },
         "compile": {
-          "lib/netstandard1.0/Microsoft.Extensions.Options.dll": {}
+          "lib/netstandard1.0/Microsoft.Extensions.Options.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.0/Microsoft.Extensions.Options.dll": {}
+          "lib/netstandard1.0/Microsoft.Extensions.Options.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Extensions.Primitives/1.1.1": {
@@ -496,10 +588,14 @@
           "System.Runtime.CompilerServices.Unsafe": "4.3.0"
         },
         "compile": {
-          "lib/netstandard1.0/Microsoft.Extensions.Primitives.dll": {}
+          "lib/netstandard1.0/Microsoft.Extensions.Primitives.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.0/Microsoft.Extensions.Primitives.dll": {}
+          "lib/netstandard1.0/Microsoft.Extensions.Primitives.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.NETCore.Platforms/1.1.0": {
@@ -576,10 +672,14 @@
       "Newtonsoft.Json/11.0.2": {
         "type": "package",
         "compile": {
-          "lib/net45/Newtonsoft.Json.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/Newtonsoft.Json.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.AppContext/4.3.0": {
@@ -638,7 +738,9 @@
           "mscorlib"
         ],
         "compile": {
-          "ref/net461/System.ComponentModel.Annotations.dll": {}
+          "ref/net461/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
           "lib/net461/System.ComponentModel.Annotations.dll": {}
@@ -737,10 +839,14 @@
       "System.Diagnostics.DiagnosticSource/4.3.0": {
         "type": "package",
         "compile": {
-          "lib/net46/_._": {}
+          "lib/net46/_._": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net46/System.Diagnostics.DiagnosticSource.dll": {}
+          "lib/net46/System.Diagnostics.DiagnosticSource.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Diagnostics.Tools/4.3.0": {
@@ -922,7 +1028,9 @@
           "mscorlib"
         ],
         "compile": {
-          "ref/net46/System.Net.Http.dll": {}
+          "ref/net46/System.Net.Http.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
           "lib/net46/System.Net.Http.dll": {}
@@ -1028,10 +1136,14 @@
       "System.Runtime.CompilerServices.Unsafe/4.3.0": {
         "type": "package",
         "compile": {
-          "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll": {}
+          "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll": {}
+          "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Runtime.Extensions/4.3.0": {
@@ -1309,10 +1421,14 @@
           "mscorlib"
         ],
         "compile": {
-          "lib/net461/System.Threading.Tasks.Dataflow.dll": {}
+          "lib/net461/System.Threading.Tasks.Dataflow.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net461/System.Threading.Tasks.Dataflow.dll": {}
+          "lib/net461/System.Threading.Tasks.Dataflow.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Threading.Timer/4.3.0": {
@@ -5240,6 +5356,7 @@
       },
       "frameworks": {
         "net461": {
+          "targetAlias": "net461",
           "projectReferences": {}
         }
       },
@@ -5251,6 +5368,7 @@
     },
     "frameworks": {
       "net461": {
+        "targetAlias": "net461",
         "dependencies": {
           "Microsoft.Dynamics.Commerce.Runtime.DataServices": {
             "target": "Package",

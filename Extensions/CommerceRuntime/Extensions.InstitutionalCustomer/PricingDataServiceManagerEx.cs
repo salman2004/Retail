@@ -31,7 +31,7 @@ namespace CDC.Commerce.Runtime.InstitutionalCustomer
         public override object ReadRetailDiscounts(object items, object priceGroups, DateTimeOffset minActiveDate, DateTimeOffset maxActiveDate, string currencyCode, QueryResultSettings settings)
         {
             ReadOnlyCollection<PeriodicDiscount> retailDiscounts = base.ReadRetailDiscounts(items, priceGroups, minActiveDate, maxActiveDate, currencyCode, settings) as ReadOnlyCollection<PeriodicDiscount>;
-
+            this.Transaction.SetProperty("isTenderDiscount", false);
             retailDiscounts = SortDiscounts(retailDiscounts);
             retailDiscounts = FilterRebateQtyLimit(retailDiscounts);
             //retailDiscounts = FilterMonthlyCapDiscounts(retailDiscounts);
@@ -80,15 +80,15 @@ namespace CDC.Commerce.Runtime.InstitutionalCustomer
                     }
                 }
             }
+            
 
-
-            if (this.Transaction.SalesLines.Where(p=>!p.IsVoided).Sum(p => (p.Quantity * p.Price)) >= 5000)
+         /*   if (this.Transaction.SalesLines.Where(p=>!p.IsVoided).Sum(p => (p.Quantity * p.Price)) >= 5000 && this.Transaction.AmountDue < 5000)
             {
                 foreach(TenderDiscountRule td in tenderDiscounts)
                 {
-                    td.AmountThreshold = this.Transaction.AmountDue;
+                    td.AmountThreshold = this.Transaction.AmountDue - 100;
                 }
-            }
+            }*/
             return tenderDiscounts;
         }
         
@@ -491,8 +491,6 @@ namespace CDC.Commerce.Runtime.InstitutionalCustomer
                     }
                 }
                
-                
-                
                 return updatedDiscounts.AsReadOnly();
             }
             else

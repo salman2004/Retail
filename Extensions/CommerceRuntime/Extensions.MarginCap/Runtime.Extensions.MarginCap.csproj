@@ -17,6 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="RequestHandlers\MarginCapService.cs" />
     <Compile Remove="RequestHandlers\SortingServiceRequestHandler.cs" />
   </ItemGroup>
 

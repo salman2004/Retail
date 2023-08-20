@@ -55,8 +55,11 @@ namespace CDC.Commerce.Runtime.FBRIntegration
                                 taxLine.TaxBasis = maximumRetailPrice * salesLine.Quantity;
                             }
                             taxLines.Add(taxLine);
+
                         }
-                       // salesLine.NetAmountWithoutTax = maximumRetailPrice;
+
+                        salesLine.NetAmountWithoutTax = maximumRetailPrice;
+
                         salesLine.TaxAmount = taxLines.Sum(a => a.Amount);
                         salesLine.TaxLines = taxLines;
 
@@ -104,21 +107,30 @@ namespace CDC.Commerce.Runtime.FBRIntegration
                     
                 }                
             }
-
-            if(serviceResponse.Transaction.GetProperty("isTenderDiscount")?.ToString() == "false")
+           var checkVale = serviceResponse.Transaction.GetProperty("isTenderDiscount").ToString();
+            
+           if (checkVale.ToLower() == "false")
             { 
             CalculateDiscountsServiceRequest calculateDiscountsRequest = new CalculateDiscountsServiceRequest(serviceResponse.Transaction);
-            GetPriceServiceResponse calculateDiscountResponse  = await request.RequestContext.Runtime.ExecuteAsync<GetPriceServiceResponse>(calculateDiscountsRequest,request.RequestContext);
+            GetPriceServiceResponse calculateDiscountResponse  = await request.RequestContext.Runtime.ExecuteAsync<GetPriceServiceResponse>(calculateDiscountsRequest,request.RequestContext).ConfigureAwait(false);
             
             serviceResponse.Transaction.SalesLines = calculateDiscountResponse.Transaction.SalesLines;
                 serviceResponse.Transaction.SetProperty("isTenderDiscount",false);
             }
+            
+
             /*
             calculateTax.Transaction.DiscountAmount = calculateTax.Transaction.ActiveSalesLines.Sum(a => a.DiscountAmount);
             calculateTax.Transaction.DiscountAmountWithoutTax = calculateTax.Transaction.ActiveSalesLines.Sum(a => a.DiscountAmountWithoutTax);
             calculateTax.Transaction.PeriodicDiscountAmount = calculateTax.Transaction.ActiveSalesLines.Sum(a => a.PeriodicDiscount);
             calculateTax.Transaction.TenderDiscountAmount = calculateTax.Transaction.ActiveSalesLines.Sum(a => a.TenderDiscountAmount);
             */
+
+           // foreach(var  salesLine in serviceResponse.Transaction.SalesLines)
+           // serviceResponse.Transaction.NetAmount = serviceResponse.Transaction.SalesLines.Where(p=>!p.IsVoided).Sum(p=>p.NetAmount);
+           // serviceResponse.Transaction.NetAmountWithoutTax = serviceResponse.Transaction.SalesLines.Where(p => !p.IsVoided).Sum(p => p.NetAmountWithoutTax);
+           // serviceResponse.Transactionfor.NetAmountWithoutTax = serviceResponse.Transaction.SalesLines.Where(p => !p.IsVoided).Sum(p => p.NetAmountWithAllInclusiveTax);
+
             return serviceResponse;
         }
         public async Task<Response> ExecuteBaseRequestAsync(Request request)

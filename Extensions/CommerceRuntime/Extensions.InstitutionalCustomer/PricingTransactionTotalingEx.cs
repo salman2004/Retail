@@ -16,7 +16,10 @@
 
         public PE.DiscountData.TransactionTotals CalculateTransactionTotals(SalesTransaction transaction)
         {
-            CalculateSalesTransactionServiceRequest request = new CalculateSalesTransactionServiceRequest(transaction, CalculationModes.Taxes | CalculationModes.Totals | CalculationModes.Deposit | CalculationModes.AmountDue);
+            CalculateSalesTransactionServiceRequest request = new CalculateSalesTransactionServiceRequest(transaction, CalculationModes.Taxes | CalculationModes.Totals | CalculationModes.Deposit | CalculationModes.AmountDue | CalculationModes.Prices );
+           
+         //   CalculateSalesTransactionServiceRequest request = new CalculateSalesTransactionServiceRequest(transaction, CalculationModes.All);
+
             transaction = RequestContext.ExecuteAsync<CalculateSalesTransactionServiceResponse>(request).Result.Transaction;
             return new PE.DiscountData.TransactionTotals
             {

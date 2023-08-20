@@ -1,5 +1,7 @@
 ﻿namespace CDC.Commerce.Runtime.InstitutionalCustomer
 {
+    using CDC.Commerce.Runtime.MarginCap.Entities;
+    using CDC.CommerceRuntime.Entities.DataModel;
     using Microsoft.Dynamics.Commerce.Runtime;
     using Microsoft.Dynamics.Commerce.Runtime.Data;
     using Microsoft.Dynamics.Commerce.Runtime.DataModel;
@@ -56,7 +58,7 @@
             }
         }
 
-        private static async Task<GetPriceServiceResponse> CalculateDiscountAsync(CalculateDiscountsServiceRequest request)
+        private async Task<GetPriceServiceResponse> CalculateDiscountAsync(CalculateDiscountsServiceRequest request)
         {
             // PE.PricingEngineExtensionRepository
             ChannelConfiguration channelConfiguration = request.RequestContext.GetChannelConfiguration();
@@ -76,24 +78,33 @@
                 request.RequestContext.GetNowInChannelTimeZone(),
                 new PricingTransactionTotalingEx(request.RequestContext));
 
-    
+         //  var resp = await this.ExecuteNextAsync<GetPriceServiceResponse>(request);
+
+
             Collection<SalesLine> salesLinesBeforeReorderedDiscounts = request.Transaction.SalesLines;
 
             SortSalesLines(request.Transaction.SalesLines, request);
-
+            calculateMRPGST1Discount(request);
             FilterMonthlyCapDiscounts(request);
+           await filterMarginCapDiscounts(request);
 
             Collection<SalesLine> salesLinesAfterReorderedDiscounts = request.Transaction.SalesLines;
 
             request.Transaction.SalesLines = new Collection<SalesLine>();
             foreach (SalesLine salesLine in salesLinesBeforeReorderedDiscounts)
             {
-                SalesLine salesLineToReorder = salesLinesAfterReorderedDiscounts.First(p=>p.LineId == salesLine.LineId);
+                SalesLine salesLineToReorder = salesLinesAfterReorderedDiscounts.First(p => p.LineId == salesLine.LineId);
                 request.Transaction.SalesLines.Add(salesLineToReorder);
             }
 
+            applyTenderDiscountMax(request);
 
-             applyTenderDiscount(request);
+            request.Transaction.DiscountAmount = request.Transaction.SalesLines.Where(sl => !sl.IsVoided).Sum(a => a.DiscountAmount);
+            request.Transaction.DiscountAmountWithoutTax = request.Transaction.SalesLines.Where(sl => !sl.IsVoided).Sum(a => a.DiscountAmountWithoutTax);
+            request.Transaction.PeriodicDiscountAmount = request.Transaction.SalesLines.Where(sl => !sl.IsVoided).Sum(a => a.PeriodicDiscount);
+            request.Transaction.TenderDiscountAmount = request.Transaction.SalesLines.Where(sl => !sl.IsVoided).Sum(a => a.TenderDiscountAmount);
+
+
             request.Transaction.IsDiscountFullyCalculated = !request.CalculateSimpleDiscountOnly;
 
             request.Transaction.SetProperty("CSDstoreId", request.RequestContext.GetDeviceConfiguration().StoreNumber);
@@ -114,65 +125,100 @@
             return new GetPriceServiceResponse(request.Transaction);
         }
 
+
+        private static void calculateMRPGST1Discount(CalculateDiscountsServiceRequest request)
+        {
+            foreach(var item in request.Transaction.SalesLines) {
+                if (!item.IsVoided) { 
+                var applicableDiscountAmount = ( item.Price*item.Quantity);
+                var applicableOnMRPDiscountAmount = ((item.Price * item.Quantity)-item.TaxAmount);
+            foreach (var discount in item.DiscountLines.Where(d=>d.DiscountLineType== DiscountLineType.PeriodicDiscount))
+            {
+
+                if ((Convert.ToInt32(item.GetProperty("CSDGSTYPEU"))) == 1)
+                {
+                    decimal discountAmount = ((applicableOnMRPDiscountAmount * (discount.Percentage / 100)));
+
+
+
+                    discount.Percentage = (((discountAmount / applicableDiscountAmount) * 100));
+                    discount.SetProperty("PartialDiscountPCT", 0);// retailDiscount.Percentage);
+                    discount.Amount = discountAmount;
+                    discount.EffectiveAmount = discountAmount;
+                    discount.EffectivePercentage = (((discountAmount / applicableDiscountAmount) * 100)); //retailDiscount.Percentage;
+
+
+                }
+            }
+                }
+            }
+        }
         private static void applyTenderDiscount(CalculateDiscountsServiceRequest request)
         {
             GetLoyaltyCardDetails(out string cardNumber, out decimal cardBalance, request.RequestContext, out DateTime lastTransactionDateTime, request);
 
-
-
             GetTenderDiscountOfferIds(request.RequestContext, out List<string> offerIds);
-                        GetTenderDiscountValue(request.RequestContext, out decimal maxDiscount, out decimal minDiscount);
+            GetTenderDiscountValue(request.RequestContext, out decimal maxDiscount, out decimal minDiscount);
 
-                        decimal totalTenderTypeAmount = request.Transaction.SalesLines.Where(p=>!p.IsVoided).Sum(t=>t.Quantity*t.Price);
-            
-            decimal tenderPerLine =0;
-            if(request.Transaction.AmountPaid >0)
-             tenderPerLine = request.Transaction.AmountPaid/request.Transaction.SalesLines.Where(p=>!p.IsVoided).Count();
+            decimal totalTenderTypeAmount = request.Transaction.SalesLines.Where(p => !p.IsVoided).Sum(t => t.Quantity * t.Price);
 
-            foreach(var salesLine in request.Transaction.SalesLines) { 
-                var applicableDiscountAmount = salesLine.Quantity*salesLine.Price;
-                var applicableOnMRPDiscountAmount = salesLine.Quantity*salesLine.Price - salesLine.TaxAmount;
-                cardBalance -= salesLine.                                                                                                                                                                          NetAmount - salesLine.DiscountLines.Where(g=>g.DiscountLineType == DiscountLineType.TenderTypeDiscount).Sum(p=>p.Amount) ;
-                      
-                
+            decimal tenderPerLine = 0;
+            if (request.Transaction.AmountPaid > 0)
+            {
+                tenderPerLine = request.Transaction.AmountPaid / request.Transaction.SalesLines.Where(p => !p.IsVoided).Count();
+            }
+            decimal amountDue=0;
+            decimal amountDuePerLine = 0;
+            if (request.Transaction.SalesLines.Count > 0) { 
+             amountDue = request.Transaction.AmountDue;
+             amountDuePerLine = amountDue / request.Transaction.SalesLines.Where(p => !p.IsVoided).Count();
+            }
+            foreach (SalesLine salesLine in request.Transaction.SalesLines)
+            {
+                if (!salesLine.IsVoided) { 
+                decimal applicableDiscountAmount = salesLine.Quantity * salesLine.Price;
+                decimal applicableOnMRPDiscountAmount = salesLine.Quantity * salesLine.Price - salesLine.TaxAmount;
+                cardBalance -= salesLine.NetAmount - salesLine.DiscountLines.Where(g => g.DiscountLineType == DiscountLineType.TenderTypeDiscount).Sum(p => p.Amount);
+
+
                 if (totalTenderTypeAmount < maxDiscount)
-                        {
-                    
-                    foreach (var item in salesLine.DiscountLines.Where(a => a.DiscountLineType == DiscountLineType.TenderTypeDiscount))
+                {
+                    var otherDiscountAmount = salesLine.TotalDiscount;// - salesLine.TenderDiscountAmount;
+
+                    foreach (DiscountLine item in salesLine.DiscountLines.Where(a => a.DiscountLineType == DiscountLineType.TenderTypeDiscount))
                     {
-                        /* if (cardBalance <= 0)
-                         {
-                             var discAmount = (salesLine.Quantity*salesLine.Price) - salesLine.DiscountLines.Where(p=>p.DiscountLineType != DiscountLineType.TenderTypeDiscount).Sum(t=>t.Amount);
+                            /* if (cardBalance <= 0)
+                             {
+                                 var discAmount = (salesLine.Quantity*salesLine.Price) - salesLine.DiscountLines.Where(p=>p.DiscountLineType != DiscountLineType.TenderTypeDiscount).Sum(t=>t.Amount);
 
-                             item.EffectiveAmount = discAmount * (item.Percentage / 100); //((((salesLine.Price * salesLine.Quantity) -(salesLine.TaxAmount) - (salesLine.DiscountLines.Where(d => !offerIds.Contains(d.OfferId)).Sum(a => a.EffectiveAmount))) * (item.Percentage / 100)));
-                             item.Amount = item.EffectiveAmount;
-                         }
-                         if ((Convert.ToInt32(salesLine.GetProperty("CSDGSTYPEU"))) == 1)
-                         {
-                             item.EffectiveAmount = salesLine.NetAmount * (item.Percentage/100); //((((salesLine.Price * salesLine.Quantity) -(salesLine.TaxAmount) - (salesLine.DiscountLines.Where(d => !offerIds.Contains(d.OfferId)).Sum(a => a.EffectiveAmount))) * (item.Percentage / 100)));
-                             item.Amount = item.EffectiveAmount;
-                         }*/
-
-                        if(totalTenderTypeAmount >= item.ThresholdAmountRequired)
-                        {
-                            item.ThresholdAmountRequired = request.Transaction.AmountDue;
-                        }
-                        var discAmount = ((salesLine.Quantity * salesLine.Price) - tenderPerLine) * (item.Percentage/100);
-
-                        item.EffectiveAmount = discAmount;
-                        item.Amount =discAmount;
+                                 item.EffectiveAmount = discAmount * (item.Percentage / 100); //((((salesLine.Price * salesLine.Quantity) -(salesLine.TaxAmount) - (salesLine.DiscountLines.Where(d => !offerIds.Contains(d.OfferId)).Sum(a => a.EffectiveAmount))) * (item.Percentage / 100)));
+                                 item.Amount = item.EffectiveAmount;
+                             }
+                             if ((Convert.ToInt32(salesLine.GetProperty("CSDGSTYPEU"))) == 1)
+                             {
+                                 item.EffectiveAmount = salesLine.NetAmount * (item.Percentage/100); //((((salesLine.Price * salesLine.Quantity) -(salesLine.TaxAmount) - (salesLine.DiscountLines.Where(d => !offerIds.Contains(d.OfferId)).Sum(a => a.EffectiveAmount))) * (item.Percentage / 100)));
+                                 item.Amount = item.EffectiveAmount;
+                             }*/
 
 
+                            // decimal discAmount = (((salesLine.Quantity * salesLine.Price)) - otherDiscountAmount - tenderPerLine) * (item.Percentage / 100);
 
+                            //    decimal discAmount = (amountDuePerLine - tenderPerLine) * (item.Percentage / 100);
+
+                                decimal discAmount = (amountDuePerLine ) * (item.Percentage / 100);
+
+                            //if ((Convert.ToInt32(salesLine.GetProperty("CSDGSTYPEU"))) == 1)
+                            //{
+                            //    discAmount = (((salesLine.Quantity * salesLine.Price)+salesLine.TaxAmount) - tenderPerLine) * (item.Percentage / 100);
+                            //}
+                            item.EffectiveAmount = discAmount;
+                        item.Amount = discAmount;
                     }
-
-                  
-
                 }
                 else
                 {
-                    var discountPerLine = minDiscount/ request.Transaction.SalesLines.Where(p => !p.IsVoided).Count();
-                    foreach (var item in salesLine.DiscountLines.Where(a => a.DiscountLineType == DiscountLineType.TenderTypeDiscount))
+                    decimal discountPerLine = minDiscount / request.Transaction.SalesLines.Where(p => !p.IsVoided).Count();
+                    foreach (DiscountLine item in salesLine.DiscountLines.Where(a => a.DiscountLineType == DiscountLineType.TenderTypeDiscount))
                     {
                         /* if (cardBalance <= 0)
                          {
@@ -186,25 +232,77 @@
                              item.EffectiveAmount = salesLine.NetAmount * (item.Percentage/100); //((((salesLine.Price * salesLine.Quantity) -(salesLine.TaxAmount) - (salesLine.DiscountLines.Where(d => !offerIds.Contains(d.OfferId)).Sum(a => a.EffectiveAmount))) * (item.Percentage / 100)));
                              item.Amount = item.EffectiveAmount;
                          }*/
-                        var discAmount = discountPerLine;
+                        decimal discAmount = discountPerLine;
 
                         item.EffectiveAmount = discAmount;
                         item.Amount = discAmount;
-
-
-
                     }
-
-
                 }
-
-
-
-
                 salesLine.DiscountAmount = salesLine.DiscountLines.Sum(a => a.EffectiveAmount);
-                        salesLine.DiscountAmountWithoutTax = salesLine.DiscountLines.Sum(a => a.DiscountCost);
-                        salesLine.PeriodicDiscount = salesLine.DiscountLines.Where(a => a.DiscountLineType == DiscountLineType.PeriodicDiscount).Sum(line => line.EffectiveAmount);
-                        salesLine.TenderDiscountAmount = salesLine.DiscountLines.Where(a => a.DiscountLineType == DiscountLineType.TenderTypeDiscount).Sum(line => line.EffectiveAmount);
+                salesLine.DiscountAmountWithoutTax = salesLine.DiscountLines.Sum(a => a.DiscountCost);
+                salesLine.PeriodicDiscount = salesLine.DiscountLines.Where(a => a.DiscountLineType == DiscountLineType.PeriodicDiscount).Sum(line => line.EffectiveAmount);
+                salesLine.TenderDiscountAmount = salesLine.DiscountLines.Where(a => a.DiscountLineType == DiscountLineType.TenderTypeDiscount).Sum(line => line.EffectiveAmount);
+            }
+            }
+            request.Transaction.DiscountAmount = request.Transaction.SalesLines.Where(sl => !sl.IsVoided).Sum(a => a.DiscountAmount);
+            request.Transaction.DiscountAmountWithoutTax = request.Transaction.SalesLines.Where(sl => !sl.IsVoided).Sum(a => a.DiscountAmountWithoutTax);
+            request.Transaction.PeriodicDiscountAmount = request.Transaction.SalesLines.Where(sl => !sl.IsVoided).Sum(a => a.PeriodicDiscount);
+            request.Transaction.TenderDiscountAmount = request.Transaction.SalesLines.Where(sl => !sl.IsVoided).Sum(a => a.TenderDiscountAmount);
+
+
+        }
+        private static void applyTenderDiscountMax(CalculateDiscountsServiceRequest request)
+        {
+           
+            GetLoyaltyCardDetails(out string cardNumber, out decimal cardBalance, request.RequestContext, out DateTime lastTransactionDateTime, request);
+
+            GetTenderDiscountOfferIds(request.RequestContext, out List<string> offerIds);
+            GetTenderDiscountValue(request.RequestContext, out decimal maxDiscount, out decimal minDiscount);
+
+            decimal totalTenderTypeAmount = request.Transaction.AmountDue; //request.Transaction.SalesLines.Where(p => !p.IsVoided).Sum(t => t.Quantity * t.Price);
+
+            if(totalTenderTypeAmount < maxDiscount)
+            {
+                return;
+            }
+            decimal tenderPerLine = 0;
+            if (request.Transaction.AmountPaid > 0)
+            {
+                tenderPerLine = (request.Transaction.AmountPaid / request.Transaction.SalesLines.Where(p => !p.IsVoided).Count());
+            }
+            decimal amountDue = 0;
+            decimal amountDuePerLine = 0;
+            if (request.Transaction.SalesLines.Count > 0)
+            {
+                amountDue = (request.Transaction.AmountDue);
+                amountDuePerLine =(amountDue / request.Transaction.SalesLines.Where(p => !p.IsVoided).Count());
+            }
+            foreach (SalesLine salesLine in request.Transaction.SalesLines)
+            {
+                if (!salesLine.IsVoided)
+                {
+
+
+                    if (totalTenderTypeAmount >= maxDiscount)
+                    {
+                   
+                        decimal discountPerLine = (minDiscount / request.Transaction.SalesLines.Where(p => !p.IsVoided).Count());
+                        decimal lineAskariDiscountPercentage = ((salesLine.Quantity*salesLine.Price)/ request.Transaction.SalesLines.Where(p => !p.IsVoided).Sum(t => t.Quantity * t.Price));
+                        decimal lineAskaruDiscountAmount = ((lineAskariDiscountPercentage*minDiscount));
+                        foreach (DiscountLine item in salesLine.DiscountLines.Where(a => a.DiscountLineType == DiscountLineType.TenderTypeDiscount))
+                        {
+                         
+                            decimal discAmount = (lineAskaruDiscountAmount);
+
+                            item.EffectiveAmount = discAmount;
+                            item.Amount = discAmount;
+                        
+                        }
+                    salesLine.DiscountAmount = salesLine.DiscountLines.Sum(a => a.EffectiveAmount);
+                    salesLine.DiscountAmountWithoutTax = salesLine.DiscountLines.Sum(a => a.DiscountCost);
+                    salesLine.PeriodicDiscount = salesLine.DiscountLines.Where(a => a.DiscountLineType == DiscountLineType.PeriodicDiscount).Sum(line => line.EffectiveAmount);
+                    salesLine.TenderDiscountAmount = salesLine.DiscountLines.Where(a => a.DiscountLineType == DiscountLineType.TenderTypeDiscount).Sum(line => line.EffectiveAmount);
+                }
             }
             request.Transaction.DiscountAmount = request.Transaction.SalesLines.Where(sl => !sl.IsVoided).Sum(a => a.DiscountAmount);
             request.Transaction.DiscountAmountWithoutTax = request.Transaction.SalesLines.Where(sl => !sl.IsVoided).Sum(a => a.DiscountAmountWithoutTax);
@@ -214,6 +312,77 @@
 
         }
 
+            
+                //RetailLogger log = new RetailLogger();
+           
+            //lo("total due "+ request.Transaction.AmountDue.ToString());
+
+        }
+
+        private static void applyTenderDiscountMarginal(CalculateDiscountsServiceRequest request)
+        {
+
+            GetLoyaltyCardDetails(out string cardNumber, out decimal cardBalance, request.RequestContext, out DateTime lastTransactionDateTime, request);
+
+            GetTenderDiscountOfferIds(request.RequestContext, out List<string> offerIds);
+            GetTenderDiscountValue(request.RequestContext, out decimal maxDiscount, out decimal minDiscount);
+
+            decimal totalTenderTypeAmount = request.Transaction.AmountDue; //request.Transaction.SalesLines.Where(p => !p.IsVoided).Sum(t => t.Quantity * t.Price);
+
+            if (totalTenderTypeAmount > maxDiscount)
+            {
+                return;
+            }
+            decimal tenderPerLine = 0;
+            if (request.Transaction.AmountPaid > 0)
+            {
+                tenderPerLine = (request.Transaction.AmountPaid / request.Transaction.SalesLines.Where(p => !p.IsVoided).Count());
+            }
+           
+            foreach (SalesLine salesLine in request.Transaction.SalesLines)
+            {
+                if (!salesLine.IsVoided)
+                {
+
+
+                    if (totalTenderTypeAmount < maxDiscount)
+                    {
+
+                 
+                        foreach (DiscountLine item in salesLine.DiscountLines.Where(a => a.DiscountLineType == DiscountLineType.TenderTypeDiscount))
+                        {
+
+                            minDiscount = (request.Transaction.AmountDue * item.Percentage)/100;
+                            decimal discountPerLine = (minDiscount / request.Transaction.SalesLines.Where(p => !p.IsVoided).Count());
+                            decimal lineAskariDiscountPercentage = ((salesLine.Quantity * salesLine.Price) / request.Transaction.SalesLines.Where(p => !p.IsVoided).Sum(t => t.Quantity * t.Price));
+                            decimal lineAskaruDiscountAmount = ((lineAskariDiscountPercentage * minDiscount));
+
+                            decimal discAmount = (lineAskaruDiscountAmount);
+
+                            item.EffectiveAmount = discAmount;
+                            item.Amount = discAmount;
+
+                        }
+                        salesLine.DiscountAmount = salesLine.DiscountLines.Sum(a => a.EffectiveAmount);
+                        salesLine.DiscountAmountWithoutTax = salesLine.DiscountLines.Sum(a => a.DiscountCost);
+                        salesLine.PeriodicDiscount = salesLine.DiscountLines.Where(a => a.DiscountLineType == DiscountLineType.PeriodicDiscount).Sum(line => line.EffectiveAmount);
+                        salesLine.TenderDiscountAmount = salesLine.DiscountLines.Where(a => a.DiscountLineType == DiscountLineType.TenderTypeDiscount).Sum(line => line.EffectiveAmount);
+                    }
+                }
+                request.Transaction.DiscountAmount = request.Transaction.SalesLines.Where(sl => !sl.IsVoided).Sum(a => a.DiscountAmount);
+                request.Transaction.DiscountAmountWithoutTax = request.Transaction.SalesLines.Where(sl => !sl.IsVoided).Sum(a => a.DiscountAmountWithoutTax);
+                request.Transaction.PeriodicDiscountAmount = request.Transaction.SalesLines.Where(sl => !sl.IsVoided).Sum(a => a.PeriodicDiscount);
+                request.Transaction.TenderDiscountAmount = request.Transaction.SalesLines.Where(sl => !sl.IsVoided).Sum(a => a.TenderDiscountAmount);
+
+
+            }
+
+
+            //RetailLogger log = new RetailLogger();
+
+            //lo("total due "+ request.Transaction.AmountDue.ToString());
+
+        }
         private static void GetTenderDiscountOfferIds(RequestContext context, out List<string> offerIds)
         {
             offerIds = new List<string>();
@@ -233,7 +402,7 @@
         private static void GetTenderDiscountValue(RequestContext context, out decimal maxDiscount, out decimal minDiscount)
         {
             maxDiscount = decimal.Zero;
-            minDiscount=decimal.Zero;
+            minDiscount = decimal.Zero;
             // Get the configuration parameters
             GetConfigurationParametersDataRequest configurationRequest = new GetConfigurationParametersDataRequest(context.GetChannelConfiguration().RecordId);
             EntityDataServiceResponse<RetailConfigurationParameter> configurationResponse = context.ExecuteAsync<EntityDataServiceResponse<RetailConfigurationParameter>>(configurationRequest).Result;
@@ -370,12 +539,12 @@
               || !request.Transaction.AffiliationLoyaltyTierLines.Any(alt => alt.AffiliationType == RetailAffiliationType.Loyalty))
             {
                 //this.MonthlyLimitUsed = decimal.Zero;
-                return ;
+                return;
             }
 
 
             SalesAffiliationLoyaltyTier affiliationLoyaltyTier = request.Transaction.AffiliationLoyaltyTierLines.FirstOrDefault(alt => alt.AffiliationType == RetailAffiliationType.Loyalty);
-            
+
             GetLoyaltyDetails(request.RequestContext, affiliationLoyaltyTier.AffiliationId, out decimal loyaltyLimit, out bool checkLoyaltyLimit, request);
             request.Transaction.SetProperty("checkLoyaltyLimit", checkLoyaltyLimit);
 
@@ -398,8 +567,8 @@
                 {
                     bool allowOnce = false;
                     decimal splitAmount = 0;
-                    decimal applicableDiscountAmount = salesLine.Quantity * salesLine.Price;
-                    decimal applicableOnMRPDiscountAmount = salesLine.Quantity * salesLine.Price;
+                    decimal applicableDiscountAmount = (salesLine.Quantity * salesLine.Price);
+                    decimal applicableOnMRPDiscountAmount = (salesLine.Quantity * salesLine.Price);
                     if ((Convert.ToInt32(salesLine.GetProperty("CSDGSTYPEU"))) == 1)
                     {
                         applicableOnMRPDiscountAmount -= salesLine.TaxAmount;
@@ -421,19 +590,19 @@
                         {
                             if (splitAmount == 0)
                             {
-                                splitAmount = cardBalance / 2;
+                                splitAmount = decimal.Round(cardBalance / 2,2, MidpointRounding.AwayFromZero);
 
                             }
-                            decimal discountAmount = (cardBalance * (retailDiscount.Percentage / 100));
+                            decimal discountAmount = decimal.Round((cardBalance * (retailDiscount.Percentage / 100)),2);
 
+                          //  discountAmount = (discountAmount);
 
-
-                            retailDiscount.Percentage = ((discountAmount / applicableDiscountAmount) * 100);
+                            retailDiscount.Percentage = (((discountAmount / applicableDiscountAmount) * 100));
                             retailDiscount.SetProperty("PartialDiscountPCT", 0);// retailDiscount.Percentage);
                             retailDiscount.Amount = discountAmount;
                             retailDiscount.EffectiveAmount = discountAmount;
-                            retailDiscount.EffectivePercentage = ((discountAmount / applicableDiscountAmount) * 100); //retailDiscount.Percentage;
-
+                            retailDiscount.EffectivePercentage =(((discountAmount / applicableDiscountAmount) * 100)); //retailDiscount.Percentage;
+                            
 
                             cartTotal += cardBalance;
                             // cardBalance -= applicableDiscountAmount;
@@ -446,10 +615,11 @@
                             {
                                 allowOnce = true;
                             }
+                            
                         }
                         else
                         {
-                            if ((Convert.ToInt32(salesLine.GetProperty("CSDGSTYPEU"))) == 1)
+                           /* if ((Convert.ToInt32(salesLine.GetProperty("CSDGSTYPEU"))) == 1)
                             {
                                 decimal discountAmount = (applicableOnMRPDiscountAmount * (retailDiscount.Percentage / 100));
 
@@ -462,10 +632,10 @@
                                 retailDiscount.EffectivePercentage = ((discountAmount / applicableDiscountAmount) * 100); //retailDiscount.Percentage;
 
 
-                            }
+                            }*/
                             cartTotal += salesLine.NetAmount;
 
-                            //salesLine.NetAmount+salesLine.DiscountAmount;
+                            // salesLine.NetAmount+salesLine.DiscountAmount;
                             // itemPriceTotal.Add(string.Format("{0}::{1}", retailDiscount.ItemId, retailDiscount.InventoryDimensionId), lineTotal);
                             // filteredRetailDiscounts.Add(retailDiscount);
                         }
@@ -506,7 +676,7 @@
 
             using (DatabaseContext databaseContext = new DatabaseContext(context))
             {
-                var query = new SqlPagedQuery(QueryResultSettings.SingleRecord)
+                SqlPagedQuery query = new SqlPagedQuery(QueryResultSettings.SingleRecord)
                 {
                     DatabaseSchema = "ext",
                     Select = new ColumnSet("CDCPROTECTMONTHLYCAT", "CDCMONTHLYCATLIMIT"),
@@ -518,7 +688,7 @@
 
                 try
                 {
-                    var loyaltyDetail = databaseContext.ReadEntity<ExtensionsEntity>(query);
+                    PagedResult<ExtensionsEntity> loyaltyDetail = databaseContext.ReadEntity<ExtensionsEntity>(query);
                     loyaltyLimit = Convert.ToDecimal(Convert.ToString(loyaltyDetail?.FirstOrDefault()?.GetProperty("CDCMONTHLYCATLIMIT") ?? decimal.Zero));
                     checkLoyaltyLimit = Convert.ToBoolean(Convert.ToInt32(Convert.ToString(loyaltyDetail?.FirstOrDefault()?.GetProperty("CDCPROTECTMONTHLYCAT") ?? decimal.Zero)));
 
@@ -527,7 +697,7 @@
                         request.Transaction.SetProperty("CSDMonthlyLimitUsed", "00000");
                         request.Transaction.SetProperty("CSDCardBalance", "00000");
                         request.Transaction.SetProperty("EmployeeCreditLimit", "00000");
-                       // this.MonthlyLimitUsed = decimal.Zero;
+                        // this.MonthlyLimitUsed = decimal.Zero;
                     }
                 }
                 catch (Exception)
@@ -635,5 +805,189 @@
                 }
             }
         }
+
+
+        public async Task filterMarginCapDiscounts(CalculateDiscountsServiceRequest request)
+        {
+
+            GetMarginCapOnProductAndProductCategory capOnProductAndProductCategory;
+            GetMarginCapOnStoreAndLoyaltyProgram getMarginCapOnStoreAndLoyalty;
+            CalculateDiscountsServiceRequest discountsServiceRequest;
+
+            bool excludeDiscount, isMarginCapEnabledOnProductAndProductCategory, isMarginCapEnabledForStoreAndLoyaltyProgram = false;
+            decimal marginCapPercentageOnStoreAndEntity, marginCapPercentageOnProductAndProductCategory = 0.00M;
+
+            discountsServiceRequest = (CalculateDiscountsServiceRequest)request;
+            discountsServiceRequest.Transaction.SetProperty("CSDstoreId", request.RequestContext.GetDeviceConfiguration().StoreNumber);
+
+            if (discountsServiceRequest.Transaction.AffiliationLoyaltyTierLines.Where(a => a.AffiliationType == RetailAffiliationType.Loyalty).Count() == 0)
+            {
+                return;
+            }
+
+            getMarginCapOnStoreAndLoyalty = GetMarginCapOnStoreAndLoyaltyProgram(request);
+            isMarginCapEnabledForStoreAndLoyaltyProgram = Convert.ToBoolean(Convert.ToInt32(getMarginCapOnStoreAndLoyalty?.GetProperty("ISMARGINCAPALLOWEDONSTOREANDLOYALTY")?.ToString() ?? decimal.Zero.ToString()));
+            marginCapPercentageOnStoreAndEntity = (Convert.ToDecimal(getMarginCapOnStoreAndLoyalty?.GetProperty("MARGINCAPPERCENTAGE")?.ToString() ?? decimal.Zero.ToString()));
+            GetTenderDiscountOfferIds(request.RequestContext, out List<string> offerIds);
+
+            if (!isMarginCapEnabledForStoreAndLoyaltyProgram)
+            {
+                return;
+            }
+
+            foreach (var item in request.Transaction.SalesLines)
+            {
+
+                if (item.IsReturnLine() || item.IsVoided)
+                {
+                    continue;
+                }
+                else
+                {
+                    capOnProductAndProductCategory = GetMarginCapOnProductAndProductCategory(request, item.ItemId,  await GetProductIdAsync(request, item));
+                    isMarginCapEnabledOnProductAndProductCategory = Convert.ToBoolean(Convert.ToInt32(capOnProductAndProductCategory?.GetProperty("ISMARGINCAPALLOWED")?.ToString() ?? decimal.Zero.ToString()));
+                    excludeDiscount = Convert.ToBoolean(Convert.ToInt32(capOnProductAndProductCategory?.GetProperty("EXCLUDEDISCOUNT")?.ToString() ?? decimal.Zero.ToString()));
+                    marginCapPercentageOnProductAndProductCategory = (Convert.ToDecimal(capOnProductAndProductCategory?.GetProperty("MARGINCAPPERCENTAGE")?.ToString() ?? decimal.Zero.ToString()));
+
+
+                    if (excludeDiscount)
+                    {
+                        item.DiscountLines.Clear();
+                        item.DiscountAmount = 0;
+                        item.DiscountAmountWithoutTax = 0;
+                        item.PeriodicDiscount = 0;
+                        item.PeriodicPercentageDiscount = 0;
+                    }
+                    if (isMarginCapEnabledOnProductAndProductCategory)
+                    {
+                        if (marginCapPercentageOnProductAndProductCategory == 0)
+                        {
+                            marginCapPercentageOnProductAndProductCategory = marginCapPercentageOnStoreAndEntity;
+                        }
+
+                        // decimal totalDiscountPercentageWithoutTenderDiscount = item.DiscountLines.Where(a => !offerIds.Contains(a.OfferId)).Sum(a => a.EffectivePercentage);
+                        decimal totalDiscountPercentageWithoutTenderDiscount = item.DiscountLines.Where(a => a.DiscountLineType != DiscountLineType.TenderTypeDiscount ).Sum(a => a.EffectivePercentage);
+
+                        var costPrice = GetCostPrice(item, request);
+                        var grossMargin = CalculateGrossMargin(costPrice, item?.Price ?? decimal.Zero);
+                        grossMargin = (Convert.ToDecimal(String.Format("{0:0.00}", grossMargin)));
+
+                        if ((grossMargin - marginCapPercentageOnProductAndProductCategory) <= totalDiscountPercentageWithoutTenderDiscount)
+                        {
+                            decimal newDiscount = (grossMargin - marginCapPercentageOnProductAndProductCategory);
+
+                            if (newDiscount < Decimal.Zero)
+                            {
+                                newDiscount = Decimal.Zero;
+                            }
+
+                            foreach (var discountLine in item.PeriodicDiscountLines())
+                            {
+                                    discountLine.EffectivePercentage = newDiscount;
+                                    discountLine.Percentage = newDiscount;
+                                    discountLine.Amount = (item.AgreementPrice * item.Quantity * (discountLine.EffectivePercentage / 100));
+                                    discountLine.EffectiveAmount = (item.AgreementPrice * item.Quantity * (discountLine.EffectivePercentage / 100));
+                            }
+
+                            item.DiscountAmount = item.DiscountLines.Sum(a => a.EffectiveAmount);
+                            item.DiscountAmountWithoutTax = item.DiscountAmount - item.TaxAmount;
+                            item.PeriodicDiscount = item.DiscountLines.Where(a => a.DiscountLineType == DiscountLineType.PeriodicDiscount).Sum(line => line.EffectiveAmount);
+                            item.TenderDiscountAmount = item.DiscountLines.Where(a => a.DiscountLineType == DiscountLineType.TenderTypeDiscount).Sum(line => line.EffectiveAmount);
+
+                            item.NetPrice -= item.DiscountAmount;
+                    
+                        }
+                    }
+                }
+
+
+            }
+
+            applyTenderDiscountMarginal(request);
+            return;
+        }
+        public GetMarginCapOnStoreAndLoyaltyProgram GetMarginCapOnStoreAndLoyaltyProgram(Request request)
+        {
+            CalculateDiscountsServiceRequest discountsServiceRequest = (CalculateDiscountsServiceRequest)request;
+            ParameterSet parameters = new ParameterSet();
+            parameters["@LoyaltyId"] = discountsServiceRequest.Transaction.AffiliationLoyaltyTierLines.Where(a => a.AffiliationType == RetailAffiliationType.Loyalty).FirstOrDefault().AffiliationId;
+            parameters["@StoreNumber"] = request.RequestContext.GetDeviceConfiguration().StoreNumber;
+            parameters["@DataAreaId"] = request.RequestContext.GetChannelConfiguration().InventLocationDataAreaId;
+
+            using (DatabaseContext databaseContext = new DatabaseContext(request.RequestContext))
+            {
+                var result = databaseContext.ExecuteStoredProcedure<GetMarginCapOnStoreAndLoyaltyProgram>("ext.GETMARGINCAPONLOYALTYANDSTORE", parameters, QueryResultSettings.AllRecords);
+                return result.FirstOrDefault();
+            }
+        }
+
+        public GetMarginCapOnProductAndProductCategory GetMarginCapOnProductAndProductCategory(Request request, String itemId, long productId)
+        {
+            CalculateDiscountsServiceRequest discountsServiceRequest = (CalculateDiscountsServiceRequest)request;
+            ParameterSet parameters = new ParameterSet();
+            parameters["@ProductID"] = productId;
+            parameters["@ItemId"] = itemId;
+            parameters["@StoreNumber"] = request.RequestContext.GetDeviceConfiguration().StoreNumber;
+            parameters["@DataAreaId"] = request.RequestContext.GetChannelConfiguration().InventLocationDataAreaId;
+
+            using (DatabaseContext databaseContext = new DatabaseContext(request.RequestContext))
+            {
+                var result = databaseContext.ExecuteStoredProcedure<GetMarginCapOnProductAndProductCategory>("ext.GETMARGINCAPONPRODUCTANDPRODUCTCATEGORY", parameters, QueryResultSettings.AllRecords);
+                return result.FirstOrDefault();
+            }
+        }
+        public async Task<long> GetProductIdAsync(Request request, SalesLine item)
+        {
+            ProductSearchCriteria searchCriteria = new ProductSearchCriteria(request.RequestContext.GetDeviceConfiguration().ChannelId);
+            searchCriteria.Ids.Add(item.ProductId);
+            GetProductServiceRequest productServiceRequest = new GetProductServiceRequest(searchCriteria, request.RequestContext.LanguageId, false, QueryResultSettings.AllRecords);
+            productServiceRequest.RequestContext = request.RequestContext;
+            productServiceRequest.QueryResultSettings = QueryResultSettings.AllRecords;
+            ProductSearchServiceResponse result = (ProductSearchServiceResponse)await ExecuteBaseRequestAsync(productServiceRequest);
+            return result.ProductSearchResult.Results.FirstOrDefault().RecordId;
+        }
+
+
+        public decimal GetCostPrice(SalesLine item, Request request)
+        {
+            using (DatabaseContext databaseContext = new DatabaseContext(request.RequestContext))
+            {
+                var query = new SqlPagedQuery(QueryResultSettings.SingleRecord)
+                {
+                    DatabaseSchema = "ext",
+                    Select = new ColumnSet("CostPrice"),
+                    From = "CDCPRODUCTVARIANTCOSTPRICE",
+                    Where = "DATAAREAID = @dataAreaId AND ITEMID = @itemId AND CONFIGID = @configId AND INVENTLOCATIONID = @inventLocationId AND INVENTCOLORID = @inventColorId AND INVENTSTYLEID = @inventStyleId AND INVENTSIZEID = @inventSizeId",
+                    OrderBy = "RECID"
+                };
+
+                query.Parameters["@dataAreaId"] = request.RequestContext.GetChannelConfiguration().InventLocationDataAreaId;
+                query.Parameters["@itemId"] = item.ItemId;
+                query.Parameters["@inventLocationId"] = item.InventoryLocationId ?? string.Empty;
+                query.Parameters["@inventStyleId"] = item.Variant.StyleId ?? string.Empty;
+                query.Parameters["@inventColorId"] = item.Variant.ColorId ?? string.Empty;
+                query.Parameters["@inventSizeId"] = item.Variant.SizeId ?? string.Empty;
+                query.Parameters["@configId"] = item.Variant?.ConfigId ?? string.Empty;
+
+                var itemCostPrice = databaseContext.ReadEntity<ItemCostPrice>(query);
+                if (!itemCostPrice.Results.IsNullOrEmpty())
+                {
+                    decimal costPrice = (Convert.ToDecimal(Convert.ToString(itemCostPrice.FirstOrDefault().GetProperty("COSTPRICE"))));
+                    return costPrice;
+                }
+                else
+                {
+                    return 0.00M;
+                }
+            }
+        }
+        public async Task<Response> ExecuteBaseRequestAsync(Request request)
+        {
+           // var requestHandler = request.RequestContext.Runtime.GetNextAsyncRequestHandler(request.GetType(), this);
+            Response response = await request.RequestContext.Runtime.ExecuteAsync<Response>(request, request.RequestContext).ConfigureAwait(false);
+            return response;
+        }
+
+
     }
 }

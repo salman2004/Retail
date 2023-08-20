@@ -225,7 +225,21 @@ namespace CDC.Commerce.Runtime.FBRIntegration
                 if (!discountExtensionEntity.IsNullOrEmpty())
                 {
                     List<string> offerIds = discountExtensionEntity.Select(a => a.GetProperty("OFFERID").ToString()).ToList();
-                    discount = request.SalesOrder.ActiveSalesLines.Where(sl => sl.DiscountAmount > 0 && !sl.DiscountLines.IsNullOrEmpty()).Sum(sl => sl.DiscountLines.Where(dl => offerIds.Contains(dl.OfferId)).Sum(dl => dl.EffectiveAmount));
+                   // discount = request.SalesOrder.ActiveSalesLines.Where(sl => sl.DiscountAmount > 0 && !sl.DiscountLines.IsNullOrEmpty()).Sum(sl => sl.DiscountLines.Where(dl => offerIds.Contains(dl.OfferId)).Sum(dl => dl.EffectiveAmount));
+                    foreach(var salesLineL in request.SalesOrder.SalesLines)
+                    {
+                        if (!salesLineL.IsVoided) { 
+                        foreach(var discountLineL in salesLineL.DiscountLines.Where(p=>p.DiscountLineType != DiscountLineType.TenderTypeDiscount))
+                        {
+                                discount += discountLineL.EffectiveAmount;
+                                if (offerIds.Contains(discountLineL.OfferId))
+                            {
+                              //  discount += discountLineL.Amount;
+                            }
+                        }
+                        }
+                    }
+                    
                 }
                 value = string.Format(CultureInfo.InvariantCulture, "{0:#,0.00}", discount);
             }

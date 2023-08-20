@@ -25,6 +25,10 @@
     <PackageReference Include="Microsoft.Dynamics.Commerce.Runtime.Messages" Version="$(ChannelRepoPackagesVersion)" />
     <PackageReference Include="Microsoft.Dynamics.Commerce.Runtime.Workflow" Version="$(ChannelRepoPackagesVersion)" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Extensions.MarginCap\Runtime.Extensions.MarginCap.csproj" />
+  </ItemGroup>
   
   <Import Project="..\..\..\BuildTools\Microsoft.Dynamics.RetailSdk.Build.targets" />
 </Project>

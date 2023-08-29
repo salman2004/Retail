@@ -11,7 +11,7 @@ using Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages;
 
 namespace CDC.Commerce.Runtime.MarginCap.RequestHandlers
 {
-    public class CreditCardFeeProcessService : IRequestHandlerAsync
+    public class CreditCardFeeProcessService : IRequestTriggerAsync
     {
         public IEnumerable<Type> SupportedRequestTypes
         {
@@ -24,24 +24,86 @@ namespace CDC.Commerce.Runtime.MarginCap.RequestHandlers
             }
         }
 
-        public async Task<Response> Execute(Request request)
-        {   
-            GetPriceServiceResponse priceServiceResponse = new GetPriceServiceResponse();
+        /*  public async Task<Response> Execute(Request request)
+         { 
+
+             GetPriceServiceResponse priceServiceResponse = new GetPriceServiceResponse();
+             if (request.GetType() == typeof(CalculateDiscountsServiceRequest))
+             {
+                 CalculateDiscountsServiceRequest calculateDiscountsService = (CalculateDiscountsServiceRequest)request;
+                 priceServiceResponse = await this.ExecuteNextAsync<GetPriceServiceResponse>(request);
+
+                 if (priceServiceResponse.Transaction.RefundableTenderLines.Count == 0)
+                 {
+                     return priceServiceResponse;
+                 }
+
+                 GetCardRefundChargeCode(request.RequestContext, out string cardRefundChargeCode);
+                 GetCardRefundProcessingFeePercentage(request.RequestContext, out decimal cardFee);
+                 GetTenderTypeForRefundCharges(request.RequestContext, out List<string> tenderTypeForRefundCharges);
+
+                 if ( !string.IsNullOrEmpty(cardRefundChargeCode) && tenderTypeForRefundCharges.Count > 0)
+                 {
+                     if (priceServiceResponse.Transaction.IsReturnByReceipt)
+                     {
+                         HashSet<string> supportedTenderTypes = new HashSet<string>(tenderTypeForRefundCharges);
+                         List<TenderLine> tenderLists = priceServiceResponse.Transaction.RefundableTenderLines.Where(m => supportedTenderTypes.Contains(m.TenderTypeId)).ToList();
+                         List<SalesLine> productReturnableLines = priceServiceResponse.Transaction.ActiveSalesLines.Where(sl => sl.IsReturnLine()).ToList();//.Sum(sl => sl.Price * sl.Quantity);  //RefundableTenderLines.Where(m => supportedTenderTypes.Contains(m.TenderTypeId)).ToList();
+                         decimal returnSalesLines = productReturnableLines.Sum(sl => (sl.Price * (sl.QuantityReturnable ?? sl.Quantity)) - sl.DiscountAmount);
+                         //bool isSupportedTenderType = priceServiceResponse.Transaction.RefundableTenderLines.Where(m => supportedTenderTypes.Contains(m.TenderTypeId)).ToList().IsNullOrEmpty();
+
+                         if (productReturnableLines.Count > 0 && !tenderLists.IsNullOrEmpty())
+                         {
+                             decimal processingFees = returnSalesLines * (Convert.ToDecimal((cardFee)) / 100);
+                             ChargeLine ccrChargeLine = priceServiceResponse.Transaction.ChargeLines?.Where(a => a.ChargeCode == cardRefundChargeCode)?.FirstOrDefault() ?? null;
+                             if (ccrChargeLine == null)
+                             {
+                                 ChargeLine chargeLine = new ChargeLine();
+
+                                 chargeLine.BeginDateTime = DateTimeOffset.MinValue;
+                                 chargeLine.EndDateTime = DateTimeOffset.MinValue;
+                                 chargeLine.ChargeLineId = Guid.NewGuid().ToString();
+                                 chargeLine.ChargeCode = cardRefundChargeCode;
+                                 chargeLine.CurrencyCode = priceServiceResponse.Transaction.RefundableTenderLines.FirstOrDefault().Currency;
+                                 chargeLine.ModuleType = ChargeModule.Sales;
+                                 chargeLine.ModuleTypeValue = Convert.ToInt16(ChargeModule.Sales);
+                                 chargeLine.CalculatedAmount = Math.Abs(processingFees);
+                                 chargeLine.Description = cardRefundChargeCode;
+                                 chargeLine.Quantity = 1;
+                                 chargeLine.NetAmountPerUnit = Math.Abs(processingFees);
+                                 priceServiceResponse.Transaction.ChargeLines.Add(chargeLine);
+                             }
+                             else
+                             {
+                                 ccrChargeLine.CalculatedAmount = Math.Abs(processingFees);
+                                 ccrChargeLine.NetAmountPerUnit = Math.Abs(processingFees);
+                             }
+                         }
+                     }
+                 }
+
+             }
+             return priceServiceResponse;
+    }*/
+
+    public Task OnExecuted(Request request, Response response)
+        {
+            GetPriceServiceResponse priceServiceResponse;
             if (request.GetType() == typeof(CalculateDiscountsServiceRequest))
             {
                 CalculateDiscountsServiceRequest calculateDiscountsService = (CalculateDiscountsServiceRequest)request;
-                priceServiceResponse = await this.ExecuteNextAsync<GetPriceServiceResponse>(request);
-                
+                priceServiceResponse = (GetPriceServiceResponse) response ;//await this.ExecuteNextAsync<GetPriceServiceResponse>(request);
+
                 if (priceServiceResponse.Transaction.RefundableTenderLines.Count == 0)
                 {
-                    return priceServiceResponse;
+                    return Task.CompletedTask;
                 }
-                                
+
                 GetCardRefundChargeCode(request.RequestContext, out string cardRefundChargeCode);
                 GetCardRefundProcessingFeePercentage(request.RequestContext, out decimal cardFee);
                 GetTenderTypeForRefundCharges(request.RequestContext, out List<string> tenderTypeForRefundCharges);
 
-                if ( !string.IsNullOrEmpty(cardRefundChargeCode) && tenderTypeForRefundCharges.Count > 0)
+                if (!string.IsNullOrEmpty(cardRefundChargeCode) && tenderTypeForRefundCharges.Count > 0)
                 {
                     if (priceServiceResponse.Transaction.IsReturnByReceipt)
                     {
@@ -80,16 +142,15 @@ namespace CDC.Commerce.Runtime.MarginCap.RequestHandlers
                         }
                     }
                 }
-                
+
             }
-            return priceServiceResponse;
+
+            return Task.CompletedTask;
         }
 
-        public async Task<Response> ExecuteBaseRequestAsync(Request request)
+        public Task OnExecuting(Request request)
         {
-            var requestHandler = request.RequestContext.Runtime.GetNextAsyncRequestHandler(request.GetType(), this);
-            Response response = await request.RequestContext.Runtime.ExecuteAsync<Response>(request, request.RequestContext, requestHandler, false).ConfigureAwait(false);
-            return response;
+            return Task.CompletedTask;
         }
 
         private void GetCardRefundChargeCode(RequestContext context, out string CardRefundChargeCode)

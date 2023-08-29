@@ -75,7 +75,7 @@
         {
             // Validation to check transaction checkout
             if (salesTransaction == null
-                || salesTransaction.AmountDue != decimal.Zero
+               // || salesTransaction.AmountDue != decimal.Zero
                 || salesTransaction.CartType != CartType.Shopping
                 || salesTransaction.ExtensibleSalesTransactionType != ExtensibleSalesTransactionType.Sales
                 || salesTransaction.IsSales != true

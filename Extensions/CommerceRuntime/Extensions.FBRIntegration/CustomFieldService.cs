@@ -217,7 +217,7 @@ namespace CDC.Commerce.Runtime.FBRIntegration
         private static string GetRebateLoyalty(GetSalesTransactionCustomReceiptFieldServiceRequest request)
         {
             string value = string.Empty;
-            if (!string.IsNullOrEmpty(request.SalesOrder.LoyaltyCardId))
+            /*if (!string.IsNullOrEmpty(request.SalesOrder.LoyaltyCardId))
             {
                 decimal discount = decimal.Zero;
                 var affiliation = request.SalesOrder.AffiliationLoyaltyTierLines.Where(a => a.AffiliationType == RetailAffiliationType.Loyalty).FirstOrDefault();
@@ -242,7 +242,9 @@ namespace CDC.Commerce.Runtime.FBRIntegration
                     
                 }
                 value = string.Format(CultureInfo.InvariantCulture, "{0:#,0.00}", discount);
-            }
+            }*/
+
+            value =  request.SalesOrder.PeriodicDiscountAmount.ToString("N");
             return value;
         }
         

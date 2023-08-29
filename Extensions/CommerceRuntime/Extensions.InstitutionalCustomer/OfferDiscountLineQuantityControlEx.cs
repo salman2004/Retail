@@ -70,16 +70,30 @@
 
             int itemGroupIndex = appliedDiscountApplication?.DiscountApplication?.RetailDiscountLines?.FirstOrDefault()?.ItemGroupIndex ?? int.MinValue;
             this.itemGroupIndexToQuantityMap.TryGetValue(itemGroupIndex, out decimal allowedQty);
-
+           // allowedQty = allowedQty ==0 ?10:allowedQty;
             if (appliedDiscountApplication != null && itemGroupIndex != int.MinValue)
             {
                 appliedDiscountApplication.ItemQuantities[itemGroupIndex] = allowedQty;
-                appliedDiscountApplication.DiscountApplication.ItemQuantities[itemGroupIndex] = allowedQty;
-                appliedDiscountApplication.ItemGroupIndexToDiscountLineQuantitiesLookup[itemGroupIndex].FirstOrDefault().Quantity = allowedQty;
+                appliedDiscountApplication.DiscountApplication.ItemQuantities[itemGroupIndex] = allowedQty;// ==0?1:allowedQty;
+                appliedDiscountApplication.ItemGroupIndexToDiscountLineQuantitiesLookup[itemGroupIndex].FirstOrDefault().Quantity = allowedQty  == 0 ? 1 : allowedQty; ;
+
+                if(allowedQty == 0)
+                {
+                    
+                    appliedDiscountApplication.Value =0;
+                    appliedDiscountApplication.ItemGroupIndexToDiscountLineQuantitiesLookup[itemGroupIndex].FirstOrDefault().DiscountLine.Amount =0;
+                    appliedDiscountApplication.ItemGroupIndexToDiscountLineQuantitiesLookup[itemGroupIndex].FirstOrDefault().DiscountLine.EffectivePercentage = 0;
+                    appliedDiscountApplication.ItemGroupIndexToDiscountLineQuantitiesLookup[itemGroupIndex].FirstOrDefault().DiscountLine.Percentage = 0;
+                    // appliedDiscountApplication.ItemGroupIndexToDiscountLineQuantitiesLookup[itemGroupIndex].FirstOrDefault().DiscountLine.SaleLineNumber = 0;
+                    appliedDiscountApplication.ItemGroupIndexToDiscountLineQuantitiesLookup[itemGroupIndex].FirstOrDefault().DiscountLine.OfferDescription = "";
+
+                    appliedDiscountApplication.ItemGroupIndexToDiscountLineQuantitiesLookup[itemGroupIndex].FirstOrDefault().DiscountLine.EffectiveAmount = 0;
+                }
+
 
                 if (this.itemGroupIndexToQuantityMap.ContainsKey(itemGroupIndex))
                 {
-                    this.itemGroupIndexToQuantityMap[itemGroupIndex] -= allowedQty;
+                    this.itemGroupIndexToQuantityMap[itemGroupIndex] -= allowedQty ;
                 }
             }
 
